@@ -59,8 +59,7 @@
             container.classList.add('container-fluid');
           }
         </script>
-        <% console.log(Page == "Dashboard") %>
-        <% if (Page === "Dashboard") { %>
+        <% if (Page === "Dashboard" || Page === "Affiliate") { %>
           <%- include('../partials/leftbar.html') %>
         <% } %>
               <div class="content">

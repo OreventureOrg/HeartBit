@@ -34,6 +34,13 @@ app.get("/new/:id", (req, res) => {
     res.render("./news/news-details.html", { Page: "New Details"});
 });
 
+app.get("/dashboard", (req, res) => {
+    res.render("./dashboard/dashboard.html", { Page: "Dashboard"});
+});
+
+app.get("/affiliate", (req, res) => {
+    res.render("./affiliate/affiliate.html", { Page: "Affiliate"});
+});
 
 const userRoutes = require('./src/routes/userRoutes');
 app.use('/', userRoutes);
