@@ -1,11 +1,4 @@
-<<<<<<< Updated upstream
 <%- include("./partials/header.html") %>
-          <div class="card mb-3">
-            <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(/assets/img/icons/spot-illustrations/corner-4.png);">
-            </div>
-            <!--/.bg-holder-->
-=======
-<%- include("./partials/header_default.html") %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - BitHeart</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome CSS (assumindo que você já incluiu isso em header_default.html) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Estilos adicionais podem ser adicionados aqui conforme necessário */
+        .service-item {
+            background-color: transparent;
+        }
+        .service-item img {
+            border-radius: 20px;
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
->>>>>>> Stashed changes
 
-<!-- Header -->
-<!-- Seu código de cabeçalho pode ser incluído aqui -->
-
-<!-- Hero Section -->
 <div class="jumbotron jumbotron-fluid bg-dark text-white">
     <div class="container text-center">
         <h1 class="display-4">BitHeart</h1>
@@ -33,76 +27,108 @@
     </div>
 </div>
 
-<!-- Text Before Login Section -->
 <section class="py-5">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3 text-center">
                 <h2>How BitHeart Works</h2>
-                <p>We would like to take the opportunity to introduce you to our key services that can help you easily grow on social media.</p>
+                <p>We would like to take the opportunity to present to you our main services that can help you grow easily on social media.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Our Services for Advertisers Section -->
 <section class="bg-light py-5">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/150" class="img-fluid mb-3" alt="Service 1">
-                <h4>Complete Tasks</h4>
-                <p>Earn points by completing simple tasks.</p>
+                <div class="service-item">
+                    <img src="\assets\img\favicons\Check list.png" class="img-fluid mb-3" alt="Service 1">
+                    <h4>Complete Tasks</h4>
+                    <p>Earn points by completing simple tasks.</p>
+                </div>
             </div>
             <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/150" class="img-fluid mb-3" alt="Service 2">
-                <h4>Earn Money</h4>
-                <p>Convert your points into real money.</p>
+                <div class="service-item">
+                    <img src="\assets\img\favicons\money.png" class="img-fluid mb-3" alt="Service 2">
+                    <h4>Earn Money</h4>
+                    <p>Convert your points into real money.</p>
+                </div>
             </div>
             <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/150" class="img-fluid mb-3" alt="Service 3">
-                <h4>Create Campaigns</h4>
-                <p>Create campaigns and promote your content.</p>
+                <div class="service-item">
+                    <img src="\assets\img\favicons\formulario.png" class="img-fluid mb-3" alt="Service 3">
+                    <h4>Create Campaigns</h4>
+                    <p>Create campaigns and promote your content.</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Dynamic Buttons Section -->
 <section class="py-5">
     <div class="container">
-        <div class="section3__wrap">
-            <div class="btn-block">
-                <!-- Botões dinâmicos aqui -->
-                <div class="btn btn--active">
-                    <i style="color: #C27ACA; margin-right: 8px;" class="fab fa-instagram"></i> Instagram
-                </div>
-                <div class="btn">
-                    <i style="color: #F5454D; margin-right: 8px;" class="fab fa-youtube"></i> YouTube
-                </div>
-                <div class="btn">
-                    <i style="color: #54769B; margin-right: 8px;" class="fab fa-twitter"></i> Twitter
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <h2>Our services for advertisers</h2>
+                <p>We would like to take the opportunity to present to you our main services that can help you grow easily on social media.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <button class="btn btn-outline-primary btn-block" id="btn-instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                </button>
+                <div id="popup-instagram" class="popup-content mt-3" style="display: none;">
+                    <h3>Instagram Popup</h3>
+                    <p>Instagram popup content here...</p>
                 </div>
             </div>
-
-            <!-- Popups -->
-            <div class="popup-block">
-                <!-- Conteúdo dos popups -->
-                
-                <!-- Incluir os popups relevantes para Instagram, YouTube e Twitter -->
+            <div class="col-md-4 text-center">
+                <button class="btn btn-outline-danger btn-block" id="btn-youtube">
+                    <i class="fab fa-youtube"></i> YouTube
+                </button>
+                <div id="popup-youtube" class="popup-content mt-3" style="display: none;">
+                    <h3>YouTube Popup</h3>
+                    <p>YouTube popup content here...</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <button class="btn btn-outline-info btn-block" id="btn-twitter">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <div id="popup-twitter" class="popup-content mt-3" style="display: none;">
+                    <h3>Twitter Popup</h3>
+                    <p>Twitter popup content here...</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#btn-instagram').click(function() {
+            $('#popup-instagram').toggle();
+        });
+
+        $('#btn-youtube').click(function() {
+            $('#popup-youtube').toggle();
+        });
+
+        $('#btn-twitter').click(function() {
+            $('#popup-twitter').toggle();
+        });
+    });
+</script>
+
 </body>
 </html>
-<!-- Footer -->
 <%- include("./partials/footer.html") %>
-
-
