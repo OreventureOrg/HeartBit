@@ -1,28 +1,23 @@
 <%- include("./partials/header.html") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - BitHeart</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        .service-item {
-            background-color: transparent;
-        }
-        .service-item img {
-            border-radius: 20px;
-            width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
-<body>
-
-<div class="jumbotron jumbotron-fluid bg-dark text-white">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .service-item {
+        background-color: transparent;
+    }
+    .service-item img {
+        border-radius: 20px;
+        width: 100%;
+        height: auto;
+    }
+    .popup-content {
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+</style>
+<div class="jumbotron jumbotron-fluid bg-dark py-5">
     <div class="container text-center">
-        <h1 class="display-4">BitHeart</h1>
+        <h1 class="display-4 text-white">BitHeart</h1>
         <p class="lead">Discover, Share, and Watch high quality videos.</p>
     </div>
 </div>
@@ -38,26 +33,26 @@
     </div>
 </section>
 
-<section class="bg-light py-5">
+<section class="py-5">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-4 mb-4">
                 <div class="service-item">
-                    <img src="\assets\img\favicons\Check list.png" class="img-fluid mb-3" alt="Service 1">
+                    <img src="/assets/img/favicons/Check list.png" class="img-fluid mb-3" alt="Service 1">
                     <h4>Complete Tasks</h4>
                     <p>Earn points by completing simple tasks.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="service-item">
-                    <img src="\assets\img\favicons\money.png" class="img-fluid mb-3" alt="Service 2">
+                    <img src="/assets/img/favicons/money.png" class="img-fluid mb-3" alt="Service 2">
                     <h4>Earn Money</h4>
                     <p>Convert your points into real money.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="service-item">
-                    <img src="\assets\img\favicons\formulario.png" class="img-fluid mb-3" alt="Service 3">
+                    <img src="/assets/img/favicons/formulario.png" class="img-fluid mb-3" alt="Service 3">
                     <h4>Create Campaigns</h4>
                     <p>Create campaigns and promote your content.</p>
                 </div>
@@ -65,6 +60,7 @@
         </div>
     </div>
 </section>
+
 <section class="py-5">
     <div class="container">
         <div class="row">
@@ -75,10 +71,11 @@
         </div>
     </div>
 </section>
+
 <section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mb-4">
                 <button class="btn btn-outline-primary btn-block" id="btn-instagram">
                     <i class="fab fa-instagram"></i> Instagram
                 </button>
@@ -87,7 +84,7 @@
                     <p>Instagram popup content here...</p>
                 </div>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mb-4">
                 <button class="btn btn-outline-danger btn-block" id="btn-youtube">
                     <i class="fab fa-youtube"></i> YouTube
                 </button>
@@ -96,7 +93,7 @@
                     <p>YouTube popup content here...</p>
                 </div>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mb-4">
                 <button class="btn btn-outline-info btn-block" id="btn-twitter">
                     <i class="fab fa-twitter"></i> Twitter
                 </button>
@@ -108,6 +105,7 @@
         </div>
     </div>
 </section>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
