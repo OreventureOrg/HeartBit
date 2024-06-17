@@ -10,9 +10,10 @@
             </div>
             <div class="col-auto d-none d-sm-block">
               <select class="form-select form-select-sm mb-3" id="dashboard-chart-select">
-                <option value="all">All Payments</option>
-                <option value="successful" selected="selected">Successful Payments</option>
-                <option value="failed">Failed Payments</option>
+                <option value="24_horas">24 Hours</option>
+                <option value="7_days" selected="selected">7 Days</option>
+                <option value="1_month">1 Month</option>
+                <option value="all">All Time</option>
               </select>
             </div>
           </div>
@@ -22,60 +23,9 @@
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="row g-3">
-        <div class="col-md-4 col-xxl-12">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="row flex-between-center g-0">
-                <div class="col-6 d-lg-block flex-between-center">
-                  <h6 class="mb-2 text-900">Active Users</h6>
-                  <h4 class="fs-6 fw-normal text-700 mb-0">765k</h4>
-                </div>
-                <div class="col-auto h-100">
-                  <div style="height: 50px; min-width: 80px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" data-echarts="{&quot;xAxis&quot;:{&quot;show&quot;:false,&quot;boundaryGap&quot;:false},&quot;series&quot;:[{&quot;data&quot;:[3,7,6,8,5,12,11],&quot;type&quot;:&quot;line&quot;,&quot;symbol&quot;:&quot;none&quot;}],&quot;grid&quot;:{&quot;right&quot;:&quot;0px&quot;,&quot;left&quot;:&quot;0px&quot;,&quot;bottom&quot;:&quot;0px&quot;,&quot;top&quot;:&quot;0px&quot;}}" _echarts_instance_="ec_1718381493192"><div style="position: relative; width: 80px; height: 50px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="80" height="50" style="position: absolute; left: 0px; top: 0px; width: 80px; height: 50px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-xxl-12">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="row flex-between-center">
-                <div class="col d-md-flex d-lg-block flex-between-center">
-                  <h6 class="mb-md-0 mb-lg-2">Revenue</h6><span class="badge rounded-pill badge-subtle-success"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 61.8%</span>
-                </div>
-                <div class="col-auto">
-                  <h4 class="fs-6 fw-normal text-700" data-countup="{&quot;endValue&quot;:82.18,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;M&quot;,&quot;prefix&quot;:&quot;$&quot;}">$82.18M</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-xxl-12">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="row flex-between-center">
-                <div class="col d-md-flex d-lg-block flex-between-center">
-                  <h6 class="mb-md-0 mb-lg-2">Conversion</h6><span class="badge rounded-pill badge-subtle-primary"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 29.4%</span>
-                </div>
-                <div class="col-auto">
-                  <h4 class="fs-6 fw-normal text-primary" data-countup="{&quot;endValue&quot;:28.5,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;%&quot;}">28.50%</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="row g-3 mb-3">
     <div class="col-xxl-9">
       <div class="card bg-body-tertiary dark__bg-opacity-50 my-3">
-        <div class="card-body p-3">
-          <p class="fs-10 mb-0"><a href="#!"><svg class="svg-inline--fa fa-exchange-alt fa-w-16 me-2" data-fa-transform="rotate-90" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exchange-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="" style="transform-origin: 0.5em 0.5em;"><g transform="translate(256 256)"><g transform="translate(0, 0)  scale(1, 1)  rotate(90 0 0)"><path fill="currentColor" d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z" transform="translate(-256 -256)"></path></g></g></svg><!-- <span class="fas fa-exchange-alt me-2" data-fa-transform="rotate-90"></span> Font Awesome fontawesome.com -->A payout for <strong>$921.42 </strong>was deposited 13 days ago</a>. Your next deposit is expected on <strong>Tuesday, March 13.</strong></p>
-        </div>
       </div>
       <div class="row g-3 mb-3">
         <div class="col-sm-6 col-md-4">
@@ -85,8 +35,13 @@
             <!--/.bg-holder-->
 
             <div class="card-body position-relative">
-              <h6>Customers<span class="badge badge-subtle-warning rounded-pill ms-2">-0.23%</span></h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-warning" data-countup="{&quot;endValue&quot;:58.386,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">58.39k</div><a class="fw-semi-bold fs-10 text-nowrap" href="../app/e-commerce/customers.html">See all<svg class="svg-inline--fa fa-angle-right fa-w-8 ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" transform="translate(-128 -256)"></path></g></g></svg><!-- <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span> Font Awesome fontawesome.com --></a>
+              <h6>Actions done by me (Today)</h6>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-warning" data-countup="{&quot;endValue&quot;:58.386,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">58.39k</div>
+              <button class="info-btn" data-tippy-content="Number of actions (likes, subscribes, comments, etc) made by me (in the last 24h)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -97,8 +52,13 @@
             <!--/.bg-holder-->
 
             <div class="card-body position-relative">
-              <h6>Orders<span class="badge badge-subtle-info rounded-pill ms-2">0.0%</span></h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info" data-countup="{&quot;endValue&quot;:23.434,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">23.43k</div><a class="fw-semi-bold fs-10 text-nowrap" href="../app/e-commerce/orders/order-list.html">All orders<svg class="svg-inline--fa fa-angle-right fa-w-8 ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" transform="translate(-128 -256)"></path></g></g></svg><!-- <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span> Font Awesome fontawesome.com --></a>
+              <h6>Actions done by me (Total)</h6>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info" data-countup="{&quot;endValue&quot;:23.434,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">23.43k</div>
+              <button class="info-btn" data-tippy-content="Number of actions (likes, subscribes, comments, etc) made by me (for all the time)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -109,347 +69,82 @@
             <!--/.bg-holder-->
 
             <div class="card-body position-relative">
-              <h6>Revenue<span class="badge badge-subtle-success rounded-pill ms-2">9.54%</span></h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif" data-countup="{&quot;endValue&quot;:43594,&quot;prefix&quot;:&quot;$&quot;}">$43,594</div><a class="fw-semi-bold fs-10 text-nowrap" href="../index.html">Statistics<svg class="svg-inline--fa fa-angle-right fa-w-8 ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" transform="translate(-128 -256)"></path></g></g></svg><!-- <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span> Font Awesome fontawesome.com --></a>
+              <h6>Earned USD (Today)</h6>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info" data-countup="{&quot;endValue&quot;:23.434,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">23.43k</div>
+              <button class="info-btn" data-tippy-content="Amount of earned funds (in the last 24h)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card overflow-hidden" style="min-width: 12rem">
+            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);">
+            </div>
+            <!--/.bg-holder-->            
+
+            <div class="card-body position-relative">
+              <h6>Earned USD (Total)</h6>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif" data-countup="{&quot;endValue&quot;:43594,&quot;prefix&quot;:&quot;$&quot;}">$43,594</div>
+              <button class="info-btn" data-tippy-content="Amount of earned funds (for all the time)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="row g-3">
-        <div class="col-12">
-          <div class="card h-100">
-            <div class="card-header">
-              <div class="row flex-between-center">
-                <div class="col-auto">
-                  <h6 class="mb-2">Candle Chart</h6>
-                </div>
-                <div class="col-auto mt-2">
-                  <div class="row g-sm-4">
-                    <div class="col-12 col-sm-auto">
-                      <div class="mb-3 pe-4 border-end-sm border-200">
-                        <h6 class="fs-11 text-600 mb-1">Forecast Hours</h6>
-                        <div class="d-flex align-items-center">
-                          <h5 class="fs-9 text-900 mb-0 me-2">2077h</h5><span class="badge rounded-pill badge-subtle-primary"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 20.2%</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-auto">
-                      <div class="mb-3 pe-4 border-end-sm border-200">
-                        <h6 class="fs-11 text-600 mb-1">Workflow Hours</h6>
-                        <div class="d-flex align-items-center">
-                          <h5 class="fs-9 text-900 mb-0 me-2">100h</h5><span class="badge rounded-pill badge-subtle-success"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 20%</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-auto">
-                      <div class="mb-3 pe-0">
-                        <h6 class="fs-11 text-600 mb-1">Forecast Income</h6>
-                        <div class="d-flex align-items-center">
-                          <h5 class="fs-9 text-900 mb-0 me-2">$256,489</h5><span class="badge rounded-pill badge-subtle-primary"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 18%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body pe-0 position-relative" id="candle-chart" dir="ltr">
-              <div class="btn-group position-absolute z-1 top-0 d-inline-block" role="group" style="left:20px;right:20px;">
-                <button class="btn btn-falcon-default btn-sm mb-1" data-zoom="in"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg><!-- <span class="fas fa-plus"></span> Font Awesome fontawesome.com --></button>
-                <button class="btn btn-falcon-default btn-sm mb-1" data-zoom="out"><svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg><!-- <span class="fas fa-minus"></span> Font Awesome fontawesome.com --></button>
-              </div>
-              <!-- Find the JS file for the following calendar at: src/js/charts/echarts/candle-chart.js-->
-              <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
-              <div class="echart-candle-chart" data-echart-responsive="true" data-action-target="candle-chart" _echarts_instance_="ec_1718381493190" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 908px; height: 328px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="908" height="328" style="position: absolute; left: 0px; top: 0px; width: 908px; height: 328px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="" style="position: absolute; display: block; border-style: solid; white-space: nowrap; z-index: 9999999; box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 10px; transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgb(249, 250, 253); border-width: 1px; border-radius: 4px; color: rgb(11, 23, 39); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 7px 10px; top: 0px; left: 0px; transform: translate3d(752px, 69px, 0px); border-color: rgb(216, 226, 239); pointer-events: none; visibility: hidden; opacity: 0;"><div style="margin: 0px 0 0;line-height:1;"><div style="margin: 0px 0 0;line-height:1;"><div style="font-size:14px;color:#0b1727;font-weight:400;line-height:1;">2013/4/3</div><div style="margin: 10px 0 0;line-height:1;"><div style="margin: 0px 0 0;line-height:1;"><div style="margin: 0px 0 0;line-height:1;"><span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#2c7be5;"></span><span style="font-size:14px;color:#0b1727;font-weight:400;margin-left:2px">candlestick</span><span style="float:right;margin-left:20px;font-size:14px;color:#0b1727;font-weight:900"></span><div style="clear:both"></div></div><div style="margin: 10px 0 0;line-height:1;"><span style="display:inline-block;vertical-align:middle;margin-right:8px;margin-left:3px;border-radius:4px;width:4px;height:4px;background-color:#2c7be5;"></span><span style="font-size:14px;color:#0b1727;font-weight:400;margin-left:2px">open</span><span style="float:right;margin-left:20px;font-size:14px;color:#0b1727;font-weight:900">2,232.69</span><div style="clear:both"></div></div><div style="margin: 10px 0 0;line-height:1;"><span style="display:inline-block;vertical-align:middle;margin-right:8px;margin-left:3px;border-radius:4px;width:4px;height:4px;background-color:#2c7be5;"></span><span style="font-size:14px;color:#0b1727;font-weight:400;margin-left:2px">close</span><span style="float:right;margin-left:20px;font-size:14px;color:#0b1727;font-weight:900">2,225.29</span><div style="clear:both"></div></div><div style="margin: 10px 0 0;line-height:1;"><span style="display:inline-block;vertical-align:middle;margin-right:8px;margin-left:3px;border-radius:4px;width:4px;height:4px;background-color:#2c7be5;"></span><span style="font-size:14px;color:#0b1727;font-weight:400;margin-left:2px">lowest</span><span style="float:right;margin-left:20px;font-size:14px;color:#0b1727;font-weight:900">2,217.25</span><div style="clear:both"></div></div><div style="margin: 10px 0 0;line-height:1;"><span style="display:inline-block;vertical-align:middle;margin-right:8px;margin-left:3px;border-radius:4px;width:4px;height:4px;background-color:#2c7be5;"></span><span style="font-size:14px;color:#0b1727;font-weight:400;margin-left:2px">highest</span><span style="float:right;margin-left:20px;font-size:14px;color:#0b1727;font-weight:900">2,241.34</span><div style="clear:both"></div></div><div style="clear:both"></div></div><div style="clear:both"></div></div><div style="clear:both"></div></div><div style="clear:both"></div></div></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
-              <h6 class="mb-0">Active Users</h6>
-              <div class="dropdown font-sans-serif btn-reveal-trigger">
-                <button class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal" type="button" id="dropdown-active-user" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><svg class="svg-inline--fa fa-ellipsis-h fa-w-16 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-h" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"></path></svg><!-- <span class="fas fa-ellipsis-h fs-11"></span> Font Awesome fontawesome.com --></button>
-                <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-active-user"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                  <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body py-2">
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-online">
-                  <img class="rounded-circle" src="../assets/img/team/1.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Emma Watson</a></h6>
-                  <p class="text-500 fs-11 mb-0">Admin</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-online">
-                  <img class="rounded-circle" src="../assets/img/team/2.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Antony Hopkins</a></h6>
-                  <p class="text-500 fs-11 mb-0">Moderator</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-away">
-                  <img class="rounded-circle" src="../assets/img/team/3.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Anna Karinina</a></h6>
-                  <p class="text-500 fs-11 mb-0">Editor</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-offline">
-                  <img class="rounded-circle" src="../assets/img/team/4.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">John Lee</a></h6>
-                  <p class="text-500 fs-11 mb-0">Admin</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-offline">
-                  <img class="rounded-circle" src="../assets/img/team/5.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Rowen Atkinson</a></h6>
-                  <p class="text-500 fs-11 mb-0">Editor</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative mb-3">
-                <div class="avatar avatar-2xl status-offline">
-                  <img class="rounded-circle" src="../assets/img/team/6.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Bucky Robert</a></h6>
-                  <p class="text-500 fs-11 mb-0">Editor</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center position-relative false">
-                <div class="avatar avatar-2xl status-offline">
-                  <img class="rounded-circle" src="../assets/img/team/7.jpg" alt="">
-
-                </div>
-                <div class="flex-1 ms-3">
-                  <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../pages/user/profile.html">Tom Hanks</a></h6>
-                  <p class="text-500 fs-11 mb-0">Editor</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer bg-body-tertiary p-0"><a class="btn btn-sm btn-link d-block w-100 py-2" href="../app/social/followers.html">All active users<svg class="svg-inline--fa fa-chevron-right fa-w-10 ms-1 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg><!-- <span class="fas fa-chevron-right ms-1 fs-11"></span> Font Awesome fontawesome.com --></a></div>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card h-100">
-            <div class="card-header">
-              <div class="row justify-content-between gx-0">
-                <div class="col-auto">
-                  <h1 class="fs-9 text-900">Gross revenue</h1>
-                  <div class="d-flex">
-                    <h4 class="text-primary mb-0">$165.50</h4>
-                    <div class="ms-3"><span class="badge rounded-pill badge-subtle-primary"><svg class="svg-inline--fa fa-caret-up fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path></svg><!-- <span class="fas fa-caret-up"></span> Font Awesome fontawesome.com --> 5%</span></div>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <select class="form-select form-select-sm pe-4" id="select-gross-revenue-month">
-                    <option value="0">Jan</option>
-                    <option value="1">Feb</option>
-                    <option value="2">Mar</option>
-                    <option value="3">Apr</option>
-                    <option value="4">May</option>
-                    <option value="5">Jun</option>
-                    <option value="6">Jul</option>
-                    <option value="7">Aug</option>
-                    <option value="8">Sep</option>
-                    <option value="9">Oct</option>
-                    <option value="10">Nov</option>
-                    <option value="11">Dec</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="card-body pt-0 pb-3 h-100">
-              <div class="mx-nx1">
-                <table class="table table-borderless font-sans-serif fw-medium fs-10">
-                  <tbody><tr>
-                    <td class="pb-2 pt-0">Point of sale</td>
-                    <td class="pb-2 pt-0 text-end" style="width: 20%">$791.64</td>
-                    <td class="pb-2 pt-0 text-end text-700" style="max-width: 20%"><svg class="svg-inline--fa fa-long-arrow-alt-down fa-w-8 me-1 text-danger" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="long-arrow-alt-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"></path></svg><!-- <span class="me-1 fas fa-long-arrow-alt-down text-danger"></span> Font Awesome fontawesome.com -->13%</td>
-                  </tr>
-                  <tr>
-                    <td class="pb-2 pt-0">Online Store</td>
-                    <td class="pb-2 pt-0 text-end" style="width: 20%">$113.86</td>
-                    <td class="pb-2 pt-0 text-end text-700" style="max-width: 20%"><svg class="svg-inline--fa fa-long-arrow-alt-up fa-w-8 me-1 text-success" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="long-arrow-alt-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"></path></svg><!-- <span class="me-1 fas fa-long-arrow-alt-up text-success"></span> Font Awesome fontawesome.com -->178%</td>
-                  </tr>
-                  <tr>
-                    <td class="pb-2 pt-0">Online Store</td>
-                    <td class="pb-2 pt-0 text-end" style="width: 20%">$0.00</td>
-                    <td class="pb-2 pt-0 text-end text-700" style="max-width: 20%"><span class="me-1 false text-success"></span>-</td>
-                  </tr>
-                </tbody></table>
-                <!-- Find the JS file for the following calendar at: src/js/charts/echarts/gross-revenue.js-->
-                <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
-                <div class="echart-gross-revenue-chart px-3 h-100" data-echart-responsive="true" data-options="{&quot;target&quot;:&quot;gross-revenue-footer&quot;,&quot;monthSelect&quot;:&quot;select-gross-revenue-month&quot;,&quot;optionOne&quot;:&quot;currentMonth&quot;,&quot;optionTwo&quot;:&quot;prevMonth&quot;}" _echarts_instance_="ec_1718381493191" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 581px; height: 230px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="581" height="230" style="position: absolute; left: 0px; top: 0px; width: 581px; height: 230px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="" style="position: absolute; display: block; border-style: solid; white-space: nowrap; z-index: 9999999; box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 10px; background-color: rgb(249, 250, 253); border-width: 1px; border-radius: 4px; color: rgb(11, 23, 39); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 7px 10px; top: 0px; left: 0px; transform: translate3d(494px, 81px, 0px); border-color: rgb(216, 226, 239); pointer-events: none; visibility: hidden; opacity: 0;"><div class="ms-1">
-        <h6 class="fs-10 text-700"><svg class="svg-inline--fa fa-circle fa-w-16 me-2" style="color: #d8e2ef;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <span class="fas fa-circle me-2" style="color:#d8e2ef"></span> Font Awesome fontawesome.com -->
-Jan 28 : 120
-</h6><h6 class="fs-10 text-700"><svg class="svg-inline--fa fa-circle fa-w-16 me-2" style="color: #2c7be5;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <span class="fas fa-circle me-2" style="color:#2c7be5"></span> Font Awesome fontawesome.com -->
-Jan 28 : 40
-</h6>
-      </div></div></div>
-              </div>
-            </div>
-            <div class="card-footer border-top py-2 d-flex flex-between-center">
-              <div class="d-flex" id="gross-revenue-footer">
-                <div class="btn btn-sm d-flex align-items-center p-0 shadow-none" id="currentMonth" data-month="current"><svg class="svg-inline--fa fa-circle fa-w-16 text-primary fs-11 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <span class="fas fa-circle text-primary fs-11 me-1"></span> Font Awesome fontawesome.com --><span class="text">Jan</span></div>
-                <div class="btn btn-sm d-flex align-items-center p-0 shadow-none ms-2" id="prevMonth" data-month="prev"><svg class="svg-inline--fa fa-circle fa-w-16 text-300 fs-11 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><!-- <span class="fas fa-circle text-300 fs-11 me-1"></span> Font Awesome fontawesome.com --><span class="text">Dec</span></div>
-              </div><a class="btn btn-link btn-sm px-0" href="#!">View report<svg class="svg-inline--fa fa-chevron-right fa-w-10 ms-1 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg><!-- <span class="fas fa-chevron-right ms-1 fs-11"></span> Font Awesome fontawesome.com --></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <div class="col">
       <div class="row g-3">
         <div class="col-xxl-12">
           <div class="card h-100 h-xxl-auto mt-xxl-3">
             <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
-              <h6 class="mb-0">Shared Files</h6><a class="py-1 fs-10 font-sans-serif" href="#!">View All</a>
+              <h6 class="mb-0">How To Start</h6>
             </div>
             <div class="card-body pb-0">
               <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-                <div class="file-thumbnail"><img class="border h-100 w-100 object-fit-cover rounded-2" src="../assets/img/products/5-thumb.png" alt="">
+                <div class="file-thumbnail"><h2>1</h2>
                 </div>
                 <div class="ms-3 flex-shrink-1 flex-grow-1">
-                  <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">apple-smart-watch.png</a></h6>
-                  <div class="fs-10"><span class="fw-semi-bold">Antony</span><span class="fw-medium text-600 ms-2">Just Now</span></div>
-                  <div class="hover-actions end-0 top-50 translate-middle-y"><a class="btn btn-tertiary border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" href="../assets/img/icons/cloud-download.svg" download="download" aria-label="Download" data-bs-original-title="Download"><img src="../assets/img/icons/cloud-download.svg" alt="" width="15"></a>
-                    <button class="btn btn-tertiary border-300 btn-sm me-1 text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><img src="../assets/img/icons/edit-alt.svg" alt="" width="15"></button>
-                  </div>
+                  <h5 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">Start By Completing Tasks</a></h5>
+                  <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
                 </div>
               </div>
               <hr class="text-200">
               <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-                <div class="file-thumbnail"><img class="border h-100 w-100 object-fit-cover rounded-2" src="../assets/img/products/3-thumb.png" alt="">
+                <div class="file-thumbnail"><h2>2</h2>
                 </div>
                 <div class="ms-3 flex-shrink-1 flex-grow-1">
-                  <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">iphone.jpg</a></h6>
-                  <div class="fs-10"><span class="fw-semi-bold">Antony</span><span class="fw-medium text-600 ms-2">Yesterday at 1:30 PM</span></div>
-                  <div class="hover-actions end-0 top-50 translate-middle-y"><a class="btn btn-tertiary border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" href="../assets/img/icons/cloud-download.svg" download="download" aria-label="Download" data-bs-original-title="Download"><img src="../assets/img/icons/cloud-download.svg" alt="" width="15"></a>
-                    <button class="btn btn-tertiary border-300 btn-sm me-1 text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><img src="../assets/img/icons/edit-alt.svg" alt="" width="15"></button>
-                  </div>
+                  <h5 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">Make money on social networks by completing simple tasks (likes, subscriptions, etc.)</a></h5>
+                  <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
                 </div>
               </div>
               <hr class="text-200">
               <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-                <div class="file-thumbnail"><img class="img-fluid" src="../assets/img/icons/zip.png" alt="">
+                <div class="file-thumbnail"><h2>3</h2>
                 </div>
                 <div class="ms-3 flex-shrink-1 flex-grow-1">
-                  <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">Falcon v1.8.2</a></h6>
-                  <div class="fs-10"><span class="fw-semi-bold">Jane</span><span class="fw-medium text-600 ms-2">27 Sep at 10:30 AM</span></div>
-                  <div class="hover-actions end-0 top-50 translate-middle-y"><a class="btn btn-tertiary border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" href="../assets/img/icons/cloud-download.svg" download="download" aria-label="Download" data-bs-original-title="Download"><img src="../assets/img/icons/cloud-download.svg" alt="" width="15"></a>
-                    <button class="btn btn-tertiary border-300 btn-sm me-1 text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><img src="../assets/img/icons/edit-alt.svg" alt="" width="15"></button>
-                  </div>
+                  <h5 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">Invite friends and get a percentage of their earnings</a></h5>
+                  <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
                 </div>
               </div>
               <hr class="text-200">
               <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-                <div class="file-thumbnail"><img class="border h-100 w-100 object-fit-cover rounded-2" src="../assets/img/products/2-thumb.png" alt="">
+                <div class="file-thumbnail"><h2>4</h2>
                 </div>
                 <div class="ms-3 flex-shrink-1 flex-grow-1">
-                  <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">iMac.jpg</a></h6>
-                  <div class="fs-10"><span class="fw-semi-bold">Rowen</span><span class="fw-medium text-600 ms-2">23 Sep at 6:10 PM</span></div>
-                  <div class="hover-actions end-0 top-50 translate-middle-y"><a class="btn btn-tertiary border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" href="../assets/img/icons/cloud-download.svg" download="download" aria-label="Download" data-bs-original-title="Download"><img src="../assets/img/icons/cloud-download.svg" alt="" width="15"></a>
-                    <button class="btn btn-tertiary border-300 btn-sm me-1 text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><img src="../assets/img/icons/edit-alt.svg" alt="" width="15"></button>
-                  </div>
+                  <h5 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">Withdraw the earned funds to the popular payment systems</a></h5>
+                  <div class="fs-10"><span class="fas fa-arrow-down"></span></div> 
                 </div>
               </div>
               <hr class="text-200">
-              <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-                <div class="file-thumbnail"><img class="img-fluid" src="../assets/img/icons/docs.png" alt="">
-                </div>
-                <div class="ms-3 flex-shrink-1 flex-grow-1">
-                  <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!">functions.php</a></h6>
-                  <div class="fs-10"><span class="fw-semi-bold">John</span><span class="fw-medium text-600 ms-2">1 Oct at 4:30 PM</span></div>
-                  <div class="hover-actions end-0 top-50 translate-middle-y"><a class="btn btn-tertiary border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" href="../assets/img/icons/cloud-download.svg" download="download" aria-label="Download" data-bs-original-title="Download"><img src="../assets/img/icons/cloud-download.svg" alt="" width="15"></a>
-                    <button class="btn btn-tertiary border-300 btn-sm me-1 text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit"><img src="../assets/img/icons/edit-alt.svg" alt="" width="15"></button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <div class="col-md col-xxl-12">
-          <div class="card h-100 h-xxl-auto">
-            <div class="card-header bg-body-tertiary d-flex flex-between-center py-2">
-              <h6 class="mb-0">Bandwidth Saved</h6>
-              <div class="dropdown font-sans-serif btn-reveal-trigger">
-                <button class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal" type="button" id="dropdown-bandwidth-saved" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><svg class="svg-inline--fa fa-ellipsis-h fa-w-16 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-h" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"></path></svg><!-- <span class="fas fa-ellipsis-h fs-11"></span> Font Awesome fontawesome.com --></button>
-                <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="dropdown-bandwidth-saved"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                  <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body d-flex flex-center flex-column">
-              <!-- Find the JS file for the following chart at: src/js/charts/echarts/bandwidth-saved.js-->
-              <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
-              <div class="echart-bandwidth-saved" data-echart-responsive="true" _echarts_instance_="ec_1718381493189" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><div style="position: relative; width: 165px; height: 165px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="165" height="165" style="position: absolute; left: 0px; top: 0px; width: 165px; height: 165px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div></div>
-              <div class="text-center mt-3">
-                <h6 class="fs-9 mb-1"><svg class="svg-inline--fa fa-check fa-w-16 text-success me-1" data-fa-transform="shrink-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="" style="transform-origin: 0.5em 0.5em;"><g transform="translate(256 256)"><g transform="translate(0, 0)  scale(0.875, 0.875)  rotate(0 0 0)"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" transform="translate(-256 -256)"></path></g></g></svg><!-- <span class="fas fa-check text-success me-1" data-fa-transform="shrink-2"></span> Font Awesome fontawesome.com -->35.75 GB saved</h6>
-                <p class="fs-10 mb-0">38.44 GB total bandwidth</p>
-              </div>
-            </div>
-            <div class="card-footer bg-body-tertiary py-2">
-              <div class="row flex-between-center">
-                <div class="col-auto">
-                  <select class="form-select form-select-sm">
-                    <option>Last 6 Months</option>
-                    <option>Last Year</option>
-                    <option>Last 2 Year</option>
-                  </select>
-                </div>
-                <div class="col-auto"><a class="fs-10 font-sans-serif" href="#!">Help</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md col-xxl-12">
-          <div class="card">
-            <div class="card-body px-4 py-3 my-2">
-              <h4 class="text-800">More with Falcon</h4>
-              <h5 class="text-600 fs-9">Get <span class="text-primary fw-semi-bold">70% OFF </span>with Falcon+</h5>
-              <div class="alert alert-success mt-3">
-                <h3 class="mb-0 text-800">$29<span class="fs-9 fw-medium font-sans-serif text-600">/month</span></h3>
-              </div>
-              <ul class="fa-ul ms-2 ps-x1 mb-2">
-                <li class="py-1">
-                  <h6 class="text-700"><span class="fa-li text-success"><svg class="svg-inline--fa fa-infinity fa-w-20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="infinity" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M471.1 96C405 96 353.3 137.3 320 174.6 286.7 137.3 235 96 168.9 96 75.8 96 0 167.8 0 256s75.8 160 168.9 160c66.1 0 117.8-41.3 151.1-78.6 33.3 37.3 85 78.6 151.1 78.6 93.1 0 168.9-71.8 168.9-160S564.2 96 471.1 96zM168.9 320c-40.2 0-72.9-28.7-72.9-64s32.7-64 72.9-64c38.2 0 73.4 36.1 94 64-20.4 27.6-55.9 64-94 64zm302.2 0c-38.2 0-73.4-36.1-94-64 20.4-27.6 55.9-64 94-64 40.2 0 72.9 28.7 72.9 64s-32.7 64-72.9 64z"></path></svg><!-- <i class="fas fa-infinity"></i> Font Awesome fontawesome.com --></span>Unlimited downloads</h6>
-                </li>
-                <li class="py-1">
-                  <h6 class="text-700"><span class="fa-li text-success"><svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg><!-- <i class="fas fa-check"></i> Font Awesome fontawesome.com --></span>Commercial use</h6>
-                </li>
-                <li class="py-1">
-                  <h6 class="text-700"><span class="fa-li text-success"><svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg><!-- <i class="fas fa-check"></i> Font Awesome fontawesome.com --></span>100% moneyback guarantee</h6>
-                </li>
-                <li class="py-1">
-                  <h6 class="text-700"><span class="fa-li text-success"><svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg><!-- <i class="fas fa-check"></i> Font Awesome fontawesome.com --></span>Lifetime free updates</h6>
-                </li>
-              </ul>
-              <button class="btn btn-success w-100"> <svg class="svg-inline--fa fa-crown fa-w-20 me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="crown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2c-15.4 9.2-35.3 4-44.2-11.6L350.3 85C361 76.2 368 63 368 48c0-26.5-21.5-48-48-48s-48 21.5-48 48c0 15 7 28.2 17.7 37l-81.5 142.6c-8.9 15.6-28.9 20.8-44.2 11.6l-72.3-43.4c2.7-6 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48S0 149.5 0 176s21.5 48 48 48c2.6 0 5.2-.4 7.7-.8L128 416h384l72.3-192.8c2.5.4 5.1.8 7.7.8 26.5 0 48-21.5 48-48s-21.5-48-48-48z"></path></svg><!-- <span class="fas fa-crown me-2"></span> Font Awesome fontawesome.com -->Upgrade to Falcon+</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 <%- include("../partials/footer.html") %>
