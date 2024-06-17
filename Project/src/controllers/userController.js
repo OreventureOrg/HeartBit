@@ -1,15 +1,29 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
-    const { username, email, password, firstName, lastName } = req.body;
+    const { username, email, password, confirmPassword, firstName, lastName } = req.body;
+
+    if (!username || !email || !password || !confirmPassword || !firstName || !lastName) {
+        return res.render('auth/register.html', { errorMessage: 'All fields are required.' });
+    }
+
+    if (password !== confirmPassword) {
+        return res.render('auth/register.html', { errorMessage: 'Passwords do not match.' });
+    }
+
     try {
-        const user = new User({ username, email, password, firstName, lastName });
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.render('auth/register.html', { errorMessage: 'Email already in use.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new User({ username, email, password: hashedPassword, firstName, lastName });
         await user.save();
-        res.status(201).json({ message: 'Usuário registrado com sucesso' });
+        res.redirect('/login');
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.render('auth/register.html', { errorMessage: error.message });
     }
 };
 
@@ -18,19 +32,29 @@ const loginUser = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'Usuário não encontrado' });
+            return res.render('auth/login.html', { errorMessage: 'User not found.' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Senha incorreta' });
+            return res.render('auth/login.html', { errorMessage: 'Incorrect password.' });
         }
 
-        const token = jwt.sign({ id: user._id }, 'secreta', { expiresIn: '1h' });
-        res.status(200).json({ token });
+        req.session.userId = user._id;
+        res.redirect('/dashboard');
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.render('auth/login.html', { errorMessage: error.message });
     }
 };
 
-module.exports = { registerUser, loginUser };
+const logoutUser = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.redirect('/dashboard');
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/login');
+    });
+};
+
+module.exports = { registerUser, loginUser, logoutUser };
