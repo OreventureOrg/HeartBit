@@ -42,6 +42,14 @@ app.get("/affiliate", (req, res) => {
     res.render("./dashboard/affiliate.html", { Page: "Affiliate"});
 });
 
+app.get("/login", (req, res) => {
+    res.render("./auth/login.html", { Page: "Login"});
+});
+
+app.get("/register", (req, res) => {
+    res.render("./auth/register.html", { Page: "Register"});
+});
+
 const userRoutes = require('./src/routes/userRoutes');
 app.use('/', userRoutes);
 
