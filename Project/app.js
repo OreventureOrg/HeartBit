@@ -39,7 +39,7 @@ app.get("/dashboard", (req, res) => {
 });
 
 app.get("/affiliate", (req, res) => {
-    res.render("./affiliate/affiliate.html", { Page: "Affiliate"});
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate"});
 });
 
 const userRoutes = require('./src/routes/userRoutes');
