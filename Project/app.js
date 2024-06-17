@@ -1,10 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const app = express();
 const PORT = 5000;
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/heartbit', {});
 
@@ -20,6 +25,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'secreta',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/heartbit' })
+}));
+
+const userRoutes = require('./src/routes/userRoutes');
+app.use('/', userRoutes);
+
 app.get("/", (req, res) => {
     res.render("index.html", { Page: "Home"});
 });
@@ -29,8 +44,8 @@ app.get("/news", (req, res) => {
 });
 
 app.get("/new/:id", (req, res) => {
-    const id = req.params.id
-    console.log(id)
+    const id = req.params.id;
+    console.log(id);
     res.render("./news/news-details.html", { Page: "New Details"});
 });
 
@@ -42,9 +57,15 @@ app.get("/affiliate", (req, res) => {
     res.render("./dashboard/affiliate.html", { Page: "Affiliate"});
 });
 
-const userRoutes = require('./src/routes/userRoutes');
-app.use('/', userRoutes);
+app.get("/login", (req, res) => {
+    res.render("./auth/login.html", { Page: "Login"});
+});
 
+app.get("/register", (req, res) => {
+    res.render("./auth/register.html", { Page: "Register"});
+});
+
+// Iniciar servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
