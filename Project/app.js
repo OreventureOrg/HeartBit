@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
@@ -11,7 +12,7 @@ const PORT = 5000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/heartbit', {});
+mongoose.connect(process.env.MONGO_URI, {});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erro de conexão com MongoDB:'));
@@ -29,7 +30,7 @@ app.use(session({
     secret: 'secreta',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/heartbit' })
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
 const userRoutes = require('./src/routes/userRoutes');
