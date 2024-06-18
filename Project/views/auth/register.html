@@ -134,7 +134,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="reference-code">Reference Code (Optional)</label>
-                                                <input class="form-control" type="text" name="referenceCode" id="reference-code" value="<%= referenceCode %>">
+                                                <input class="form-control" type="text" name="referenceCode" id="reference-code" value="<%= referenceCode ? referenceCode : '' %>">
                                             </div>                                            
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="card-register-checkbox" required />
