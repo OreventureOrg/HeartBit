@@ -68,9 +68,6 @@ app.get("/how_about", (req, res) => {
     res.render("./how_about.html", { Page: "How About"});
 });
 
-<<<<<<< Updated upstream
-// Iniciar servidor
-=======
 app.get("/earn", (req, res) => {
     res.render("./earn/earntemplate.html", { Page: "Earn Template"});
 });
@@ -78,7 +75,6 @@ app.get("/earn", (req, res) => {
 const userRoutes = require('./src/routes/userRoutes');
 app.use('/', userRoutes);
 
->>>>>>> Stashed changes
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
