@@ -76,9 +76,6 @@ app.get("/earn", (req, res) => {
     res.render("./earn/earntemplate.html", { Page: "Earn Template"});
 });
 
-const userRoutes = require('./src/routes/userRoutes');
-app.use('/', userRoutes);
-
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
