@@ -64,6 +64,9 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
     res.render("./auth/register.html", { Page: "Register"});
 });
+app.get("/how_about", (req, res) => {
+    res.render("./how_about.html", { Page: "How About"});
+});
 
 // Iniciar servidor
 app.listen(PORT, () => {
