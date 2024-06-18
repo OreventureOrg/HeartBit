@@ -73,7 +73,7 @@ app.get("/how_about", (req, res) => {
 });
 
 app.get("/earn", (req, res) => {
-    res.render("./earn/earntemplate.html", { Page: "Earn Template"});
+    res.render("./dashboard/earn.html", { Page: "Earn"});
 });
 
 app.listen(PORT, () => {
