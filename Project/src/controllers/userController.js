@@ -2,28 +2,34 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 const registerUser = async (req, res) => {
-    const { username, email, password, confirmPassword, firstName, lastName } = req.body;
+    const { username, email, password, confirmPassword, firstName, lastName, referenceCode } = req.body;
 
     if (!username || !email || !password || !confirmPassword || !firstName || !lastName) {
-        return res.render('auth/register.html', { errorMessage: 'All fields are required.' });
+        return res.render('auth/register.html', { errorMessage: 'All fields are required.', referenceCode });
     }
 
     if (password !== confirmPassword) {
-        return res.render('auth/register.html', { errorMessage: 'Passwords do not match.' });
+        return res.render('auth/register.html', { errorMessage: 'Passwords do not match.', referenceCode });
     }
 
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.render('auth/register.html', { errorMessage: 'Email already in use.' });
+            return res.render('auth/register.html', { errorMessage: 'Email already in use.', referenceCode });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = new User({ username, email, password: hashedPassword, firstName, lastName });
-        await user.save();
+        const newUser = new User({
+            username,
+            email,
+            password: hashedPassword,
+            firstName,
+            lastName,
+            referenceCode: referenceCode || null
+        });
 
-        const savedUser = await User.findOne({ email });
+        await newUser.save();
 
         res.redirect('/login');
     } catch (error) {
@@ -54,9 +60,8 @@ const loginUser = async (req, res) => {
 
 const logoutUser = (req, res) => {
     req.session.destroy((err) => {
-        if (err) {
-            return res.redirect('/dashboard');
-        }
+        if (err) return res.redirect('/');
+
         res.clearCookie('connect.sid');
         res.redirect('/login');
     });

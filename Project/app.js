@@ -9,8 +9,14 @@ require('dotenv').config();
 const app = express();
 const PORT = 5000;
 
+const authMiddleware = require('./src/middleware/authMiddleware');
+
+// ============= BODY-PARSER SETUP ============= //
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// ============= MONGO SETUP ============= //
 
 mongoose.connect(process.env.MONGO_URI, {});
 
@@ -19,6 +25,8 @@ db.on('error', console.error.bind(console, 'Erro de conexão com MongoDB:'));
 db.once('open', () => {
     console.log('Conectado ao MongoDB');
 });
+
+// ============= GENERAL SETUP ============= //
 
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -36,8 +44,14 @@ app.use(session({
 const userRoutes = require('./src/routes/userRoutes');
 app.use('/', userRoutes);
 
+// ============= HOME ============= //
+
 app.get("/", (req, res) => {
     res.render("index.html", { Page: "Home"});
+});
+
+app.get("/how_about", (req, res) => {
+    res.render("./how_about.html", { Page: "How About"});
 });
 
 app.get("/news", (req, res) => {
@@ -46,35 +60,38 @@ app.get("/news", (req, res) => {
 
 app.get("/new/:id", (req, res) => {
     const id = req.params.id;
-    console.log(id);
     res.render("./news/news-details.html", { Page: "New Details"});
 });
 
-app.get("/dashboard", (req, res) => {
-    res.render("./dashboard/dashboard.html", { Page: "Dashboard"});
-});
-
-app.get("/affiliate", (req, res) => {
-    if (!req.session.userId) return res.redirect('/login');
-
-    const affiliateLink = `http://yourwebsite.com/register?ref=${req.session.userId}`;
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink });
-});
+// ============= AUTH ============= //
 
 app.get("/login", (req, res) => {
     res.render("./auth/login.html", { Page: "Login"});
 });
 
 app.get("/register", (req, res) => {
-    res.render("./auth/register.html", { Page: "Register"});
-});
-app.get("/how_about", (req, res) => {
-    res.render("./how_about.html", { Page: "How About"});
+    const referenceCode = req.query.ref || '';
+    res.render("auth/register.html", { Page: "Register", referenceCode });
 });
 
-app.get("/earn", (req, res) => {
+
+// ============= DASHBOARD ============= //
+
+app.get("/dashboard", authMiddleware, (req, res) => {
+    res.render("./dashboard/dashboard.html", { Page: "Dashboard"});
+});
+
+app.get("/affiliate", authMiddleware, (req, res) => {
+    const host = `${req.protocol}://${req.get('host')}`;
+    const affiliateLink = `${host}/register?ref=${req.session.userId}`;
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink });
+});
+
+app.get("/earn", authMiddleware, (req, res) => {
     res.render("./earn/earntemplate.html", { Page: "Earn Template"});
 });
+
+// ============= INIT SERVER ============= //
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

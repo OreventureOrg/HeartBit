@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css"> 
+<style>
+    @keyframes shakeRotation {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(-5deg); }
+        50% { transform: rotate(5deg); }
+        75% { transform: rotate(-5deg); }
+        100% { transform: rotate(0deg); }
+    }
+    .shake-animation {
+        animation: shakeRotation 0.5s;
+    }
+</style>
 <div class="card">
     <div class="card-body text-center py-5">
         <div class="row justify-content-center">
@@ -30,7 +42,9 @@
                 <h4 class="fw-normal mb-0 fs-8 fs-md-7">More ways to <br class="d-sm-none"> invite your friends</h4>
                 <div class="row gx-2 my-4">
                     <div class="col-lg-4 mb-2">
-                        <a href="mailto:destinatario@exemplo.com?subject=Assunto%20do%20Email&body=Corpo%20do%20Email%20aqui" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0"><span class="fa-solid fa-envelope"></span> Share on Gmail</a>
+                        <button id="shareEmail" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0">
+                            <span class="fa-solid fa-envelope"></span> Share on Gmail
+                        </button>
                     </div>
                     <div class="col-lg-4">
                         <button id="shareFacebook" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0"><span class="fab fa-facebook-square"></span> Share on Facebook</button>
@@ -54,7 +68,7 @@
 </div>
 
 <script>
-    document.getElementById("copyButton").addEventListener("click", function() {
+    function copyToClipboard() {
         var copyText = document.getElementById("linkInput");
         copyText.select();
         copyText.setSelectionRange(0, 99999);
@@ -62,26 +76,36 @@
 
         var copyButton = document.getElementById("copyButton");
         copyButton.classList.remove("btn-primary");
-        copyButton.classList.add("btn-success");
+        copyButton.classList.add("btn-success", "shake-animation");
         copyButton.textContent = "Link Copied";
-    });
-    
+        setTimeout(function() {
+            copyButton.classList.remove("shake-animation");
+        }, 500);
+    }
+
+    document.getElementById("copyButton").addEventListener("click", copyToClipboard);
+
+    document.getElementById("linkInput").addEventListener("dblclick", copyToClipboard);
+
     const link = document.getElementById('linkInput').value;
-    
+
+    document.getElementById('shareEmail').addEventListener('click', function() {
+        window.open(`mailto:destinatario@exemplo.com?subject=Assunto%20do%20Email&body=${encodeURIComponent(link)}`, '_blank');
+    });
 
     document.getElementById('shareFacebook').addEventListener('click', function() {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank');
-        this.classList.add('btn-success'); // Adiciona classe para indicar sucesso
+        this.classList.add('btn-success');
     });
 
     document.getElementById('shareTwitter').addEventListener('click', function() {
         window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(link)}`, '_blank');
-        this.classList.add('btn-success'); // Adiciona classe para indicar sucesso
+        this.classList.add('btn-success');
     });
 
     document.getElementById('shareWhatsApp').addEventListener('click', function() {
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(link)}`, '_blank');
-        this.classList.add('btn-success'); // Adiciona classe para indicar sucesso
+        this.classList.add('btn-success');
     });
 
     document.getElementById('shareInstagram').addEventListener('click', function() {
@@ -90,7 +114,7 @@
 
     document.getElementById('shareTelegram').addEventListener('click', function() {
         window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}`, '_blank');
-        this.classList.add('btn-success'); // Adiciona classe para indicar sucesso
+        this.classList.add('btn-success');
     });
 </script>
 

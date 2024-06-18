@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     balance: { type: Number, default: 0.0 },
+    referenceCode: { type: String, default: null }
 });
 
 const User = mongoose.model('User', userSchema);
