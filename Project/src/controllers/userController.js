@@ -19,8 +19,12 @@ const registerUser = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+
         const user = new User({ username, email, password: hashedPassword, firstName, lastName });
         await user.save();
+
+        const savedUser = await User.findOne({ email });
+
         res.redirect('/login');
     } catch (error) {
         res.render('auth/register.html', { errorMessage: error.message });
@@ -36,6 +40,7 @@ const loginUser = async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+
         if (!isMatch) {
             return res.render('auth/login.html', { errorMessage: 'Incorrect password.' });
         }
