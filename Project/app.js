@@ -54,8 +54,12 @@ app.get("/dashboard", (req, res) => {
 });
 
 app.get("/affiliate", (req, res) => {
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate"});
+    if (!req.session.userId) return res.redirect('/login');
+
+    const affiliateLink = `http://yourwebsite.com/register?ref=${req.session.userId}`;
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink });
 });
+
 
 app.get("/login", (req, res) => {
     res.render("./auth/login.html", { Page: "Login"});

@@ -15,7 +15,7 @@
             <div class="col-md-7">
                 <form class="row gx-2">
                     <div class="col-sm mb-2 mb-sm-0">
-                        <input id="linkInput" class="form-control" type="text" value="affiliate_link.com" readonly aria-label="Recipient's username">
+                        <input id="linkInput" class="form-control" type="text" value="<%= affiliateLink %>" readonly aria-label="Recipient's username">
                     </div>
                     <div class="col-sm-auto">
                         <button id="copyButton" class="btn btn-primary d-block w-100" type="button">Copy Link</button>
@@ -29,8 +29,8 @@
             <div class="col-11 col-sm-10">
                 <h4 class="fw-normal mb-0 fs-8 fs-md-7">More ways to <br class="d-sm-none"> invite your friends</h4>
                 <div class="row gx-2 my-4">
-                    <div class="col-lg-4">
-                        <a href="mailto:destinatario@exemplo.com?subject=Assunto%20do%20Email&body=Corpo%20do%20Email%20aqui" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0"><span class="fa-solid fa-envelope"></span> Share on Gmail</a></span></button>
+                    <div class="col-lg-4 mb-2">
+                        <a href="mailto:destinatario@exemplo.com?subject=Assunto%20do%20Email&body=Corpo%20do%20Email%20aqui" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0"><span class="fa-solid fa-envelope"></span> Share on Gmail</a>
                     </div>
                     <div class="col-lg-4">
                         <button id="shareFacebook" class="btn btn-falcon-default d-block w-100 mb-2 mb-xl-0"><span class="fab fa-facebook-square"></span> Share on Facebook</button>
@@ -57,10 +57,9 @@
     document.getElementById("copyButton").addEventListener("click", function() {
         var copyText = document.getElementById("linkInput");
         copyText.select();
-        copyText.setSelectionRange(0, 99999); // For mobile devices
+        copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
 
-        // Change button color to green
         var copyButton = document.getElementById("copyButton");
         copyButton.classList.remove("btn-primary");
         copyButton.classList.add("btn-success");
@@ -86,7 +85,6 @@
     });
 
     document.getElementById('shareInstagram').addEventListener('click', function() {
-        // Instagram não suporta compartilhamento direto via URL, então alertamos o usuário
         alert('Instagram does not support direct link sharing through URL schemes. Please share the link manually.');
     });
 
