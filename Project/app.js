@@ -88,7 +88,7 @@ app.get("/affiliate", authMiddleware, (req, res) => {
 });
 
 app.get("/earn", authMiddleware, (req, res) => {
-    res.render("./earn/earntemplate.html", { Page: "Earn Template"});
+    res.render("./dashboard/earn.html", { Page: "Earn Template"});
 });
 
 // ============= INIT SERVER ============= //

@@ -1,0 +1,87 @@
+<%- include("../partials/header.html") %>
+
+<div class="alert_info" style="margin-bottom: 1rem;">
+    <span style="display:inline !important;">Click the "Like Post" button, set the like in the opened window and then <b>close this window</b>. Our system will check for the presence or absence of your action and will add the reward in accordance with this.<br><br>You can <a href="https://everve.net/campaigns-add/quora-likes/">create your own campaign</a> in the <b>"Quora Likes"</b> category and getting a live audience by promoting your content or account on a social network using funds on your balance.</span>
+</div>
+
+<style>
+    .alert_info {
+        display: block;
+        width: 100%;
+        background: #e4f5ff;
+        border-radius: .25rem;
+        padding: 15px;
+        font-size: var(--fz-md);
+        line-height: 20px;
+        margin-top: 20px;
+        font-weight: 400;
+        border: 1px solid #e1e4e8;
+        border-left: 6px solid #2b81ff !important;
+        color: #2b81ff;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .title-content {
+        max-width: 900px; /* Ajuste a largura conforme necessário */
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    .reward-column, .action-column {
+        text-align: center;
+    }
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<div class="table-responsive scrollbar">
+    <table class="table table-hover table-striped overflow-hidden">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th class="reward-column" scope="col">Reward (USD)</th>
+          <th class="action-column" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="align-middle">
+          <td class="text-nowrap">
+            <div class="d-flex align-items-center">
+              <div class="avatar avatar-xl">
+                <img class="rounded-circle" src="../../assets/img/team/4.jpg" alt="" />
+              </div>
+              <div class="ms-2 title-content">I have just lost $10,000 BTC to scammers. How do I recover my money back?asggdasdahhshdahshjashdda</div>
+            </div>
+          </td>
+          <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$0.0015</span></td>
+          <td class="action-column">
+            <div class="action-buttons">
+              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Like Post"><span>Like Post</span></button>
+              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
+            </div>
+          </td>
+        </tr>
+        <tr class="align-middle">
+          <td class="text-nowrap">
+            <div class="d-flex align-items-center">
+              <div class="avatar avatar-xl">
+                <img class="rounded-circle" src="../../assets/img/team/13.jpg" alt="" />
+              </div>
+              <div class="ms-2 title-content">How can I find a legitimate assolen from me? I need to ac jbasjkdbaskjb kdbk.</div>
+            </div>
+          </td>
+          <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$0.0015</span></td>
+          <td class="action-column">
+            <div class="action-buttons">
+              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Like Post"><span>Like Post</span></button>
+              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<%- include("../partials/footer.html") %>
