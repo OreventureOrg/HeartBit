@@ -60,7 +60,6 @@ app.get("/affiliate", (req, res) => {
     res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink });
 });
 
-
 app.get("/login", (req, res) => {
     res.render("./auth/login.html", { Page: "Login"});
 });
