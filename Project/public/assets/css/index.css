@@ -1,0 +1,508 @@
+.service-item {
+    background-color: transparent;
+}
+
+.service-item img {
+    border-radius: 20px;
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Estilos adicionais para o layout dos testemunhos */
+.testimonial-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 20px; /* Espaço extra na parte inferior para a barra de rolagem */
+    padding-top: 10px; /* Espaço extra na parte superior */
+    padding-left: 5px; /* Espaço extra na lateral esquerda */
+    padding-right: 5px; /* Espaço extra na lateral direita */
+}
+
+.testimonial {
+    display: inline-block;
+    vertical-align: top;
+    width: 280px; /* Largura fixa para cada depoimento */
+    padding: 15px;
+    margin-right: 20px; /* Espaçamento entre depoimentos */
+    border: 1px solid #007bff; /* Borda azul */
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Cor de fundo clara */
+    overflow: hidden; /* Garante que o texto não saia do contêiner */
+    white-space: normal; /* Permite quebra de linha */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transição suave */
+}
+
+.testimonial:hover {
+    transform: translateY(-5px); /* Elevação ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+.testimonial p {
+    font-size: 1.1em;
+    margin-bottom: 10px; /* Espaço abaixo do texto do depoimento */
+    color: #333; /* Cor do texto */
+}
+
+.testimonial cite {
+    display: block;
+    font-style: normal;
+    margin-top: 10px; /* Espaço acima da citação */
+    text-align: right;
+    color: #007bff; /* Cor do texto da citação */
+}
+
+/* Estilos para o cabeçalho dos testemunhos */
+.testimonial-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #343a40; /* Cor do texto do cabeçalho */
+    font-size: 2em; /* Tamanho da fonte do cabeçalho */
+    font-weight: bold; /* Peso da fonte do cabeçalho */
+}
+
+/* Estilos para a barra de rolagem */
+.testimonial-container::-webkit-scrollbar {
+    height: 10px; /* Altura da barra de rolagem */
+}
+
+.testimonial-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do trilho da barra de rolagem */
+    border-radius: 10px; /* Borda arredondada do trilho */
+}
+
+.testimonial-container::-webkit-scrollbar-thumb {
+    background: #007bff; /* Cor do polegar da barra de rolagem */
+    border-radius: 10px; /* Borda arredondada do polegar */
+}
+
+.testimonial-container::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Cor do polegar ao passar o mouse */
+}
+
+/* Estilos para a seção 5 */
+.section5__info {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.section5__info .container {
+    border: 2px solid #343a40;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.section5__heading {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #343a40;
+}
+
+.section5__features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.section5__feature {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.section5__feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.section5__feature p {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.section5__feature p:nth-child(2) {
+    font-size: 1.2em;
+    color: #6c757d;
+}
+
+/* Estilos para o popup */
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 100%;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup__wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.popup__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 23%;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.popup__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.popup__pic img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.popup__title {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.popup__info {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.popup__button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.popup__button:hover {
+    background-color: #0056b3;
+}
+
+.popup__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.popup__header .heading {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.popup__close {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.popup__close:hover {
+    color: red;
+}
+
+/* Estilos para botões de outline */
+.btn-outline-primary, .btn-outline-danger, .btn-outline-info {
+    padding: 15px;
+    font-size: 1.2em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline-primary:hover, .btn-outline-danger:hover, .btn-outline-info:hover {
+    color: white;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+}
+
+.btn-outline-info:hover {
+    background-color: #17a2b8;
+}
+
+        .service-item {
+            background-color: transparent;
+        }
+        
+        .service-item img {
+            border-radius: 20px;
+            width: 100%;
+            max-width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        /* Estilos adicionais para o layout dos testemunhos */
+        .testimonial-container {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 20px; /* Espaço extra na parte inferior para a barra de rolagem */
+            padding-top: 10px; /* Espaço extra na parte superior */
+            padding-left: 5px; /* Espaço extra na lateral esquerda */
+            padding-right: 5px; /* Espaço extra na lateral direita */
+        }
+
+        .testimonial {
+            display: inline-block;
+            vertical-align: top;
+            width: 280px; /* Largura fixa para cada depoimento */
+            padding: 15px;
+            margin-right: 20px; /* Espaçamento entre depoimentos */
+            border: 1px solid #007bff; /* Borda azul */
+            border-radius: 10px;
+            background-color: #f9f9f9; /* Cor de fundo clara */
+            overflow: hidden; /* Garante que o texto não saia do contêiner */
+            white-space: normal; /* Permite quebra de linha */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+            transition: transform 0.2s, box-shadow 0.2s; /* Transição suave */
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px); /* Elevação ao passar o mouse */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+        }
+
+        .testimonial p {
+            font-size: 1.1em;
+            margin-bottom: 10px; /* Espaço abaixo do texto do depoimento */
+            color: #333; /* Cor do texto */
+        }
+
+        .testimonial cite {
+            display: block;
+            font-style: normal;
+            margin-top: 10px; /* Espaço acima da citação */
+            text-align: right;
+            color: #007bff; /* Cor do texto da citação */
+        }
+
+        /* Estilos para o cabeçalho dos testemunhos */
+        .testimonial-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40; /* Cor do texto do cabeçalho */
+            font-size: 2em; /* Tamanho da fonte do cabeçalho */
+            font-weight: bold; /* Peso da fonte do cabeçalho */
+        }
+
+        /* Estilos para a barra de rolagem */
+        .testimonial-container::-webkit-scrollbar {
+            height: 10px; /* Altura da barra de rolagem */
+        }
+
+        .testimonial-container::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Cor do trilho da barra de rolagem */
+            border-radius: 10px; /* Borda arredondada do trilho */
+        }
+
+        .testimonial-container::-webkit-scrollbar-thumb {
+            background: #007bff; /* Cor do polegar da barra de rolagem */
+            border-radius: 10px; /* Borda arredondada do polegar */
+        }
+
+        .testimonial-container::-webkit-scrollbar-thumb:hover {
+            background: #0056b3; /* Cor do polegar ao passar o mouse */
+        }
+
+        /* Estilos para a seção 5 */
+        .section5__info {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .section5__info .container {
+            border: 2px solid #343a40;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .section5__heading {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+
+        .section5__features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .section5__feature {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .section5__feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .section5__feature p {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .section5__feature p:nth-child(2) {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        /* Estilos para o popup */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup__wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .popup__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 23%;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .popup__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup__pic img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+        }
+
+        .popup__title {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .popup__info {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .popup__button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .popup__button:hover {
+            background-color: #0056b3;
+        }
+
+        .popup__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup__header .heading {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .popup__close {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .popup__close:hover {
+            color: red;
+        }
+
+        /* Estilos para botões de outline */
+        .btn-outline-primary, .btn-outline-danger, .btn-outline-info {
+            padding: 15px;
+            font-size: 1.2em;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .btn-outline-primary:hover, .btn-outline-danger:hover, .btn-outline-info:hover {
+            color: white;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+        }
+
+        .btn-outline-info:hover {
+            background-color: #17a2b8;
+        }
+        .btn-outline-primary,.btn-outline-primary:hover {color: #E63660;border-color: #E63660;}
