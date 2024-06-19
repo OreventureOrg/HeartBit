@@ -1,0 +1,194 @@
+<%- include("../partials/header.html") %>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row flex-between-center">
+            <div class="col-md">
+                <h5 class="mb-2 mb-md-0">Platform Name + specification</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-10">
+    <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header bg-body-tertiary">
+                <h6 class="mb-0">Instagram Profile URL</h6>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row gx-2">
+                        <div class="col-12 mb-3">
+                            <input class="form-control" id="youtube-url" type="text" placeholder="Enter YouTube URL" onblur="fetchYoutubeInfo()">
+                            <div class="text-muted" style="margin-top: 6px; font-size: 0.75rem;">
+                                <i class="fa fa-info-circle" style="margin-right: 8px;"></i>Enter a valid YouTube video URL
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-12 mb-3 d-flex flex-wrap align-items-center">
+                            <div class="d-flex flex-column flex-grow-1">
+                                <input class="form-control mb-2" id="manufacturer-name" type="text" placeholder="" disabled value=""><!--input username-->    
+                                <textarea class="form-control" id="event-description" rows="3" disabled></textarea><!--input descrição-->    
+                            </div>
+                            <div class="d-flex align-items-center ms-2">
+                                <img class="rounded-square me-2" id="thumbnail" src="../../../assets/img/team/no-image.jpg" alt="" width="140" height="140" />                            
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header bg-body-tertiary">
+                <h6 class="mb-0">Price Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="row gx-2">
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="import-status">Reward Per Action: </label>
+                        <div class="input-group mg-b-10">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="padding-top: 5px;padding-bottom: 8px;">$</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="" name="order_price_usd" id="order_price_usd" value="0.0020" onkeypress="return is_float_key(this, event);" onblur="validateMinValue(this, 0.0010)" style="border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;">
+                        </div>
+                    </div>
+                    <!-- Daily Actions Limit -->
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label class="d-block">Daily Actions Limit</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="check_box_1" onchange="toggleDailyLimit()">
+                                            <label class="custom-control-label" for="check_box_1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="order_daily_limit" id="order_daily_limit" value="0" disabled onkeypress="return is_number_key(this, event);">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim Daily Actions Limit -->
+                    <!-- Overall Actions Limit -->
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <label class="d-block">Overall Actions Limit</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="check_box_2" onchange="toggleOverallLimit()">
+                                            <label class="custom-control-label" for="check_box_2"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" name="overall_actions_limit" id="overall_actions_limit" value="0" disabled onkeypress="return is_number_key(this, event);">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim Overall Actions Limit -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md">
+                <h5 class="mb-2 mb-md-0"></h5>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary disabled" onclick="$(this).addClass('disabled');
+                    $(this).parent().find('.spinner-border').show();
+                    add_order();" style="float: right;margin-bottom: 20px;" disabled="" id="btn_submit">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px; display: none;"></span>
+                    Add A New Campaign            
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.html") %>
+<script>
+    function toggleDailyLimit() {
+        var dailyLimitInput = document.getElementById('order_daily_limit');
+        var checkBox = document.getElementById('check_box_1');
+
+        if (checkBox.checked) {
+            dailyLimitInput.disabled = false;
+        } else {
+            dailyLimitInput.disabled = true;
+        }
+    }
+
+    function toggleOverallLimit() {
+        var overallLimitInput = document.getElementById('overall_actions_limit');
+        var checkBox = document.getElementById('check_box_2');
+
+        if (checkBox.checked) {
+            overallLimitInput.disabled = false;
+        } else {
+            overallLimitInput.disabled = true;
+        }
+    }
+
+    function is_number_key(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function is_float_key(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode != 46 || evt.target.value.indexOf('.') != -1) && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function validateMinValue(input, minValue) {
+        var value = parseFloat(input.value);
+        if (isNaN(value) || value < minValue) {
+            input.value = minValue.toFixed(4);
+        }
+    }
+
+    async function fetchYoutubeInfo() {
+        var urlInput = document.getElementById('youtube-url').value;
+        var videoId = getYoutubeVideoId(urlInput);
+        if (videoId) {
+            var apiKey = 'AIzaSyDzIOD4iz7toMPkr4rf_PXdtaLvOfOfqp0'; // Substitua pelo seu chave de API do YouTube
+            var apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
+
+            try {
+                let response = await fetch(apiUrl);
+                let data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    var videoInfo = data.items[0].snippet;
+                    document.getElementById('manufacturer-name').value = videoInfo.channelTitle;
+                    document.getElementById('event-description').value = videoInfo.title;
+                    document.getElementById('thumbnail').src = videoInfo.thumbnails.default.url;
+                } else {
+                    console.error('No video info found');
+                }
+            } catch (error) {
+                console.error('Error fetching video info:', error);
+            }
+        } else {
+            console.error('Invalid YouTube URL');
+        }
+    }
+
+    function getYoutubeVideoId(url) {
+        var regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        var matches = url.match(regex);
+        return matches ? matches[1] : null;
+    }
+</script>
