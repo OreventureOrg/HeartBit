@@ -3,6 +3,15 @@
     background-color: transparent;
 }
 
+.custom-jumbotron {
+    background: url('/assets/img/favicons/home-img.png') no-repeat center center; 
+    background-size: cover;
+}
+.custom-jumbotron img {
+    max-width: 100%;
+    height: auto;
+}
+
 .service-item img {
     border-radius: 20px;
     width: 100%;
@@ -134,7 +143,6 @@
     color: #6c757d;
 }
 
-/* Estilos para botões de outline */
 .btn-outline-instagram,
 .btn-outline-youtube,
 .btn-outline-twitter,
@@ -144,7 +152,6 @@
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-/* Atualização da cor do botão de Instagram */
 .btn-outline-instagram {
     border-color: #E63660;
     color: #E63660;
@@ -156,10 +163,9 @@
 }
 
 .btn-outline-instagram:focus {
-    box-shadow: 0 0 10px #8a3ab9; /* Sombra cor do Instagram ao focar */
+    box-shadow: 0 0 10px #8a3ab9; 
 }
 
-/* Atualização da cor do botão de YouTube */
 .btn-outline-youtube {
     border-color: #FF0000;
     color: #FF0000;
@@ -171,10 +177,9 @@
 }
 
 .btn-outline-youtube:focus {
-    box-shadow: 0 0 10px #FF0000; /* Sombra cor do YouTube ao focar */
+    box-shadow: 0 0 10px #FF0000; 
 }
 
-/* Atualização da cor do botão de Twitter */
 .btn-outline-twitter {
     border-color: #1DA1F2;
     color: #1DA1F2;
@@ -186,14 +191,12 @@
 }
 
 .btn-outline-twitter:focus {
-    box-shadow: 0 0 10px #1DA1F2; /* Sombra cor do Twitter ao focar */
+    box-shadow: 0 0 10px #1DA1F2; 
 }
-
-/* Atualização da cor do botão de TikTok */
 .btn-outline-tiktok {
     border-color: #000000;
     color: #000000;
-    width: 100%; /* Ajuste para o botão ocupar 100% da largura */
+    width: 100%; 
 }
 
 .btn-outline-tiktok:hover {
@@ -202,7 +205,7 @@
 }
 
 .btn-outline-tiktok:focus {
-    box-shadow: 0 0 10px #000000; /* Sombra cor do TikTok ao focar */
+    box-shadow: 0 0 10px #000000; 
 }
 
 /* Estilos adicionais */
