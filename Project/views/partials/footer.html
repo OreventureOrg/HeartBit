@@ -1,3 +1,10 @@
+
+
+
+<!--ESTA A ENTRAR EM CONFLITO COM AS PAGINAS-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,41 +30,14 @@
             padding-bottom: 20px;
             font-size: 14px;
         }
-        .footer .container {
-            max-width: 1200px;
-            margin: auto;
-        }
         .footer .footer-top {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 40px;
         }
-        .footer .footer-top .logo {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .footer .footer-top .social-icons a {
-            color: #b3b3b3;
-            font-size: 18px;
-            margin-right: 15px;
-            transition: color 0.3s;
-        }
-        .footer .footer-top .social-icons a:hover {
-            color: #ffffff;
-        }
-        .footer .footer-links {
-            display: flex;
-            justify-content: space-between;
-        }
-        .footer .footer-links .footer-section {
-            flex: 1;
-            margin-right: 40px;
-        }
-        .footer .footer-links h5 {
-            color: #ffffff;
-            font-size: 18px;
-            margin-bottom: 20px;
+        .footer .footer-top .logo img {
+            max-width: 150px; 
         }
         .footer .footer-links ul {
             list-style: none;
@@ -74,43 +54,9 @@
         .footer .footer-links ul li a:hover {
             color: #ffffff;
         }
-        .footer .contact-info {
-            flex: 1;
-        }
         .footer .contact-info p {
             color: #b3b3b3;
             margin-bottom: 10px;
-        }
-        .footer .newsletter {
-            flex: 1;
-            margin-top: 20px;
-        }
-        .footer .newsletter form {
-            display: flex;
-            align-items: center;
-        }
-        .footer .newsletter input[type="email"] {
-            flex: 1;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #333333;
-            border-radius: 4px;
-            margin-right: 10px;
-            color: #b3b3b3;
-        }
-        .footer .newsletter input[type="email"]::placeholder {
-            color: #666666;
-        }
-        .footer .newsletter button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .footer .newsletter button:hover {
-            background-color: #0056b3;
         }
         .footer .bottom-line {
             border-top: 1px solid #333333;
@@ -123,105 +69,66 @@
             text-align: center;
             margin: 0;
         }
-        .btn-back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: none;
-            cursor: pointer;
-        }
-        .btn-back-to-top:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
 
 <div class="content">
-    <!-- Seu conteúdo principal aqui -->
 </div>
-
 <section class="footer">
     <div class="container">
-        <div class="footer-top">
-            <div class="logo">
-                <h2>Company Logo</h2>
+        <div class="footer-top row">
+            <div class="col-md-9 footer-links">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="#!">Home</a></li>
+                            <li><a href="#!">About Us</a></li>
+                            <li><a href="#!">Services</a></li>
+                            <li><a href="#!">Portfolio</a></li>
+                            <li><a href="#!">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="#!">Complete Tasks</a></li>
+                            <li><a href="#!">Earn Money</a></li>
+                            <li><a href="#!">Create Campaigns</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 contact-info">
+                        <h5>Contact Us</h5>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a></p>
+                        <p><i class="fas fa-phone"></i> +355 999999999</p>
+                    </div>
+                </div>
             </div>
-            <div class="social-icons">
-                <a href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a href="#!"><i class="fab fa-twitter"></i></a>
-                <a href="#!"><i class="fab fa-instagram"></i></a>
-                <a href="#!"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-        <div class="footer-links">
-            <div class="footer-section">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="#!">Home</a></li>
-                    <li><a href="#!">About Us</a></li>
-                    <li><a href="#!">Services</a></li>
-                    <li><a href="#!">Portfolio</a></li>
-                    <li><a href="#!">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h5>Services</h5>
-                <ul>
-                    <li><a href="#!">Web Design</a></li>
-                    <li><a href="#!">Graphic Design</a></li>
-                    <li><a href="#!">Digital Marketing</a></li>
-                    <li><a href="#!">SEO Optimization</a></li>
-                </ul>
-            </div>
-            <div class="footer-section contact-info">
-                <h5>Contact Us</h5>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</p>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a></p>
-                <p><i class="fas fa-phone"></i> +1234567890</p>
-            </div>
-            <div class="footer-section newsletter">
-                <h5>Newsletter</h5>
-                <p>Subscribe to our newsletter for updates:</p>
-                <form action="#">
-                    <input type="email" placeholder="Your Email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
+            <div class="col-md-3 text-md-right logo">
+                <img src="images/logo.png" alt="Company Logo">
             </div>
         </div>
         <div class="bottom-line">
             <p>&copy; 2024 Company Name. All rights reserved.</p>
         </div>
     </div>
-    <button class="btn-back-to-top" onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    // Botão de voltar ao topo
-    window.onscroll = function() {scrollFunction()};
-    
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("myBtn").style.display = "block";
-        } else {
-            document.getElementById("myBtn").style.display = "none";
-        }
-    }
-    
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-</script>
-
 </body>
 </html>
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/prism/prism.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+<script src="/assets/js/theme.js"></script>
