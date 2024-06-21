@@ -63,6 +63,10 @@ app.get("/new/:id", (req, res) => {
     res.render("./news/news-details.html", { Page: "New Details"});
 });
 
+app.get("/campaigns_list", (req, res) => {
+    res.render("./campaigns_list.html", { Page: "Campaigns List"});
+});
+
 // ============= AUTH ============= //
 
 app.get("/login", (req, res) => {
