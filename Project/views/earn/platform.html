@@ -1,3 +1,219 @@
 <%- include("../partials/header.html") %>
 
-<%- include("../partials/footer.html") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Submenu Example</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .btn-outline-instagram,
+        .btn-outline-youtube,
+        .btn-outline-twitter,
+        .btn-outline-tiktok {
+            padding: 25px;
+            font-size: 1.2em;
+            transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+            min-width: 250px; /* Increase the minimum width for buttons */
+        }
+
+        .btn-outline-instagram {
+            border-color: #E63660;
+            color: #E63660;
+        }
+
+        .btn-outline-instagram:hover {
+            background-color: #E63660;
+            color: white;
+        }
+
+        .btn-outline-instagram:focus {
+            box-shadow: 0 0 10px #8a3ab9; 
+        }
+
+        .btn-outline-youtube {
+            border-color: #FF0000;
+            color: #FF0000;
+        }
+
+        .btn-outline-youtube:hover {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        .btn-outline-youtube:focus {
+            box-shadow: 0 0 10px #FF0000; 
+        }
+
+        .btn-outline-twitter {
+            border-color: #1DA1F2;
+            color: #1DA1F2;
+        }
+
+        .btn-outline-twitter:hover {
+            background-color: #1DA1F2;
+            color: white;
+        }
+
+        .btn-outline-twitter:focus {
+            box-shadow: 0 0 10px #1DA1F2; 
+        }
+
+        .btn-outline-tiktok {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .btn-outline-tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .btn-outline-tiktok:focus {
+            box-shadow: 0 0 10px #000000; 
+        }
+
+        /* Basic styling for the menu */
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Center the menu horizontally */
+        }
+
+        .menu > li {
+            position: relative;
+            margin: 0 10px; /* Add spacing between buttons */
+        }
+
+        /* Submenu styling */
+        .submenu {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%; /* Ensure the submenu matches the width of the button */
+        }
+
+        .submenu > li {
+            border-bottom: 1px solid white; /* Add white border between submenu items */
+        }
+
+        .submenu > li > a {
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            display: block; /* Ensure the links take the full width */
+            text-align: center; /* Center the text */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        .submenu > li > a i {
+            margin-right: 10px; /* Add spacing between icon and text */
+        }
+
+        .btn-outline-instagram + .submenu > li > a {
+            background-color: #E63660;
+            border: 1px solid #E63660;
+        }
+
+        .btn-outline-instagram + .submenu > li > a:hover {
+            background-color: #c02950;
+        }
+
+        .btn-outline-youtube + .submenu > li > a {
+            background-color: #FF0000;
+            border: 1px solid #FF0000;
+        }
+
+        .btn-outline-youtube + .submenu > li > a:hover {
+            background-color: #cc0000;
+        }
+
+        .btn-outline-twitter + .submenu > li > a {
+            background-color: #1DA1F2;
+            border: 1px solid #1DA1F2;
+        }
+
+        .btn-outline-twitter + .submenu > li > a:hover {
+            background-color: #1784c7;
+        }
+
+        .btn-outline-tiktok + .submenu > li > a {
+            background-color: #000000;
+            border: 1px solid #000000;
+        }
+
+        .btn-outline-tiktok + .submenu > li > a:hover {
+            background-color: #333333;
+        }
+
+        /* Show the submenu when hovering over the parent menu item */
+        .menu > li:hover .submenu {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <ul class="menu">
+                <li>
+                    <button class="btn btn-outline-instagram dropdown-toggle" type="button">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram Followers</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram Likes</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram Likes + Followers</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram Comments</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-youtube dropdown-toggle" type="button">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube Subscribers</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube Views</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube Likes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-twitter dropdown-toggle" type="button">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter Followers</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter Likes</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter Retweets</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-tiktok dropdown-toggle" type="button">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok Followers</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok Likes</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok Views</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div> <!-- Close container -->
+    </section>
+
+    <%- include("../partials/footer.html") %>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

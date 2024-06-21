@@ -20,9 +20,22 @@
                 <form>
                     <div class="row gx-2">
                         <div class="col-12 mb-3">
-                            <input class="form-control" id="youtube-url" type="text" placeholder="Enter YouTube URL" onblur="fetchYoutubeInfo()">
+                            <input class="form-control" id="youtube-url" type="text" placeholder="Enter YouTube URL" oninput="validateInput()" onblur="fetchYoutubeInfo()">
                             <div class="text-muted" style="margin-top: 6px; font-size: 0.75rem;">
                                 <i class="fa fa-info-circle" style="margin-right: 8px;"></i>Enter a valid YouTube video URL
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="alert alert-danger" role="alert" style="margin-bottom: 1.5rem; display: none;" id="order_add_error">
+                                <i data-feather="alert-triangle" class="mg-r-10"></i>
+                                <span style="display:inline !important;">
+                                    You specified an incorrect URL! Possible causes of this error:
+                                    <ul>
+                                        <li>The resource (profile or post) you specified has been deleted by its owner</li>
+                                        <li>Profile or post is private and not viewable</li>
+                                        <li>If you are sure that the URL is correct and the profile or post is not private, it is possible that our proxy pool is overloaded and cannot process your request right now. Please wait a few seconds and retry the request.</li>
+                                    </ul>
+                                </span>
                             </div>
                         </div>
                         <hr>
@@ -104,9 +117,7 @@
                 <h5 class="mb-2 mb-md-0"></h5>
             </div>
             <div class="col-auto">
-                <button class="btn btn-primary disabled" onclick="$(this).addClass('disabled');
-                    $(this).parent().find('.spinner-border').show();
-                    add_order();" style="float: right;margin-bottom: 20px;" disabled="" id="btn_submit">
+                <button class="btn btn-primary disabled" onclick="redirectToYouTube()" style="float: right;margin-bottom: 20px;" disabled="" id="btn_submit">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px; display: none;"></span>
                     Add A New Campaign            
                 </button>
@@ -175,14 +186,24 @@
                     document.getElementById('manufacturer-name').value = videoInfo.channelTitle;
                     document.getElementById('event-description').value = videoInfo.title;
                     document.getElementById('thumbnail').src = videoInfo.thumbnails.default.url;
+
+                    // Habilitar o botão "Add A New Campaign"
+                    document.getElementById('btn_submit').disabled = false;
+                    document.getElementById('btn_submit').classList.remove('disabled');
+
+                    // Esconder a mensagem de erro, se estiver visível
+                    document.getElementById('order_add_error').style.display = 'none';
                 } else {
-                    console.error('No video info found');
+                    // Mostrar mensagem de erro se não encontrar informações do vídeo
+                    showErrorAlert();
                 }
             } catch (error) {
                 console.error('Error fetching video info:', error);
+                showErrorAlert();
             }
         } else {
-            console.error('Invalid YouTube URL');
+            // Mostrar mensagem de erro se a URL for inválida
+            showErrorAlert();
         }
     }
 
@@ -191,4 +212,32 @@
         var matches = url.match(regex);
         return matches ? matches[1] : null;
     }
+
+    function showErrorAlert() {
+        // Mostrar a mensagem de erro
+        document.getElementById('order_add_error').style.display = 'block';
+
+        // Limpar os campos de usuário, título e imagem
+        document.getElementById('manufacturer-name').value = '';
+        document.getElementById('event-description').value = '';
+        document.getElementById('thumbnail').src = '../../../assets/img/team/no-image.jpg';
+
+        // Desabilitar o botão "Add A New Campaign"
+        document.getElementById('btn_submit').disabled = true;
+        document.getElementById('btn_submit').classList.add('disabled');
+    }
+
+    function validateInput() {
+        // Esconder a mensagem de erro ao editar a URL
+        document.getElementById('order_add_error').style.display = 'none';
+
+        // Desabilitar o botão "Add A New Campaign" ao editar a URL
+        document.getElementById('btn_submit').disabled = true;
+        document.getElementById('btn_submit').classList.add('disabled');
+    }
+
+    function redirectToYouTube() {
+        window.location.href = 'https://www.youtube.com/';
+    }
+
 </script>
