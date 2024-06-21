@@ -16,7 +16,7 @@
             padding: 25px;
             font-size: 1.2em;
             transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-            min-width: 250px; /* Increase the minimum width for buttons */
+            min-width: 220px; /* Increase the minimum width for buttons */
         }
 
         .btn-outline-instagram {
@@ -145,16 +145,26 @@
             background-color: #1784c7;
         }
 
+        /* Estilo para o submenu no modo claro */
         .btn-outline-tiktok + .submenu > li > a {
             background-color: #000000;
             border: 1px solid #000000;
+        }
+
+        /* Estilo para o modo escuro */
+        @media (prefers-color-scheme: dark) {
+            .btn-outline-tiktok,
+            .btn-outline-tiktok + .submenu > li > a {
+                background-color: #ffffff; /* Branco */
+                border: 1px solid #ffffff;
+                color: #000000; /* Texto preto para contraste */
+            }
         }
 
         .btn-outline-tiktok + .submenu > li > a:hover {
             background-color: #333333;
         }
 
-        /* Show the submenu when hovering over the parent menu item */
         .menu > li:hover .submenu {
             display: block;
         }
