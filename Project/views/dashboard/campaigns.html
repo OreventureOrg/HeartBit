@@ -1,12 +1,12 @@
 <%- include("../partials/header.html") %>
 
 <div class="container-fluid">
-  <div class="card" id="allContactTable" data-list='{"valueNames":["category","info","initial_value","total_actions","actions_today","reward","total_limit","daily_limit"],"page":11,"pagination":true,"fallback":"contact-table-fallback"}'>
+  <div class="card" id="allContactTable" data-list='{"valueNames":["platform","action","rewardPerAction","dailyLimit","overallLimit"],"page":11,"pagination":true,"fallback":"contact-table-fallback"}'>
     <div class="card-header border-bottom border-200 px-0">
       <div class="d-lg-flex justify-content-between">
         <div class="row flex-between-center gy-2 px-x1">
           <div class="col-auto pe-0">
-            <h6 class="mb-0">Contacts</h6>
+            <h6 class="mb-0">Campaigns</h6>
           </div>
           <div class="col-auto">
             <form>
@@ -26,30 +26,44 @@
         <table class="table table-lg table-hover fs-12 mb-0 w-100">
           <thead class="bg-body-tertiary">
             <tr>
-              <th class="text-800 sort align-middle text-end" data-sort="category">Category</th>
-              <th class="text-800 sort align-middle text-end" data-sort="info">Info</th>
-              <th class="text-800 sort align-middle text-end" data-sort="initial_value">Initial Value</th>
-              <th class="text-800 sort align-middle text-end" data-sort="total_actions">Total Actions</th>
-              <th class="text-800 sort align-middle text-end" data-sort="actions_today">Actions Today</th>
-              <th class="text-800 sort align-middle text-end" data-sort="reward">Reward</th>
-              <th class="text-800 sort align-middle text-end" data-sort="total_limit">Total Limit</th>
-              <th class="text-800 sort align-middle text-end" data-sort="daily_limit">Daily Limit</th>
+              <th class="text-800 sort align-middle text-end" data-sort="platform">Platform</th>
+              <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
+              <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
+              <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
+              <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="align-middle text-end">PPT</td>
-              <td class="align-middle text-end">300%</td>
-              <td class="align-middle text-end">10.5</td>
-              <td class="align-middle text-end">1</td>
-              <td class="align-middle text-end">1</td>
-              <td class="align-middle text-end">3.5</td>
-              <td class="align-middle text-end">12</td>
-              <td class="align-middle text-end">1</td>
-            </tr>
+          <tbody id="announcement-table-body">
+            <!-- Rows will be added dynamically here -->
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/announcements')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('announcement-table-body');
+            tableBody.innerHTML = '';
+
+            data.forEach(announcement => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td class="align-middle text-end">${announcement.platform}</td>
+                    <td class="align-middle text-end">${announcement.action}</td>
+                    <td class="align-middle text-end">${announcement.rewardPerAction}</td>
+                    <td class="align-middle text-end">${announcement.dailyLimit}</td>
+                    <td class="align-middle text-end">${announcement.overallLimit}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching announcements:', error));
+});
+</script>
