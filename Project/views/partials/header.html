@@ -101,7 +101,7 @@
                     </div>
                   </div>
                 </li>            
-                <% if (Page !== "Dashboard" && Page !== "Affiliate") { %>
+                <% if (!["Dashboard", "Affiliate", "Earn","Platform","Announcement"].includes(Page)) { %>
                   <!--login button-->
                   <a class="nav-link px-0 fa-icon-wait" id="login" role="button">
                     <i class="fas fa-user-circle" style="font-size: 27px;"></i>
