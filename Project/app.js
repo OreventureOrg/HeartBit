@@ -111,7 +111,7 @@ app.get("/services", authMiddleware, (req, res) => {
 });
 
 app.get("/withdraw", authMiddleware, (req, res) => {
-    res.render("./dashboard/withdraw.html", { Page: "Withdraw" });
+    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance  });
 });
 
 // ============= INIT SERVER ============= //

@@ -6,38 +6,46 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 // Endpoint para saque
 router.post('/', authMiddleware, async (req, res) => {
-  const { amount } = req.body;
-  const userId = req.session.userId;
+    const { amount } = req.body;
+    const userId = req.session.userId;
 
-  if (!userId || !amount) {
-    return res.status(400).json({ message: 'Missing userId or amount' });
-  }
-
-  try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    if (!userId || !amount) {
+        return res.status(400).json({ message: 'Missing userId or amount', userBalance: req.userBalance  });
     }
 
-    if (user.balance < amount) {
-      return res.status(400).json({ message: 'Insufficient balance' });
+    if (amount < 5) {
+        return res.status(400).json({ message: 'The withdrawal amount must be greater than $5.' });
     }
 
-    user.balance -= amount;
-    await user.save();
+    try {
+        const user = await User.findById(userId);
 
-    const transaction = new Transaction({
-      userId,
-      amount,
-      type: 'withdraw'
-    });
-    await transaction.save();
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-    res.status(200).json({ message: 'Withdrawal successful', balance: user.balance });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
-  }
+        if (user.balance < 5) {
+            return res.status(400).json({ message: 'Insufficient balance. Your balance must be more than $5 to make a withdrawal.' });
+        }
+
+        if (user.balance < amount) {
+            return res.status(400).json({ message: 'Insufficient balance for this amount.' });
+        }
+
+        user.balance -= amount;
+        await user.save();
+
+        const transaction = new Transaction({
+            userId,
+            amount,
+            type: 'withdraw'
+        });
+        await transaction.save();
+
+        res.status(200).json({ message: 'Withdrawal successful', balance: user.balance });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
 });
 
 module.exports = router;

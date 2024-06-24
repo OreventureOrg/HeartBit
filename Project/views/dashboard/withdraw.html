@@ -1,38 +1,53 @@
 <%- include("../partials/header.html") %>
+<style>
+    .custom-width {
+        width: 397px; /* ajuste conforme necessário */
+    }
+</style>
+<div class="card overflow-hidden mb-3">
+    <div class="card-header audience-chart-header p-0 bg-body-tertiary scrollbar-overlay" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
+      <ul class="nav nav-tabs border-0 chart-tab flex-nowrap" id="audience-chart-tab" role="tablist">
+        <li class="nav-item" role="presentation"><a class="nav-link mb-0 active" id="withdraw-tab" data-bs-toggle="tab" href="#withdraw" role="tab" aria-controls="withdraw" aria-selected="true">
+            <div class="audience-tab-item p-3 custom-width">
+              <h5 class="text-800">Withdraw</h5>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item" role="presentation"><a class="nav-link mb-0" id="deposit-tab" data-bs-toggle="tab" href="#deposit" role="tab" aria-controls="deposit" aria-selected="false" tabindex="-1">
+            <div class="audience-tab-item p-3 custom-width">
+              <h5 class="text-800">Deposit</h5>
+            </div>
+          </a></li>
+      </ul>
+    </div></div></div></div><div class="simplebar-placeholder" style="width: 928px; height: 96px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>
+    <div class="card-body">
+      <div class="tab-content">
+        <div class="tab-pane active show" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+          <div class="echart-audience" data-echart-responsive="true" style="height: 320px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1719235392282"><div style="position: relative; width: 818px; height: 340px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="818" height="340" style="position: absolute; left: 0px; top: 0px; width: 818px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="">
+            olaa
+          </div></div>
+          
+        </div>
+        <div class="tab-pane" id="deposit" role="tabpanel" aria-labelledby="deposit-tab">
+          <div class="echart-audience" data-echart-responsive="true" style="height: 320px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1719235392291"><div style="position: relative; width: 818px; height: 340px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="818" height="340" style="position: absolute; left: 0px; top: 0px; width: 818px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="">
+            opaa
+          </div></div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw</title>
-</head>
-<body>
-    <h1>Withdraw</h1>
-    <form id="withdrawForm">
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required>
-        <button type="submit">Withdraw</button>
-    </form>
-    <script>
-        document.getElementById('withdrawForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const amount = document.getElementById('amount').value;
 
-            const response = await fetch('/api/withdraw', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ amount })
-            });
+</div>
+</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer bg-body-tertiary py-2">
+      <div class="row flex-between-center g-0">
+        <div class="col-auto">
+        </div>
+        <div class="col-auto"><a class="btn btn-link btn-sm px-0 fw-medium" href="#!">Visitors overview<svg class="svg-inline--fa fa-chevron-right fa-w-10 ms-1 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg><!-- <span class="fas fa-chevron-right ms-1 fs-11"></span> Font Awesome fontawesome.com --></a></div>
+      </div>
+    </div>
+  </div>
 
-            const result = await response.json();
-            alert(result.message);
-        });
-    </script>
-</body>
-</html>
 
 
 <%- include("../partials/footer.html") %>
