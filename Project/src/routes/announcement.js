@@ -34,8 +34,7 @@ router.get("/earn/:platform/:action", authMiddleware, async (req, res) => {
     }
 });
 
-
-router.post('/announcement', async (req, res) => {
+router.post('/announcement', authMiddleware, async (req, res) => {
     try {
         const {
             platform,
@@ -56,9 +55,10 @@ router.post('/announcement', async (req, res) => {
             username,
             description,
             thumbnailUrl: platform === 'youtube' ? thumbnailUrl : undefined,
-            rewardPerAction: parseFloat(rewardPerAction),
+            rewardPerAction: parseFloat(rewardPerAction) / 2,
             dailyLimit: parseInt(dailyLimit) || 0,
-            overallLimit: parseInt(overallLimit) || 0
+            overallLimit: parseInt(overallLimit) || 0,
+            postedBy: req.user._id
         });
 
         await newAnnouncement.save();
@@ -100,8 +100,18 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
             return res.status(400).send('Invalid reward value');
         }
 
+        const reward = announcementObj.rewardPerAction;
+        const penalty = reward * 2;
+
         user.tasks.push(announcementId);
-        user.balance += announcementObj.rewardPerAction;
+        user.balance += reward;
+
+        const poster = await User.findById(announcementObj.postedBy);
+        if (poster) {
+            poster.balance -= penalty;
+
+            await poster.save();
+        }
 
         await user.save();
 

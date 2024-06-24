@@ -41,6 +41,10 @@ const announcementSchema = new mongoose.Schema({
     accessCount: {
         type: Number,
         default: 0
+    },
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 
