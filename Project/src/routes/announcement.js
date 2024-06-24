@@ -122,4 +122,14 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
     }
 });
 
+router.get("/campaigns", authMiddleware, async (req, res) => {
+    try {
+        const announcements = await Announcement.find({});
+        res.render("./dashboard/campaigns.html", { Page: "Campaigns", announcements, userBalance: req.userBalance });
+    } catch (error) {
+        console.error('Erro ao buscar anúncios:', error);
+        res.status(500).send('Erro ao buscar anúncios');
+    }
+});
+
 module.exports = router;

@@ -45,12 +45,7 @@ const userRoutes = require('./src/routes/userRoutes');
 const withdrawRoutes = require('./src/routes/withdrawRoutes');
 const depositRoutes = require('./src/routes/depositRoutes');
 app.use('/', userRoutes);
-<<<<<<< Updated upstream
 app.use('/api/withdraw', withdrawRoutes);
-=======
-app.use('/api/withdraw', withdrawRoutes); // Nova rota adicionada
-app.use('/api/deposit', depositRoutes); // Nova rota adicionada
->>>>>>> Stashed changes
 
 const announcementRoutes = require('./src/routes/announcement');
 app.use('/', announcementRoutes);
@@ -111,8 +106,4 @@ app.get("/withdraw", authMiddleware, (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
-});
-
-app.get("/campaigns", authMiddleware, (req, res) => {
-    res.render("./dashboard/campaigns.html", { Page: "Campaigns" });
 });
