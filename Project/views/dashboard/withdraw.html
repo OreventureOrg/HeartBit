@@ -3,6 +3,21 @@
     .custom-width {
         width: 397px; /* ajuste conforme necessário */
     }
+    .echart-audience {
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+    .echart-audience canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .form-control, .form-select {
+      width: 100%;
+    }
 </style>
 <div class="card overflow-hidden mb-3">
     <div class="card-header audience-chart-header p-0 bg-body-tertiary scrollbar-overlay" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
@@ -21,33 +36,102 @@
       </ul>
     </div></div></div></div><div class="simplebar-placeholder" style="width: 928px; height: 96px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>
     <div class="card-body">
-      <div class="tab-content">
-        <div class="tab-pane active show" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
-          <div class="echart-audience" data-echart-responsive="true" style="height: 320px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1719235392282"><div style="position: relative; width: 818px; height: 340px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="818" height="340" style="position: absolute; left: 0px; top: 0px; width: 818px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="">
-            olaa
-          </div></div>
-          
-        </div>
-        <div class="tab-pane" id="deposit" role="tabpanel" aria-labelledby="deposit-tab">
-          <div class="echart-audience" data-echart-responsive="true" style="height: 320px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" _echarts_instance_="ec_1719235392291"><div style="position: relative; width: 818px; height: 340px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="818" height="340" style="position: absolute; left: 0px; top: 0px; width: 818px; height: 340px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="">
-            opaa
-          </div></div>
-
-
-</div>
-</div></div></div>
+        <div class="tab-content">
+          <!-- Withdraw Tab -->
+          <div class="tab-pane active show" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+            <div class="echart-audience">
+              <h4>Withdraw</h4>
+              <form id="withdrawForm">
+                <div class="mb-3">
+                  <label for="withdrawAmount" class="form-label">Quantidade</label>
+                  <input type="number" class="form-control" id="withdrawAmount" placeholder="Insira a quantidade">
+                </div>
+                <div class="mb-3">
+                  <label for="withdrawMethod" class="form-label">Método de Pagamento</label>
+                  <select class="form-select" id="withdrawMethod">
+                    <option value="creditCard">Cartão de Crédito</option>
+                    <option value="debitCard">Cartão de Débito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bankTransfer">Transferência Bancária</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+              </form>
+            </div>
+          </div>
+    
+          <!-- Deposit Tab -->
+          <div class="tab-pane" id="deposit" role="tabpanel" aria-labelledby="deposit-tab">
+            <div class="echart-audience">
+              <h4>Deposit</h4>
+              <form id="depositForm">
+                <div class="mb-3">
+                  <label for="depositAmount" class="form-label">Quantidade</label>
+                  <input type="number" class="form-control" id="depositAmount" placeholder="Insira a quantidade">
+                </div>
+                <div class="mb-3">
+                  <label for="paymentMethod" class="form-label">Método de Pagamento</label>
+                  <select class="form-select" id="paymentMethod">
+                    <option value="creditCard">Cartão de Crédito</option>
+                    <option value="debitCard">Cartão de Débito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bankTransfer">Transferência Bancária</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-footer bg-body-tertiary py-2">
-      <div class="row flex-between-center g-0">
-        <div class="col-auto">
-        </div>
-        <div class="col-auto"><a class="btn btn-link btn-sm px-0 fw-medium" href="#!">Visitors overview<svg class="svg-inline--fa fa-chevron-right fa-w-10 ms-1 fs-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg><!-- <span class="fas fa-chevron-right ms-1 fs-11"></span> Font Awesome fontawesome.com --></a></div>
-      </div>
-    </div>
-  </div>
-
-
-
+    
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+      <script>
+        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const amount = document.getElementById('withdrawAmount').value;
+          const method = document.getElementById('withdrawMethod').value;
+    
+          fetch('/api/withdraw', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amount, method }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message) {
+              alert(data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        });
+    
+        document.getElementById('depositForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const amount = document.getElementById('depositAmount').value;
+          const method = document.getElementById('paymentMethod').value;
+    
+          fetch('/api/deposit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amount, method }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message) {
+              alert(data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        });
+      </script>
 <%- include("../partials/footer.html") %>
