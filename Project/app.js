@@ -106,3 +106,7 @@ app.get("/withdraw", authMiddleware, (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+app.get("/campaigns", authMiddleware, (req, res) => {
+    res.render("./dashboard/campaigns.html", { Page: "Campaigns" });
+});

@@ -268,9 +268,9 @@
 }
 
 .popup__button {
-    background-color: #007BFF; /* Blue background */
-    border-color: #007BFF; /* Blue border */
-    color: white; /* White text */
+    background-color: #007BFF; 
+    border-color: #007BFF;
+    color: white; 
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
