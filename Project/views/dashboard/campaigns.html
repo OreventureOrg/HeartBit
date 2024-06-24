@@ -2,46 +2,59 @@
 
 <div class="container-fluid">
   <div class="card" id="allContactTable" data-list='{"valueNames":["platform","action","rewardPerAction","dailyLimit","overallLimit"],"page":11,"pagination":true,"fallback":"contact-table-fallback"}'>
-    <div class="card-header border-bottom border-200 px-0">
-      <div class="d-lg-flex justify-content-between">
-        <div class="row flex-between-center gy-2 px-x1">
-          <div class="col-auto pe-0">
-            <h6 class="mb-0">Campaigns</h6>
-          </div>
-          <div class="col-auto">
-            <form>
-              <div class="input-group input-search-width">
-                <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search by name" aria-label="search">
-                <button class="btn btn-sm btn-outline-secondary border-300 hover-border-secondary">
-                  <i class="fas fa-search fs-10" aria-hidden="true"></i>
-                </button>
+      <div class="card-header border-bottom border-200 px-0">
+          <div class="d-lg-flex justify-content-between">
+              <div class="row flex-between-center gy-2 px-x1">
+                  <div class="col-auto pe-0">
+                      <h6 class="mb-0">Campaigns</h6>
+                  </div>
+                  <div class="col-auto">
+                      <form>
+                          <div class="input-group input-search-width">
+                              <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search by name" aria-label="search">
+                              <button class="btn btn-sm btn-outline-secondary border-300 hover-border-secondary">
+                                  <i class="fas fa-search fs-10" aria-hidden="true"></i>
+                              </button>
+                          </div>
+                      </form>
+                  </div>
               </div>
-            </form>
           </div>
-        </div>
       </div>
-    </div>
-    <div class="card-body p-0">
-      <div class="table-responsive scrollbar">
-        <table class="table table-lg table-hover fs-12 mb-0 w-100">
-          <thead class="bg-body-tertiary">
-            <tr>
-              <th class="text-800 sort align-middle text-end" data-sort="platform">Platform</th>
-              <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
-              <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
-              <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
-              <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
-            </tr>
-          </thead>
-          <tbody id="announcement-table-body">
-            <!-- Rows will be added dynamically here -->
-          </tbody>
-        </table>
+      <div class="card-body p-0">
+          <div class="table-responsive scrollbar">
+              <table class="table table-lg table-hover fs-12 mb-0 w-100">
+                  <thead class="bg-body-tertiary">
+                      <tr>
+                          <th class="text-800 sort align-middle text-end" data-sort="platform">Platform</th>
+                          <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
+                          <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
+                          <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
+                          <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
+                      </tr>
+                  </thead>
+                  <tbody id="announcement-table-body">
+                      <% if (announcements.length > 0) { %>
+                          <% announcements.forEach(announcement => { %>
+                              <tr>
+                                  <td class="align-middle text-end"><%- announcement.platform %></td>
+                                  <td class="align-middle text-end"><%- announcement.action %></td>
+                                  <td class="align-middle text-end"><%- announcement.rewardPerAction %></td>
+                                  <td class="align-middle text-end"><%- announcement.dailyLimit %></td>
+                                  <td class="align-middle text-end"><%- announcement.overallLimit %></td>
+                              </tr>
+                          <% }); %>
+                      <% } else { %>
+                          <tr>
+                              <td colspan="5" class="text-center">No announcements found.</td>
+                          </tr>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
       </div>
-    </div>
   </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/announcements')
@@ -67,3 +80,5 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching announcements:', error));
 });
 </script>
+
+<%- include("../partials/footer.html") %>
