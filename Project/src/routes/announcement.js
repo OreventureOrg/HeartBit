@@ -29,7 +29,7 @@ router.post('/announcement', async (req, res) => {
         });
 
         await newAnnouncement.save();
-        res.redirect('/announcement');
+        res.redirect(`/announcement?success=true&platform=${platform}&action=${action}`);
     } catch (error) {
         console.error('Error creating announcement:', error);
         res.status(500).send('Internal Server Error');

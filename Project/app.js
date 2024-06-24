@@ -99,9 +99,9 @@ app.get("/earn", authMiddleware, (req, res) => {
 app.get("/announcement", authMiddleware, (req, res) => {
     const platform = req.query.platform || 'Platform';
     const action = req.query.action || 'Action';
-    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, userBalance: req.userBalance  });
+    const successMessage = req.query.success === 'true' ? 'Campaign created successfully!' : '';
+    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance });
 });
-
 app.get("/platform", authMiddleware, (req, res) => {
     res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance });
 });

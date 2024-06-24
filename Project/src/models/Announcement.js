@@ -30,12 +30,12 @@ const announcementSchema = new mongoose.Schema({
     },
     dailyLimit: {
         type: Number,
-        default: 0,
+        default: 1,
         min: 0
     },
     overallLimit: {
         type: Number,
-        default: 0,
+        default: 10,
         min: 0
     },
     accessCount: {

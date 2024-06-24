@@ -1,5 +1,12 @@
 <%- include("../partials/header.html") %>
 
+<% if (successMessage) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= successMessage %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
 <div class="card mb-3">
     <div class="card-body">
         <div class="row flex-between-center">
@@ -47,9 +54,9 @@
                         <div class="col-12 mb-3 d-flex flex-wrap align-items-center">
                             <div class="d-flex flex-column flex-grow-1">
                                 <label for="manufacturer-name" class="form-label">Profile Name</label>
-                                <input class="form-control mb-2" id="manufacturer-name" type="text" disabled value="">
+                                <input class="form-control mb-2" id="manufacturer-name" type="text" name="username" disabled value="">
                                 <label for="event-description" class="form-label">Profile Description</label>
-                                <textarea class="form-control" id="event-description" rows="3" disabled></textarea>
+                                <textarea class="form-control" id="event-description" rows="3" name="description" disabled></textarea>
                             </div>
                             <div class="d-flex align-items-center ms-2">
                                 <img class="rounded-square me-2" id="thumbnail" src="../../../assets/img/team/no-image.jpg" alt="Profile Thumbnail" width="140" height="140" />
@@ -58,11 +65,11 @@
                         <% } else { %>
                         <div class="col-12 mb-3">
                             <label for="profile-name" class="form-label">Profile Name</label>
-                            <input class="form-control mb-2" id="profile-name" type="text" required value="">
+                            <input class="form-control mb-2" id="profile-name" name="username" type="text" required value="">
                         </div>
                         <div class="col-12 mb-3">
                             <label for="profile-description" class="form-label">Profile Description</label>
-                            <textarea class="form-control" id="profile-description" rows="3" required></textarea>
+                            <textarea class="form-control" id="profile-description" rows="3" name="description" required></textarea>
                         </div>
                         <% } %>
                         <hr>
@@ -78,13 +85,13 @@
                                     <label class="form-label" for="order_price_usd">Reward Per Action: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control" name="order_price_usd" id="order_price_usd" value="0.0020" onkeypress="return is_float_key(event);" onblur="validateMinValue(this, 0.0010)">
+                                        <input type="text" class="form-control" name="rewardPerAction" id="order_price_usd" value="0.0020" onkeypress="return is_float_key(event);" onblur="validateMinValue(this, 0.0010)">
                                     </div>
                                 </div>
                                 <!-- Daily Actions Limit -->
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
-                                        <label for="check_box_1" class="d-block">Daily Actions Limit</label>
+                                        <label for="check_box_1" class="d-block">Daily Actions Limit (Default: 1)</label>
                                         <div class="input-group">
                                             <div class="input-group-text">
                                                 <input type="checkbox" id="check_box_1" onchange="toggleDailyLimit()">
@@ -96,7 +103,7 @@
                                 <!-- Overall Actions Limit -->
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
-                                        <label for="check_box_2" class="d-block">Overall Actions Limit</label>
+                                        <label for="check_box_2" class="d-block">Overall Actions Limit (Default: 10)</label>
                                         <div class="input-group">
                                             <div class="input-group-text">
                                                 <input type="checkbox" id="check_box_2" onchange="toggleOverallLimit()">
