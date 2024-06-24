@@ -45,12 +45,8 @@ const userRoutes = require('./src/routes/userRoutes');
 const withdrawRoutes = require('./src/routes/withdrawRoutes');
 const depositRoutes = require('./src/routes/depositRoutes');
 app.use('/', userRoutes);
-<<<<<<< Updated upstream
-app.use('/api/withdraw', withdrawRoutes);
-=======
 app.use('/api/withdraw', withdrawRoutes); // Nova rota adicionada
 app.use('/api/deposit', depositRoutes); // Nova rota adicionada
->>>>>>> Stashed changes
 
 const announcementRoutes = require('./src/routes/announcement');
 app.use('/', announcementRoutes);
