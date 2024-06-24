@@ -44,9 +44,11 @@ app.use(session({
 const userRoutes = require('./src/routes/userRoutes');
 const withdrawRoutes = require('./src/routes/withdrawRoutes');
 app.use('/', userRoutes);
-app.use('/api/withdraw', withdrawRoutes); // Nova rota adicionada
+app.use('/api/withdraw', withdrawRoutes);
 
 const announcementRoutes = require('./src/routes/announcement');
+const Announcement = require('./src/models/Announcement');
+const User = require('./src/models/User');
 app.use('/', announcementRoutes);
 
 // ============= HOME ============= //
@@ -57,15 +59,6 @@ app.get("/", (req, res) => {
 
 app.get("/how_about", (req, res) => {
     res.render("./how_about.html", { Page: "How About"});
-});
-
-app.get("/news", (req, res) => {
-    res.render("./news/news-list.html", { Page: "News"});
-});
-
-app.get("/new/:id", (req, res) => {
-    const id = req.params.id;
-    res.render("./news/news-details.html", { Page: "New Details"});
 });
 
 // ============= AUTH ============= //
@@ -92,9 +85,68 @@ app.get("/affiliate", authMiddleware, (req, res) => {
     res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance  });
 });
 
-app.get("/earn", authMiddleware, (req, res) => {
-    res.render("./earn/earn.html", { Page: "Earn Template", userBalance: req.userBalance });
+app.get("/earn/:platform/:action", authMiddleware, async (req, res) => {
+    const { platform, action } = req.params;
+
+    try {
+        const announcements = await announcement.find({ platform, action });
+
+        res.render("./earn/earn.html", {
+            Page: "Earn",
+            platform,
+            action,
+            announcements,
+            userBalance: req.userBalance
+        });
+    } catch (error) {
+        console.error('Erro ao buscar anúncios:', error);
+        res.status(500).send('Erro ao buscar anúncios');
+    }
 });
+
+app.get("/complete-task/:announcementId", authMiddleware, async (req, res) => {
+    const { announcementId } = req.params;
+    const userId = req.user._id;
+
+    try {
+        const announcementObj = await Announcement.findById(announcementId);
+
+        if (!announcementObj) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        if (!user.tasks) {
+            user.tasks = [];
+        }
+
+        const taskCompleted = user.tasks.includes(announcementId);
+
+        if (taskCompleted) {
+            return res.status(400).send('Task already completed');
+        }
+
+        if (isNaN(announcementObj.rewardPerAction)) {
+            return res.status(400).send('Invalid reward value');
+        }
+
+        user.tasks.push(announcementId);
+        user.balance += announcementObj.rewardPerAction;
+
+        await user.save();
+
+        res.redirect("/earn");
+    } catch (error) {
+        console.error('Erro ao completar tarefa:', error);
+        res.status(500).send('Erro ao completar tarefa');
+    }
+});
+
 
 app.get("/announcement", authMiddleware, (req, res) => {
     const platform = req.query.platform || 'Platform';

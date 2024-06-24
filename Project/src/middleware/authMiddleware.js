@@ -5,6 +5,7 @@ const authMiddleware = async (req, res, next) => {
         try {
             const user = await User.findById(req.session.userId);
             if (user) {
+                req.user = user;
                 req.userBalance = user.balance;
                 next();
             } else {

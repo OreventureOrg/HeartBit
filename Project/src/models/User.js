@@ -8,10 +8,10 @@ const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     balance: { type: Number, default: 0.0 },
-    referenceCode: { type: String, default: null }
+    referenceCode: { type: String, default: null },
+    tasks: { type: [mongoose.Schema.Types.ObjectId], ref: 'Announcement', default: [] }
 });
 
-// Método para criptografar a senha antes de salvar
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     try {
@@ -23,7 +23,6 @@ userSchema.pre('save', async function (next) {
     }
 });
 
-// Método para comparar a senha
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };

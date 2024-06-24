@@ -38,49 +38,37 @@
 
 <div class="table-responsive scrollbar">
     <table class="table table-hover table-striped overflow-hidden">
-      <thead>
-        <tr>
-          <th scope="col">Title</th>
-          <th class="reward-column" scope="col">Reward (USD)</th>
-          <th class="action-column" scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="align-middle">
-          <td class="text-nowrap">
-            <div class="d-flex align-items-center">
-              <div class="avatar avatar-xl">
-                <img class="rounded-circle" src="../../assets/img/team/4.jpg" alt="" />
-              </div>
-              <div class="ms-2 title-content">I have just lost $10,000 BTC to scammers. How do I recover my money back?asggdasdahhshdahshjashdda</div>
-            </div>
-          </td>
-          <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$0.0015</span></td>
-          <td class="action-column">
-            <div class="action-buttons">
-              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Like Post"><span>Like Post</span></button>
-              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
-            </div>
-          </td>
-        </tr>
-        <tr class="align-middle">
-          <td class="text-nowrap">
-            <div class="d-flex align-items-center">
-              <div class="avatar avatar-xl">
-                <img class="rounded-circle" src="../../assets/img/team/13.jpg" alt="" />
-              </div>
-              <div class="ms-2 title-content">How can I find a legitimate assolen from me? I need to ac jbasjkdbaskjb kdbk.</div>
-            </div>
-          </td>
-          <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$0.0015</span></td>
-          <td class="action-column">
-            <div class="action-buttons">
-              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Like Post"><span>Like Post</span></button>
-              <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th scope="col" class="col-7">Title</th>
+                <th class="reward-column col-2" scope="col" cl>Reward (USD)</th>
+                <th class="action-column col-3" scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (announcements.length === 0) { %>
+                <tr>
+                    <td colspan="3" class="text-center">No announcements available for the selected platform and action.</td>
+                </tr>
+            <% } else { %>
+                <% announcements.forEach(announcement => { %>
+                    <tr class="align-middle">
+                        <td class="text-nowrap">
+                            <div class="d-flex align-items-center">
+                                <div class="ms-2 title-content"><%= announcement.description %></div>
+                            </div>
+                        </td>
+                        <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$<%= announcement.rewardPerAction.toFixed(4) %></span></td>
+                        <td class="action-column">
+                            <div class="action-buttons">
+                                <a href="/complete-task/<%= announcement._id %>" class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= action.charAt(0).toUpperCase() + action.slice(1) %> Post"><span><%= action.charAt(0).toUpperCase() + action.slice(1) %> Post</span></a>
+                                <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } %>
+        </tbody>
     </table>
 </div>
 
