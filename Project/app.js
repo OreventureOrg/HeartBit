@@ -42,7 +42,9 @@ app.use(session({
 }));
 
 const userRoutes = require('./src/routes/userRoutes');
+const withdrawRoutes = require('./src/routes/withdrawRoutes');
 app.use('/', userRoutes);
+app.use('/api/withdraw', withdrawRoutes); // Nova rota adicionada
 
 const announcementRoutes = require('./src/routes/announcement');
 app.use('/', announcementRoutes);
@@ -106,6 +108,10 @@ app.get("/platform", authMiddleware, (req, res) => {
 
 app.get("/services", authMiddleware, (req, res) => {
     res.render("./services.html", { Page: "Services"});
+});
+
+app.get("/withdraw", authMiddleware, (req, res) => {
+    res.render("./dashboard/withdraw.html", { Page: "Withdraw" });
 });
 
 // ============= INIT SERVER ============= //
