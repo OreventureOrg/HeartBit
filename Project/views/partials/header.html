@@ -55,25 +55,6 @@
     </head>
 
 
-<<<<<<< Updated upstream
-    <body>
-      <main class="main" id="top">
-        <div class="<%= (Page != "Home") ? 'container' : '' %>" data-layout="container">
-          <script>
-            var isFluid = JSON.parse(localStorage.getItem('isFluid'));
-            if (isFluid) {
-              var container = document.querySelector('[data-layout]');
-              container.classList.remove('container');
-              container.classList.add('container-fluid');
-            }
-          </script>
-          <% if (["Dashboard", "Affiliate", "Earn","Platform","Announcement"].includes(Page)) { %>
-            <%- include('../partials/leftbar.html') %>
-          <% } %>
-          <div class="content" style="padding-bottom: 0 !important;">
-            <div class="<%= (Page == "Home") ? 'container' : '' %>">
-              <nav class="container navbar navbar-light navbar-glass navbar-top navbar-expand">
-=======
   <body>
     <main class="main" id="top">
       <div class="<%= (Page != "Home") ? 'container' : '' %>" data-layout="container">
@@ -91,7 +72,6 @@
         <div class="content" style="padding-bottom: 0 !important;">
           <div class="<%= (Page == "Home") ? 'container' : '' %>">
             <nav class="container navbar navbar-light navbar-glass navbar-top navbar-expand">
->>>>>>> Stashed changes
 
               <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
               <a class="navbar-brand me-1 me-sm-3" href="/index.html">
