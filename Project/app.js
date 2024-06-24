@@ -104,6 +104,10 @@ app.get("/platform", authMiddleware, (req, res) => {
     res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance });
 });
 
+app.get("/services", authMiddleware, (req, res) => {
+    res.render("./services.html", { Page: "Services"});
+});
+
 // ============= INIT SERVER ============= //
 
 app.listen(PORT, () => {

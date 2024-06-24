@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .popup__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .popup__close {
+            cursor: pointer;
+        }
+
+        .popup__wrap {
+            padding: 10px;
+        }
+
+        .popup__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .popup__pic img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-outline-instagram {
+            border-color: #E4405F;
+            color: #E4405F;
+        }
+
+        .btn-outline-youtube {
+            border-color: #FF0000;
+            color: #FF0000;
+        }
+
+        .btn-outline-twitter {
+            border-color: #1DA1F2;
+            color: #1DA1F2;
+        }
+
+        .btn-outline-tiktok {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center mb-4">
+                    <button class="btn btn-outline-instagram btn-block" id="btn-instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <div id="popup-instagram" class="popup">
+                        <div class="popup__header">
+                            <div class="heading">Instagram</div>
+                            <div class="popup__close" onclick="closePopup('popup-instagram')">&times;</div>
+                        </div>
+                        <div class="popup__wrap">
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Instagram.png" alt="Instagram Followers">
+                                </span>
+                                <span class="popup__title">Instagram Followers</span>
+                                <button class="popup__button btn-outline-instagram">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Instagram.png" alt="Instagram Likes">
+                                </span>
+                                <span class="popup__title">Instagram Likes</span>
+                                <button class="popup__button btn-outline-instagram">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Instagram.png" alt="Instagram Comments">
+                                </span>
+                                <span class="popup__title">Instagram Comments</span>
+                                <button class="popup__button btn-outline-instagram">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <button class="btn btn-outline-youtube btn-block" id="btn-youtube">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                    <div id="popup-youtube" class="popup">
+                        <div class="popup__header">
+                            <div class="heading">YouTube</div>
+                            <div class="popup__close" onclick="closePopup('popup-youtube')">&times;</div>
+                        </div>
+                        <div class="popup__wrap">
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Youtube.png" alt="YouTube Subscribers">
+                                </span>
+                                <span class="popup__title">YouTube Subscribers</span>
+                                <button class="popup__button btn-outline-youtube">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Youtube.png" alt="YouTube Likes">
+                                </span>
+                                <span class="popup__title">YouTube Likes</span>
+                                <button class="popup__button btn-outline-youtube">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Youtube.png" alt="YouTube Views">
+                                </span>
+                                <span class="popup__title">YouTube Views</span>
+                                <button class="popup__button btn-outline-youtube">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Youtube.png" alt="YouTube Comments">
+                                </span>
+                                <span class="popup__title">YouTube Comments</span>
+                                <button class="popup__button btn-outline-youtube">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <button class="btn btn-outline-twitter btn-block" id="btn-twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <div id="popup-twitter" class="popup">
+                        <div class="popup__header">
+                            <div class="heading">Twitter</div>
+                            <div class="popup__close" onclick="closePopup('popup-twitter')">&times;</div>
+                        </div>
+                        <div class="popup__wrap">
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Twitter.png" alt="Twitter Followers">
+                                </span>
+                                <span class="popup__title">Twitter Followers</span>
+                                <button class="popup__button btn-outline-twitter">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Twitter.png" alt="Twitter Likes">
+                                </span>
+                                <span class="popup__title">Twitter Likes</span>
+                                <button class="popup__button btn-outline-twitter">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Twitter.png" alt="Twitter Retweets">
+                                </span>
+                                <span class="popup__title">Twitter Retweets</span>
+                                <button class="popup__button btn-outline-twitter">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/Twitter.png" alt="Twitter Comments">
+                                </span>
+                                <span class="popup__title">Twitter Comments</span>
+                                <button class="popup__button btn-outline-twitter">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4">
+                    <button class="btn btn-outline-tiktok btn-block" id="btn-tiktok">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <div id="popup-tiktok" class="popup">
+                        <div class="popup__header">
+                            <div class="heading">TikTok</div>
+                            <div class="popup__close" onclick="closePopup('popup-tiktok')">&times;</div>
+                        </div>
+                        <div class="popup__wrap">
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/TikTok.png" alt="TikTok Followers">
+                                </span>
+                                <span class="popup__title">TikTok Followers</span>
+                                <button class="popup__button btn-outline-tiktok">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/TikTok.png" alt="TikTok Views">
+                                </span>
+                                <span class="popup__title">TikTok Views</span>
+                                <button class="popup__button btn-outline-tiktok">Order now</button>
+                            </div>
+                            <div class="popup__item">
+                                <span class="popup__pic">
+                                    <img src="/assets/img/logos/TikTok.png" alt="TikTok Comments">
+                                </span>
+                                <span class="popup__title">TikTok Comments</span>
+                                <button class="popup__button btn-outline-tiktok">Order now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="overlay" id="overlay"></div>
+    <script>
+        document.getElementById('btn-instagram').addEventListener('click', function() {
+            openPopup('popup-instagram');
+        });
+
+        document.getElementById('btn-youtube').addEventListener('click', function() {
+            openPopup('popup-youtube');
+        });
+
+        document.getElementById('btn-twitter').addEventListener('click', function() {
+            openPopup('popup-twitter');
+        });
+
+        document.getElementById('btn-tiktok').addEventListener('click', function() {
+            openPopup('popup-tiktok');
+        });
+
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            closeAllPopups();
+        });
+
+        function closeAllPopups() {
+            const popups = document.querySelectorAll('.popup');
+            popups.forEach(popup => {
+                popup.style.display = 'none';
+            });
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
