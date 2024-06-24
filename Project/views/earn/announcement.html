@@ -4,7 +4,7 @@
     <div class="card-body">
         <div class="row flex-between-center">
             <div class="col-md">
-                <h5 class="mb-2 mb-md-0">Platform Name + specification</h5>
+                <h5 class="mb-2 mb-md-0"><%= platform.charAt(0).toUpperCase() + platform.slice(1) %> - <%= action.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') %></h5>
             </div>
         </div>
     </div>
@@ -14,21 +14,25 @@
     <div class="col-12">
         <div class="card mb-3">
             <div class="card-header bg-body-tertiary">
-                <h6 class="mb-0">Instagram Profile URL</h6>
+                <h6 class="mb-0"><%= platform === 'x' ? 'X' : platform.charAt(0).toUpperCase() + platform.slice(1) %> Profile URL</h6>
             </div>
             <div class="card-body">
-                <form>
+                <form id="announcementForm" action="/announcement" method="POST">
+                    <input type="hidden" id="platform" name="platform" value="<%= platform %>">
+                    <input type="hidden" id="action" name="action" value="<%= action %>">
+
                     <div class="row gx-2">
                         <div class="col-12 mb-3">
-                            <input class="form-control" id="youtube-url" type="text" placeholder="Enter YouTube URL" oninput="validateInput()" onblur="fetchYoutubeInfo()">
+                            <label for="profile-url" class="form-label">Profile URL</label>
+                            <input class="form-control" id="profile-url" type="text" placeholder="Enter <%= platform === 'x' ? 'X' : platform.charAt(0).toUpperCase() + platform.slice(1) %> URL" oninput="validateInput()" onblur="fetchPlatformInfo()">
                             <div class="text-muted" style="margin-top: 6px; font-size: 0.75rem;">
-                                <i class="fa fa-info-circle" style="margin-right: 8px;"></i>Enter a valid YouTube video URL
+                                <i class="fa fa-info-circle" style="margin-right: 8px;"></i>Enter a valid <%= platform === 'x' ? 'X' : platform.charAt(0).toUpperCase() + platform.slice(1) %> URL
                             </div>
                         </div>
                         <div class="col-12 mb-3">
                             <div class="alert alert-danger" role="alert" style="margin-bottom: 1.5rem; display: none;" id="order_add_error">
                                 <i data-feather="alert-triangle" class="mg-r-10"></i>
-                                <span style="display:inline !important;">
+                                <span>
                                     You specified an incorrect URL! Possible causes of this error:
                                     <ul>
                                         <li>The resource (profile or post) you specified has been deleted by its owner</li>
@@ -39,88 +43,87 @@
                             </div>
                         </div>
                         <hr>
+                        <% if (platform === 'youtube') { %>
                         <div class="col-12 mb-3 d-flex flex-wrap align-items-center">
                             <div class="d-flex flex-column flex-grow-1">
-                                <input class="form-control mb-2" id="manufacturer-name" type="text" placeholder="" disabled value=""><!--input username-->    
-                                <textarea class="form-control" id="event-description" rows="3" disabled></textarea><!--input descrição-->    
+                                <label for="manufacturer-name" class="form-label">Profile Name</label>
+                                <input class="form-control mb-2" id="manufacturer-name" type="text" disabled value="">
+                                <label for="event-description" class="form-label">Profile Description</label>
+                                <textarea class="form-control" id="event-description" rows="3" disabled></textarea>
                             </div>
                             <div class="d-flex align-items-center ms-2">
-                                <img class="rounded-square me-2" id="thumbnail" src="../../../assets/img/team/no-image.jpg" alt="" width="140" height="140" />                            
+                                <img class="rounded-square me-2" id="thumbnail" src="../../../assets/img/team/no-image.jpg" alt="Profile Thumbnail" width="140" height="140" />
                             </div>
                         </div>
+                        <% } else { %>
+                        <div class="col-12 mb-3">
+                            <label for="profile-name" class="form-label">Profile Name</label>
+                            <input class="form-control mb-2" id="profile-name" type="text" required value="">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="profile-description" class="form-label">Profile Description</label>
+                            <textarea class="form-control" id="profile-description" rows="3" required></textarea>
+                        </div>
+                        <% } %>
                         <hr>
                     </div>
+                    <!-- Price Details Section -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-body-tertiary">
+                            <h6 class="mb-0">Price Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gx-2">
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="order_price_usd">Reward Per Action: </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control" name="order_price_usd" id="order_price_usd" value="0.0020" onkeypress="return is_float_key(event);" onblur="validateMinValue(this, 0.0010)">
+                                    </div>
+                                </div>
+                                <!-- Daily Actions Limit -->
+                                <div class="col-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="check_box_1" class="d-block">Daily Actions Limit</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input type="checkbox" id="check_box_1" onchange="toggleDailyLimit()">
+                                            </div>
+                                            <input type="text" class="form-control" name="order_daily_limit" id="order_daily_limit" value="0" disabled onkeypress="return is_number_key(event);">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Overall Actions Limit -->
+                                <div class="col-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="check_box_2" class="d-block">Overall Actions Limit</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input type="checkbox" id="check_box_2" onchange="toggleOverallLimit()">
+                                            </div>
+                                            <input type="text" class="form-control" name="overall_actions_limit" id="overall_actions_limit" value="0" disabled onkeypress="return is_number_key(event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-md">
+                                    <h5 class="mb-2 mb-md-0"></h5>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary disabled" onclick="submitForm()" style="float: right;margin-bottom: 20px;" id="btn_submit" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px; display: none;"></span>
+                                        Add A New Campaign
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
-            </div>
-        </div>
-        <div class="card mb-3">
-            <div class="card-header bg-body-tertiary">
-                <h6 class="mb-0">Price Details</h6>
-            </div>
-            <div class="card-body">
-                <div class="row gx-2">
-                    <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="import-status">Reward Per Action: </label>
-                        <div class="input-group mg-b-10">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="padding-top: 5px;padding-bottom: 8px;">$</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="" name="order_price_usd" id="order_price_usd" value="0.0020" onkeypress="return is_float_key(this, event);" onblur="validateMinValue(this, 0.0010)" style="border-top-left-radius: 0px !important;border-bottom-left-radius: 0px !important;">
-                        </div>
-                    </div>
-                    <!-- Daily Actions Limit -->
-                    <div class="col-12 mb-3">
-                        <div class="form-group">
-                            <label class="d-block">Daily Actions Limit</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="check_box_1" onchange="toggleDailyLimit()">
-                                            <label class="custom-control-label" for="check_box_1"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" name="order_daily_limit" id="order_daily_limit" value="0" disabled onkeypress="return is_number_key(this, event);">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Fim Daily Actions Limit -->
-                    <!-- Overall Actions Limit -->
-                    <div class="col-12 mb-3">
-                        <div class="form-group">
-                            <label class="d-block">Overall Actions Limit</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="check_box_2" onchange="toggleOverallLimit()">
-                                            <label class="custom-control-label" for="check_box_2"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" name="overall_actions_limit" id="overall_actions_limit" value="0" disabled onkeypress="return is_number_key(this, event);">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Fim Overall Actions Limit -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card mt-3">
-    <div class="card-body">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-md">
-                <h5 class="mb-2 mb-md-0"></h5>
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary disabled" onclick="redirectToYouTube()" style="float: right;margin-bottom: 20px;" disabled="" id="btn_submit">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px; display: none;"></span>
-                    Add A New Campaign            
-                </button>
             </div>
         </div>
     </div>
@@ -130,37 +133,27 @@
 <script>
     function toggleDailyLimit() {
         var dailyLimitInput = document.getElementById('order_daily_limit');
-        var checkBox = document.getElementById('check_box_1');
-
-        if (checkBox.checked) {
-            dailyLimitInput.disabled = false;
-        } else {
-            dailyLimitInput.disabled = true;
-        }
+        dailyLimitInput.disabled = !dailyLimitInput.disabled;
     }
 
     function toggleOverallLimit() {
         var overallLimitInput = document.getElementById('overall_actions_limit');
-        var checkBox = document.getElementById('check_box_2');
-
-        if (checkBox.checked) {
-            overallLimitInput.disabled = false;
-        } else {
-            overallLimitInput.disabled = true;
-        }
+        overallLimitInput.disabled = !overallLimitInput.disabled;
     }
 
     function is_number_key(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             return false;
+        }
         return true;
     }
 
     function is_float_key(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if ((charCode != 46 || evt.target.value.indexOf('.') != -1) && (charCode < 48 || charCode > 57))
+        if ((charCode != 46 || evt.target.value.indexOf('.') != -1) && (charCode < 48 || charCode > 57)) {
             return false;
+        }
         return true;
     }
 
@@ -171,73 +164,18 @@
         }
     }
 
-    async function fetchYoutubeInfo() {
-        var urlInput = document.getElementById('youtube-url').value;
-        var videoId = getYoutubeVideoId(urlInput);
-        if (videoId) {
-            var apiKey = 'AIzaSyDzIOD4iz7toMPkr4rf_PXdtaLvOfOfqp0'; // Substitua pelo seu chave de API do YouTube
-            var apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
+    function validateInput() {
+        const profileUrlInput = document.getElementById('profile-url');
+        const submitButton = document.getElementById('btn_submit');
+        const platform = document.getElementById('platform').value;
+        const urlPattern = new RegExp(`https?://(?:www\\.)?(${platform === 'twitter' ? 'x' : platform}\\.com)/.+`);
 
-            try {
-                let response = await fetch(apiUrl);
-                let data = await response.json();
-                if (data.items && data.items.length > 0) {
-                    var videoInfo = data.items[0].snippet;
-                    document.getElementById('manufacturer-name').value = videoInfo.channelTitle;
-                    document.getElementById('event-description').value = videoInfo.title;
-                    document.getElementById('thumbnail').src = videoInfo.thumbnails.default.url;
-
-                    // Habilitar o botão "Add A New Campaign"
-                    document.getElementById('btn_submit').disabled = false;
-                    document.getElementById('btn_submit').classList.remove('disabled');
-
-                    // Esconder a mensagem de erro, se estiver visível
-                    document.getElementById('order_add_error').style.display = 'none';
-                } else {
-                    // Mostrar mensagem de erro se não encontrar informações do vídeo
-                    showErrorAlert();
-                }
-            } catch (error) {
-                console.error('Error fetching video info:', error);
-                showErrorAlert();
-            }
+        if (urlPattern.test(profileUrlInput.value.trim())) {
+            submitButton.classList.remove('disabled');
+            submitButton.disabled = false;
         } else {
-            // Mostrar mensagem de erro se a URL for inválida
-            showErrorAlert();
+            submitButton.classList.add('disabled');
+            submitButton.disabled = true;
         }
     }
-
-    function getYoutubeVideoId(url) {
-        var regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-        var matches = url.match(regex);
-        return matches ? matches[1] : null;
-    }
-
-    function showErrorAlert() {
-        // Mostrar a mensagem de erro
-        document.getElementById('order_add_error').style.display = 'block';
-
-        // Limpar os campos de usuário, título e imagem
-        document.getElementById('manufacturer-name').value = '';
-        document.getElementById('event-description').value = '';
-        document.getElementById('thumbnail').src = '../../../assets/img/team/no-image.jpg';
-
-        // Desabilitar o botão "Add A New Campaign"
-        document.getElementById('btn_submit').disabled = true;
-        document.getElementById('btn_submit').classList.add('disabled');
-    }
-
-    function validateInput() {
-        // Esconder a mensagem de erro ao editar a URL
-        document.getElementById('order_add_error').style.display = 'none';
-
-        // Desabilitar o botão "Add A New Campaign" ao editar a URL
-        document.getElementById('btn_submit').disabled = true;
-        document.getElementById('btn_submit').classList.add('disabled');
-    }
-
-    function redirectToYouTube() {
-        window.location.href = 'https://www.youtube.com/';
-    }
-
 </script>

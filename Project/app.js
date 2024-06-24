@@ -44,6 +44,9 @@ app.use(session({
 const userRoutes = require('./src/routes/userRoutes');
 app.use('/', userRoutes);
 
+const announcementRoutes = require('./src/routes/announcement');
+app.use('/', announcementRoutes);
+
 // ============= HOME ============= //
 
 app.get("/", (req, res) => {
@@ -78,25 +81,27 @@ app.get("/register", (req, res) => {
 // ============= DASHBOARD ============= //
 
 app.get("/dashboard", authMiddleware, (req, res) => {
-    res.render("./dashboard/dashboard.html", { Page: "Dashboard"});
+    res.render("./dashboard/dashboard.html", { Page: "Dashboard", userBalance: req.userBalance });
 });
 
 app.get("/affiliate", authMiddleware, (req, res) => {
     const host = `${req.protocol}://${req.get('host')}`;
     const affiliateLink = `${host}/register?ref=${req.session.userId}`;
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink });
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance  });
 });
 
 app.get("/earn", authMiddleware, (req, res) => {
-    res.render("./earn/earn.html", { Page: "Earn Template"});
+    res.render("./earn/earn.html", { Page: "Earn Template", userBalance: req.userBalance });
 });
 
 app.get("/announcement", authMiddleware, (req, res) => {
-    res.render("./earn/announcement.html", { Page: "Announcement"});
+    const platform = req.query.platform || 'Platform';
+    const action = req.query.action || 'Action';
+    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, userBalance: req.userBalance  });
 });
 
 app.get("/platform", authMiddleware, (req, res) => {
-    res.render("./earn/platform.html", { Page: "Platform"});
+    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance });
 });
 
 // ============= INIT SERVER ============= //
