@@ -1,0 +1,273 @@
+<%- include("./partials/header.html") %>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Social Media Campaigns</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <style>
+        /* Custom CSS */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+        }
+        .campaign-list {
+            margin: 20px;
+        }
+        .campaign {
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .campaign:not(:last-child) {
+            margin-bottom: 20px;
+        }
+        .campaign:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .campaign img, .campaign iframe {
+            width: 150px;
+            height: auto;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .campaign:hover img, .campaign:hover iframe {
+            transform: scale(1.1);
+        }
+        .campaign-details {
+            flex-grow: 1;
+            margin-top: 10px;
+        }
+        .campaign h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #343a40;
+        }
+        .campaign p {
+            line-height: 1.6;
+            color: #6c757d;
+        }
+        .campaign-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #198754;
+        }
+        .campaign-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .campaign-action a {
+            color: #fff;
+            background-color: #0d6efd;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .campaign-action a:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+        .campaign-badge {
+            padding: 5px 10px;
+            background-color: #39ff07;
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .campaign-badge.inactive {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        .campaign-badge.fail {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .tab-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        .nav-link {
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            background-color: transparent;
+            transition: color 0.3s ease;
+        }
+        .nav-link.active {
+            color: #198754;
+        }
+        .nav-link:hover {
+            color: #0d6efd;
+        }
+        .campaign-divider {
+            border-top: 1px solid #dee2e6;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .container h1 {
+            color: #343a40;
+        }
+        .text-center h3 {
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Your header content here -->
+    </header>
+
+    <main class="main">
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Your Social Media Campaigns</h1>
+
+            <ul class="nav nav-tabs mb-4" id="campaignTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">Active Campaigns (3)</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="inactive-tab" data-bs-toggle="tab" data-bs-target="#inactive" type="button" role="tab" aria-controls="inactive" aria-selected="false">Inactive Campaigns (1)</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="fail-tab" data-bs-toggle="tab" data-bs-target="#fail" type="button" role="tab" aria-controls="fail" aria-selected="false">Fail Campaigns (2)</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="campaignTabsContent">
+                <!-- Active Campaigns -->
+                <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+                    <div class="campaign-list">
+                        <div class="campaign">
+                            <img src="/assets/img/gallery/instagram.png" alt="Instagram Campaign 1">
+                            <div class="campaign-details">
+                                <h2>10,000 Instagram Followers Boost</h2>
+                                <p>Gain 10,000 new followers with our special Instagram campaign!</p>
+                                <p class="campaign-price">$12.00</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-divider"></div>
+                        <div class="campaign">
+                            <img src="/assets/img/gallery/instagram.png" alt="Instagram Campaign 2">
+                            <div class="campaign-details">
+                                <h2>5,000 Instagram Likes Special</h2>
+                                <p>Boost your posts with 5,000 likes through our exclusive campaign!</p>
+                                <p class="campaign-price">$5.50</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-divider"></div>
+                        <!-- Nova Campanha YouTube 1 -->
+                        <div class="campaign">
+                            <iframe width="150" height="84" src="https://www.youtube.com/embed/videoID1" frameborder="0" allowfullscreen></iframe>
+                            <div class="campaign-details">
+                                <h2>5000 Subscribers</h2>
+                                <p>Boost your Channel with 5000 subscribers through our campaign</p>
+                                <p class="campaign-price">$7.50</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inactive Campaigns -->
+                <div class="tab-pane fade" id="inactive" role="tabpanel" aria-labelledby="inactive-tab">
+                    <div class="campaign-list">
+                        <div class="text-center mt-5">
+                            <h3>No inactive campaigns found.</h3>
+                        </div>
+                        <!-- Nova Campanha YouTube 2 -->
+                        <div class="campaign">
+                            <iframe width="150" height="84" src="https://www.youtube.com/embed/videoID2" frameborder="0" allowfullscreen></iframe>
+                            <div class="campaign-details">
+                                <h2>15000 Views</h2>
+                                <p>Boost your Channel with 15000 views in one video</p>
+                                <p class="campaign-price">$37.50</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge inactive">Inactive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fail Campaigns -->
+                <div class="tab-pane fade" id="fail" role="tabpanel" aria-labelledby="fail-tab">
+                    <div class="campaign-list">
+                        <div class="campaign">
+                            <img src="/assets/img/gallery/tiktok.png" alt="TikTok Campaign 1">
+                            <div class="campaign-details">
+                                <h2>100,000 TikTok Views Explosion</h2>
+                                <p>Get your videos noticed with our 100,000 views campaign!</p>
+                                <p class="campaign-price">$270.00</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge fail">Failed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-divider"></div>
+                        <!-- Nova Campanha YouTube 3 -->
+                        <div class="campaign">
+                            <iframe width="150" height="84" src="https://www.youtube.com/embed/videoID3" frameborder="0" allowfullscreen></iframe>
+                            <div class="campaign-details">
+                                <h2>500 Comments</h2>
+                                <p>Boost your video with 500 Comments</p>
+                                <p class="campaign-price">$1.50</p>
+                                <div class="campaign-action">
+                                    <a href="#" class="btn btn-primary" style="color: #fff;">Details</a>
+                                    <span class="campaign-badge fail">Failed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+<%- include("./partials/footer.html") %>
