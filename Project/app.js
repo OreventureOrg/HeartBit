@@ -10,6 +10,8 @@ const app = express();
 const PORT = 5000;
 
 const authMiddleware = require('./src/middleware/authMiddleware');
+const addUserMiddleware = require('./src/middleware/addUserMiddleware');
+
 
 // ============= BODY-PARSER SETUP ============= //
 
@@ -26,13 +28,7 @@ db.once('open', () => {
     console.log('Conectado ao MongoDB');
 });
 
-// ============= GENERAL SETUP ============= //
-
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-app.set('views', path.join(__dirname, 'views'));
-
-app.use(express.static(path.join(__dirname, 'public')));
+// ============= SESSION SETUP ============= //
 
 app.use(session({
     secret: 'secreta',
@@ -41,23 +37,47 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }));
 
+// ============= ROUTES ============= //
+
+app.post('/hide-announcement', (req, res) => {
+    const { announcementId } = req.body;
+
+    if (!req.session.hiddenAnnouncements) {
+        req.session.hiddenAnnouncements = [];
+    }
+
+    if (!req.session.hiddenAnnouncements.includes(announcementId)) {
+        req.session.hiddenAnnouncements.push(announcementId);
+    }
+
+    res.sendStatus(200);
+});
+
 const userRoutes = require('./src/routes/userRoutes');
 const withdrawRoutes = require('./src/routes/withdrawRoutes');
 const depositRoutes = require('./src/routes/depositRoutes');
-app.use('/', userRoutes);
-app.use('/api/withdraw', withdrawRoutes); // Nova rota adicionada
-app.use('/api/deposit', depositRoutes); // Nova rota adicionada
-
 const announcementRoutes = require('./src/routes/announcement');
+
+app.use('/', userRoutes);
+app.use('/api/withdraw', withdrawRoutes);
+app.use('/api/deposit', depositRoutes);
 app.use('/', announcementRoutes);
+
+// ============= VIEW ENGINE SETUP ============= //
+
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ============= HOME ============= //
 
-app.get("/", (req, res) => {
-    res.render("index.html", { Page: "Home"});
+app.get("/",addUserMiddleware, (req, res) => {
+    res.render("index.html", { Page: "Home", user: req.user});
 });
 
-app.get("/how_about", (req, res) => {
+app.get("/how_about",addUserMiddleware, (req, res) => {
     res.render("./how_about.html", { Page: "How About"});
 });
 
@@ -72,27 +92,27 @@ app.get("/register", (req, res) => {
     res.render("auth/register.html", { Page: "Register", referenceCode });
 });
 
-
 // ============= DASHBOARD ============= //
 
 app.get("/dashboard", authMiddleware, (req, res) => {
-    res.render("./dashboard/dashboard.html", { Page: "Dashboard", userBalance: req.userBalance });
+    res.render("./dashboard/dashboard.html", { Page: "Dashboard", userBalance: req.userBalance, username: req.username });
 });
 
 app.get("/affiliate", authMiddleware, (req, res) => {
     const host = `${req.protocol}://${req.get('host')}`;
     const affiliateLink = `${host}/register?ref=${req.session.userId}`;
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance  });
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance,username: req.username  });
 });
 
 app.get("/announcement", authMiddleware, (req, res) => {
     const platform = req.query.platform || 'Platform';
     const action = req.query.action || 'Action';
     const successMessage = req.query.success === 'true' ? 'Campaign created successfully!' : '';
-    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance });
+    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance,username: req.username });
 });
+
 app.get("/platform", authMiddleware, (req, res) => {
-    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance });
+    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance,username: req.username });
 });
 
 app.get("/services", authMiddleware, (req, res) => {
@@ -100,7 +120,7 @@ app.get("/services", authMiddleware, (req, res) => {
 });
 
 app.get("/withdraw", authMiddleware, (req, res) => {
-    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance  });
+    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance,username: req.username });
 });
 
 // ============= INIT SERVER ============= //

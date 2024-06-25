@@ -15,18 +15,26 @@ router.get("/earn/:platform/:action", authMiddleware, async (req, res) => {
             return res.status(404).send('Usuário não encontrado');
         }
 
-        const announcements = await Announcement.find({
+        let announcements = await Announcement.find({
             platform,
             action,
             _id: { $nin: user.tasks }
         });
+
+        // Filtra anúncios escondidos
+        if (req.session.hiddenAnnouncements) {
+            announcements = announcements.filter(announcement => 
+                !req.session.hiddenAnnouncements.includes(announcement._id.toString())
+            );
+        }
 
         res.render("./earn/earn.html", {
             Page: "Earn",
             platform,
             action,
             announcements,
-            userBalance: req.userBalance
+            userBalance: req.userBalance,
+            username: req.username 
         });
     } catch (error) {
         console.error('Erro ao buscar anúncios:', error);
@@ -125,11 +133,26 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
 router.get("/campaigns", authMiddleware, async (req, res) => {
     try {
         const announcements = await Announcement.find({});
-        res.render("./dashboard/campaigns.html", { Page: "Campaigns", announcements, userBalance: req.userBalance });
+        res.render("./dashboard/campaigns.html", { Page: "Campaigns", announcements, userBalance: req.userBalance, username: req.username });
     } catch (error) {
         console.error('Erro ao buscar anúncios:', error);
         res.status(500).send('Erro ao buscar anúncios');
     }
+});
+
+// Adiciona a rota para esconder anúncios
+router.post('/hide-announcement', authMiddleware, (req, res) => {
+    const { announcementId } = req.body;
+
+    if (!req.session.hiddenAnnouncements) {
+        req.session.hiddenAnnouncements = [];
+    }
+
+    if (!req.session.hiddenAnnouncements.includes(announcementId)) {
+        req.session.hiddenAnnouncements.push(announcementId);
+    }
+
+    res.sendStatus(200);
 });
 
 module.exports = router;

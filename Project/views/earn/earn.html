@@ -41,7 +41,7 @@
         <thead>
             <tr>
                 <th scope="col" class="col-7">Title</th>
-                <th class="reward-column col-2" scope="col" cl>Reward (USD)</th>
+                <th class="reward-column col-2" scope="col">Reward (USD)</th>
                 <th class="action-column col-3" scope="col">Action</th>
             </tr>
         </thead>
@@ -52,17 +52,25 @@
                 </tr>
             <% } else { %>
                 <% announcements.forEach(announcement => { %>
-                    <tr class="align-middle">
+                    <tr class="align-middle" id="announcement-<%= announcement._id %>">
                         <td class="text-nowrap">
                             <div class="d-flex align-items-center">
                                 <div class="ms-2 title-content"><%= announcement.description %></div>
                             </div>
                         </td>
-                        <td class="reward-column"><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">$<%= announcement.rewardPerAction.toFixed(4) %></span></td>
+                        <td class="reward-column">
+                            <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">
+                                $<%= announcement.rewardPerAction.toFixed(4) %>
+                            </span>
+                        </td>
                         <td class="action-column">
                             <div class="action-buttons">
-                                <a href="/complete-task/<%= announcement._id %>" class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= action.charAt(0).toUpperCase() + action.slice(1) %> Post"><span><%= action.charAt(0).toUpperCase() + action.slice(1) %> Post</span></a>
-                                <button class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide"><span class="far fa-eye-slash"></span></button>
+                                <a href="/complete-task/<%= announcement._id %>" class="btn btn-tertiary text-center" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= action.charAt(0).toUpperCase() + action.slice(1) %> Post">
+                                    <span><%= action.charAt(0).toUpperCase() + action.slice(1) %> Post</span>
+                                </a>
+                                <button class="btn btn-tertiary text-center hide-button" type="button" data-id="<%= announcement._id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide">
+                                    <span class="far fa-eye-slash"></span>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -71,5 +79,35 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hideButtons = document.querySelectorAll('.hide-button');
+
+        hideButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const announcementId = button.getAttribute('data-id');
+                try {
+                    const response = await fetch('/hide-announcement', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ announcementId }),
+                    });
+
+                    if (response.ok) {
+                        document.getElementById(`announcement-${announcementId}`).style.display = 'none';
+                    } else {
+                        console.error('Failed to hide announcement.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
 
 <%- include("../partials/footer.html") %>

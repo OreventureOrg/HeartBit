@@ -54,9 +54,9 @@
                         <div class="col-12 mb-3 d-flex flex-wrap align-items-center">
                             <div class="d-flex flex-column flex-grow-1">
                                 <label for="manufacturer-name" class="form-label">Profile Name</label>
-                                <input class="form-control mb-2" id="manufacturer-name" type="text" name="username" disabled value="">
+                                <input class="form-control mb-2" id="manufacturer-name" type="text" name="username" value="" >
                                 <label for="event-description" class="form-label">Profile Description</label>
-                                <textarea class="form-control" id="event-description" rows="3" name="description" disabled></textarea>
+                                <textarea class="form-control" id="event-description" rows="3" name="description" ></textarea>
                             </div>
                             <div class="d-flex align-items-center ms-2">
                                 <img class="rounded-square me-2" id="thumbnail" src="../../../assets/img/team/no-image.jpg" alt="Profile Thumbnail" width="140" height="140" />
@@ -137,7 +137,10 @@
 </div>
 
 <%- include("../partials/footer.html") %>
+
 <script>
+    const API_KEY = 'AIzaSyDzIOD4iz7toMPkr4rf_PXdtaLvOfOfqp0';
+
     function toggleDailyLimit() {
         var dailyLimitInput = document.getElementById('order_daily_limit');
         dailyLimitInput.disabled = !dailyLimitInput.disabled;
@@ -175,7 +178,13 @@
         const profileUrlInput = document.getElementById('profile-url');
         const submitButton = document.getElementById('btn_submit');
         const platform = document.getElementById('platform').value;
-        const urlPattern = new RegExp(`https?://(?:www\\.)?(${platform === 'twitter' ? 'x' : platform}\\.com)/.+`);
+        let urlPattern;
+
+        if (platform === 'youtube') {
+            urlPattern = new RegExp('https?://(www\\.)?(youtube\\.com|youtu.be)/.+');
+        } else {
+            urlPattern = new RegExp(`https?://(?:www\\.)?(${platform === 'twitter' ? 'x' : platform}\\.com)/.+`);
+        }
 
         if (urlPattern.test(profileUrlInput.value.trim())) {
             submitButton.classList.remove('disabled');
@@ -183,6 +192,84 @@
         } else {
             submitButton.classList.add('disabled');
             submitButton.disabled = true;
+        }
+    }
+
+    async function fetchPlatformInfo() {
+        const profileUrlInput = document.getElementById('profile-url');
+        const platform = document.getElementById('platform').value;
+
+        if (platform === 'youtube') {
+            const videoId = extractVideoId(profileUrlInput.value.trim());
+            if (videoId) {
+                try {
+                    const videoDetails = await getVideoDetails(videoId);
+                    document.getElementById('manufacturer-name').value = videoDetails.channelTitle;
+                    document.getElementById('event-description').value = videoDetails.title;
+                    document.getElementById('thumbnail').src = videoDetails.thumbnails.default.url; // Update thumbnail image
+                } catch (error) {
+                    console.error('Erro ao buscar detalhes do vídeo:', error);
+                    showError();
+                    disableSubmitButton();
+                }
+            } else {
+                showError();
+                disableSubmitButton();
+            }
+        }
+    }
+
+    function extractVideoId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
+
+    async function getVideoDetails(videoId) {
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`);
+        const data = await response.json();
+        if (data.items.length === 0) {
+            throw new Error('No video found');
+        }
+        return data.items[0].snippet;
+    }
+
+    function showError() {
+        const errorElement = document.getElementById('order_add_error');
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+            errorElement.style.display = 'none';
+        }, 5000);
+    }
+
+    function disableSubmitButton() {
+        const submitButton = document.getElementById('btn_submit');
+        submitButton.disabled = true;
+    }
+
+    function submitForm() {
+        // Implement your form submission logic here
+        console.log('Form submitted!');
+        // Example: document.getElementById('announcementForm').submit();
+    }
+
+    // Função para esconder anúncio
+    async function hideAnnouncement(id) {
+        try {
+            const response = await fetch(`/announcement/hide/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+            if (result.success) {
+                document.getElementById(`announcement-${id}`).style.display = 'none';
+            } else {
+                console.error('Erro ao esconder anúncio:', result.message);
+            }
+        } catch (error) {
+            console.error('Erro ao esconder anúncio:', error);
         }
     }
 </script>
