@@ -11,7 +11,8 @@ const PORT = 5000;
 
 const authMiddleware = require('./src/middleware/authMiddleware');
 const addUserMiddleware = require('./src/middleware/addUserMiddleware');
-
+const fetchUserDataMiddleware = require('./src/middleware/fetchUserDataMiddleware');
+const User = require('./src/models/User'); // Certifique-se de que o modelo User está sendo importado
 
 // ============= BODY-PARSER SETUP ============= //
 
@@ -73,18 +74,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ============= HOME ============= //
 
-app.get("/",addUserMiddleware, (req, res) => {
-    res.render("index.html", { Page: "Home", user: req.user});
+app.get("/", addUserMiddleware, (req, res) => {
+    res.render("index.html", { Page: "Home", user: req.user });
 });
 
-app.get("/how_about",addUserMiddleware, (req, res) => {
-    res.render("./how_about.html", { Page: "How About",user: req.user});
+app.get("/how_about", addUserMiddleware, (req, res) => {
+    res.render("./how_about.html", { Page: "How About", user: req.user });
 });
 
 // ============= AUTH ============= //
 
 app.get("/login", (req, res) => {
-    res.render("./auth/login.html", { Page: "Login"});
+    res.render("./auth/login.html", { Page: "Login" });
 });
 
 app.get("/register", (req, res) => {
@@ -94,33 +95,55 @@ app.get("/register", (req, res) => {
 
 // ============= DASHBOARD ============= //
 
-app.get("/dashboard", authMiddleware, (req, res) => {
-    res.render("./dashboard/dashboard.html", { Page: "Dashboard", userBalance: req.userBalance, username: req.username });
+app.get("/dashboard", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+    try {
+        console.log('Rendering dashboard with user data:', {
+            userBalance: req.userBalance,
+            username: req.username,
+            earnedToday: req.earnedToday,
+            earnedTotal: req.earnedTotal,
+            actionsDoneToday: req.actionsDoneToday,
+            actionsDoneTotal: req.actionsDoneTotal
+        });
+
+        res.render("./dashboard/dashboard.html", {
+            Page: "Dashboard",
+            userBalance: req.userBalance,
+            username: req.username,
+            earnedToday: req.earnedToday,
+            earnedTotal: req.earnedTotal,
+            actionsDoneToday: req.actionsDoneToday,
+            actionsDoneTotal: req.actionsDoneTotal
+        });
+    } catch (error) {
+        console.error('Error rendering dashboard:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-app.get("/affiliate", authMiddleware, (req, res) => {
+app.get("/affiliate", authMiddleware, fetchUserDataMiddleware, (req, res) => {
     const host = `${req.protocol}://${req.get('host')}`;
     const affiliateLink = `${host}/register?ref=${req.session.userId}`;
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance,username: req.username  });
+    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance, username: req.username });
 });
 
-app.get("/announcement", authMiddleware, (req, res) => {
+app.get("/announcement", authMiddleware, fetchUserDataMiddleware, (req, res) => {
     const platform = req.query.platform || 'Platform';
     const action = req.query.action || 'Action';
     const successMessage = req.query.success === 'true' ? 'Campaign created successfully!' : '';
-    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance,username: req.username });
+    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance, username: req.username });
 });
 
-app.get("/platform", authMiddleware, (req, res) => {
-    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance,username: req.username });
+app.get("/platform", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance, username: req.username });
 });
 
-app.get("/services", authMiddleware, (req, res) => {
-    res.render("./services.html", { Page: "Services", user: req.user});
+app.get("/services", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+    res.render("./services.html", { Page: "Services", user: req.user });
 });
 
-app.get("/withdraw", authMiddleware, (req, res) => {
-    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance,username: req.username });
+app.get("/withdraw", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance, username: req.username });
 });
 
 // ============= INIT SERVER ============= //

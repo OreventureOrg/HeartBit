@@ -114,10 +114,15 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         user.tasks.push(announcementId);
         user.balance += reward;
 
+        // Atualizar contadores de ações e ganhos
+        user.actionsDoneToday += 1;
+        user.actionsDoneTotal += 1;
+        user.earnedToday += reward;
+        user.earnedTotal += reward;
+
         const poster = await User.findById(announcementObj.postedBy);
         if (poster) {
             poster.balance -= penalty;
-
             await poster.save();
         }
 
@@ -129,6 +134,7 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         res.status(500).send('Erro ao completar tarefa');
     }
 });
+
 
 router.get("/campaigns", authMiddleware, async (req, res) => {
     try {
