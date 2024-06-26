@@ -78,7 +78,7 @@ app.get("/",addUserMiddleware, (req, res) => {
 });
 
 app.get("/how_about",addUserMiddleware, (req, res) => {
-    res.render("./how_about.html", { Page: "How About"});
+    res.render("./how_about.html", { Page: "How About",user: req.user});
 });
 
 // ============= AUTH ============= //
@@ -116,7 +116,7 @@ app.get("/platform", authMiddleware, (req, res) => {
 });
 
 app.get("/services", authMiddleware, (req, res) => {
-    res.render("./services.html", { Page: "Services"});
+    res.render("./services.html", { Page: "Services", user: req.user});
 });
 
 app.get("/withdraw", authMiddleware, (req, res) => {
