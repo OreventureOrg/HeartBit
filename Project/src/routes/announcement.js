@@ -106,7 +106,7 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         const reward = announcementObj.rewardPerAction;
         const penalty = reward * 2;
 
-        user.tasks.push({ taskId: announcementId, dateCompleted: new Date() });
+        user.tasks.push({ taskId: announcementId, dateCompleted: new Date(), earnings: reward });
         user.balance += reward;
 
         const poster = await User.findById(announcementObj.postedBy);
@@ -159,6 +159,7 @@ router.post('/hide-announcement', authMiddleware, (req, res) => {
     res.sendStatus(200);
 });
 
+<<<<<<< Updated upstream
 router.delete('/announcements/:id', authMiddleware, async (req, res) => {
     const { id } = req.params;
 
@@ -180,6 +181,8 @@ router.delete('/announcements/:id', authMiddleware, async (req, res) => {
         res.status(500).send('Error deleting announcement');
     }
 });
+=======
+>>>>>>> Stashed changes
 
 
 module.exports = router;

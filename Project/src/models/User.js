@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const ActionSchema = new mongoose.Schema({
-    value: { type: Number, required: true },
-    date: { type: Date, required: true }
+const TaskSchema = new mongoose.Schema({
+    taskId: { type: mongoose.Schema.Types.ObjectId, ref: 'Announcement' },
+    dateCompleted: { type: Date, required: true },
+    earnings: { type: Number, required: true, default: 0 }
 });
 
 const userSchema = new mongoose.Schema({
@@ -14,12 +15,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     balance: { type: Number, default: 0.0 },
     referenceCode: { type: String, default: null },
-    tasks: [
-        {
-            taskId: { type: mongoose.Schema.Types.ObjectId, ref: 'Announcement' },
-            dateCompleted: { type: Date, required: true }
-        }
-    ]
+    tasks: [TaskSchema]
 });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {

@@ -13,11 +13,15 @@ const authMiddleware = require('./src/middleware/authMiddleware');
 const addUserMiddleware = require('./src/middleware/addUserMiddleware');
 const fetchUserDataMiddleware = require('./src/middleware/fetchUserDataMiddleware');
 const User = require('./src/models/User'); // Certifique-se de que o modelo User está sendo importado
+const apiRoutes = require('./src/routes/api'); // ajuste o caminho conforme necessário
+
 
 // ============= BODY-PARSER SETUP ============= //
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use('/apie', apiRoutes);
 
 // ============= MONGO SETUP ============= //
 
@@ -100,20 +104,20 @@ app.get("/dashboard", authMiddleware, fetchUserDataMiddleware, (req, res) => {
         console.log('Rendering dashboard with user data:', {
             userBalance: req.userBalance,
             username: req.username,
-            earnedToday: req.earnedToday,
-            earnedTotal: req.earnedTotal,
             actionsDoneToday: req.actionsDoneToday,
-            actionsDoneTotal: req.actionsDoneTotal
+            actionsDoneTotal: req.actionsDoneTotal,
+            earnedToday: req.earnedToday,
+            earnedTotal: req.earnedTotal
         });
 
         res.render("./dashboard/dashboard.html", {
             Page: "Dashboard",
             userBalance: req.userBalance,
             username: req.username,
-            earnedToday: req.earnedToday,
-            earnedTotal: req.earnedTotal,
             actionsDoneToday: req.actionsDoneToday,
-            actionsDoneTotal: req.actionsDoneTotal
+            actionsDoneTotal: req.actionsDoneTotal,
+            earnedToday: req.earnedToday,
+            earnedTotal: req.earnedTotal
         });
     } catch (error) {
         console.error('Error rendering dashboard:', error);

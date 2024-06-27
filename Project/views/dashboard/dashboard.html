@@ -1,90 +1,91 @@
 <%- include("../partials/header.html") %>
-<div class="row g-3">
-    <div class="col-8">
-      <div class="card rounded-3 overflow-hidden h-100">
-        <div class="card-body bg-line-chart-gradient d-flex flex-column justify-content-between">
-          <div class="row align-items-center g-0">
-            <div class="col" data-bs-theme="light">
-              <h4 class="text-white mb-0">Today $764.39</h4>
-              <p class="fs-10 fw-semi-bold text-white">Yesterday <span class="opacity-50">$684.87</span></p>
-            </div>
-            <div class="col-auto d-none d-sm-block">
-              <select class="form-select form-select-sm mb-3" id="dashboard-chart-select">
-                <option value="24_horas">24 Hours</option>
-                <option value="7_days" selected="selected">7 Days</option>
-                <option value="1_month">1 Month</option>
-                <option value="all">All Time</option>
-              </select>
-            </div>
-          </div>
-          <!-- Find the JS file for the following calendar at: src/js/charts/echarts/line-payment.js-->
-          <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
-          <div class="echart-line-payment" style="height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;" data-echart-responsive="true" _echarts_instance_="ec_1718381493193"><div style="position: relative; width: 888px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="888" height="200" style="position: absolute; left: 0px; top: 0px; width: 888px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class="" style="position: absolute; display: block; border-style: solid; white-space: nowrap; z-index: 9999999; box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 10px; background-color: rgb(249, 250, 253); border-width: 1px; border-radius: 4px; color: rgb(11, 23, 39); font: 500 12px / 18px; padding: 7px 10px; top: 0px; left: 0px; transform: translate3d(592px, 58px, 0px); border-color: rgb(216, 226, 239); pointer-events: none; visibility: hidden; opacity: 0;">5:00 PM - 15.70 USD</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card h-100 h-xxl-auto mt-xxl-3">
-        <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
-          <h6 class="mb-0">How To Start</h6>
-        </div>
-        <div class="card-body pb-0">
-          <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-            <div class="file-thumbnail"><h2>1</h2>
-            </div>
-            <div class="ms-3 flex-shrink-1 flex-grow-1">
-              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Start By Completing Tasks</a></h6>
-              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-            </div>
-          </div>
-          <hr class="text-200">
-          <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-            <div class="file-thumbnail"><h2>2</h2>
-            </div>
-            <div class="ms-3 flex-shrink-1 flex-grow-1">
-              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Make money on social networks by completing simple tasks (likes, subscriptions, etc.)</a></h6>
-              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-            </div>
-          </div>
-          <hr class="text-200">
-          <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-            <div class="file-thumbnail"><h2>3</h2>
-            </div>
-            <div class="ms-3 flex-shrink-1 flex-grow-1">
-              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/affiliate">Invite friends and get a percentage of their earnings</a></h6>
-              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-            </div>
-          </div>
-          <hr class="text-200">
-          <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-            <div class="file-thumbnail"><h2>4</h2>
-            </div>
-            <div class="ms-3 flex-shrink-1 flex-grow-1">
-              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/withdraw">Withdraw the earned funds to the popular payment systems</a></h6>
-              <div class="fs-10"><span class="fas fa-arrow-down"></span></div> 
-            </div>
-          </div>
-          <hr class="text-200">
-        </div>
-      </div>
-    </div>
-  <div class="row g-3 mb-3">
-    <div class="col-xxl-9">
-      <div class="card bg-body-tertiary dark__bg-opacity-50 my-3">
-      </div>
-      <div class="row g-3 mb-3">
-        <div class="col-sm-6 col-md-4">
-          <div class="card overflow-hidden" style="min-width: 12rem">
-            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-1.png);">
-            </div>
-            <!--/.bg-holder-->
 
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<div class="row g-3">
+  <div class="col-8">
+    <div class="card rounded-3 overflow-hidden h-100">
+        <div class="card-body bg-line-chart-gradient d-flex flex-column justify-content-between">
+            <div class="row align-items-center g-0">
+                <div class="col" data-bs-theme="light">
+                    <h4 class="text-white mb-0">Today $764.39</h4>
+                    <p class="fs-10 fw-semi-bold text-white">Yesterday <span class="opacity-50">$684.87</span></p>
+                </div>
+                <div class="col-auto d-none d-sm-block">
+                    <select class="form-select form-select-sm mb-3" id="dashboard-chart-select">
+                        <option value="24_horas">24 Hours</option>
+                        <option value="7_days" selected="selected">7 Days</option>
+                        <option value="1_month">1 Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </div>
+            <div class="echart-line-payment" style="height: 200px;"></div>
+        </div>
+    </div>
+  </div>
+
+  <!--info right-->
+  <div class="col-4">
+    <div class="card h-100 h-xxl-auto mt-xxl-3">
+      <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
+        <h6 class="mb-0">How To Start</h6>
+      </div>
+      <div class="card-body pb-0">
+        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+          <div class="file-thumbnail"><h2>1</h2>
+          </div>
+          <div class="ms-3 flex-shrink-1 flex-grow-1">
+            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Start By Completing Tasks</a></h6>
+            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+          </div>
+        </div>
+        <hr class="text-200">
+        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+          <div class="file-thumbnail"><h2>2</h2>
+          </div>
+          <div class="ms-3 flex-shrink-1 flex-grow-1">
+            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Make money on social networks by completing simple tasks (likes, subscriptions, etc.)</a></h6>
+            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+          </div>
+        </div>
+        <hr class="text-200">
+        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+          <div class="file-thumbnail"><h2>3</h2>
+          </div>
+          <div class="ms-3 flex-shrink-1 flex-grow-1">
+            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/affiliate">Invite friends and get a percentage of their earnings</a></h6>
+            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+          </div>
+        </div>
+        <hr class="text-200">
+        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+          <div class="file-thumbnail"><h2>4</h2>
+          </div>
+          <div class="ms-3 flex-shrink-1 flex-grow-1">
+            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/withdraw">Withdraw the earned funds to the popular payment systems</a></h6>
+            <div class="fs-10"><span class="fas fa-arrow-down"></span></div> 
+          </div>
+        </div>
+        <hr class="text-200">
+      </div>
+    </div>
+  </div>
+<div class="row g-3 mb-3">
+  <div class="col-xxl-9">
+    <div class="card bg-body-tertiary dark__bg-opacity-50 my-3">
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-sm-6 col-md-4">
+        <div class="card overflow-hidden" style="min-width: 12rem">
+          <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-1.png);">
+          </div>
+      <!-- Card content ... -->
             <div class="card-body position-relative">
               <h6>Actions done by me (Today)</h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-warning" data-countup="{&quot;endValue&quot;:58.386,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}"><%= actionsDoneToday %></div>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-warning"><%= actionsDoneToday %></div>
               <button class="info-btn" data-tippy-content="Number of actions (likes, subscribes, comments, etc) made by me (in the last 24h)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.                096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
                 </svg>
               </button>
             </div>
@@ -92,16 +93,13 @@
         </div>
         <div class="col-sm-6 col-md-4">
           <div class="card overflow-hidden" style="min-width: 12rem">
-            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-2.png);">
-            </div>
-            <!--/.bg-holder-->
-
+            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-2.png);"></div>
             <div class="card-body position-relative">
               <h6>Actions done by me (Total)</h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info" data-countup="{&quot;endValue&quot;:23.434,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}"><%= actionsDoneTotal %></div>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info"><%= actionsDoneTotal %></div>
               <button class="info-btn" data-tippy-content="Number of actions (likes, subscribes, comments, etc) made by me (for all the time)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.                096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
                 </svg>
               </button>
             </div>
@@ -109,38 +107,98 @@
         </div>
         <div class="col-md-4">
           <div class="card overflow-hidden" style="min-width: 12rem">
-            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);">
-            </div>
-            <!--/.bg-holder-->
-
+            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);"></div>
             <div class="card-body position-relative">
-                    <h6>Earned USD (Today)</h6>
-                    <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info" data-countup="{&quot;endValue&quot;:<%= earnedToday %>,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">$<%= earnedToday.toFixed(4) %></div>
-                    <button class="info-btn" data-tippy-content="Amount of earned funds (in the last 24h)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
-                        </svg>
-                    </button>
-                </div>
+              <h6>Earned USD (Today)</h6>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif text-info">
+                  $<%= (isNaN(earnedToday) ? 0 : earnedToday).toFixed(4) %>
+              </div>
+              <button class="info-btn" data-tippy-content="Amount of earned funds (in the last 24h)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.                096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card overflow-hidden" style="min-width: 12rem">
-            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);">
-            </div>
-            <!--/.bg-holder-->            
-
+            <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);"></div>
             <div class="card-body position-relative">
               <h6>Earned USD (Total)</h6>
-              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif" data-countup="{&quot;endValue&quot;:43594,&quot;prefix&quot;:&quot;$&quot;}">$<%= earnedTotal.toFixed(4) %></div>
+              <div class="display-4 fs-5 mb-2 fw-normal font-sans-serif">
+                  $<%= (isNaN(earnedTotal) ? 0 : earnedTotal).toFixed(4) %>
+              </div>
               <button class="info-btn" data-tippy-content="Amount of earned funds (for all the time)" style="position: absolute; top: 5px; right: 5px; background: none; border: none; cursor: pointer; padding: 0; margin: 0;">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8ZM14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM5.178 6.096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.                096C5.178 4.44 6.546 3.432 8.274 3.432C9.978 3.432 11.25 4.44 11.25 5.928V5.976C11.25 7.392 10.338 7.968 9.486 8.34L9.27 8.436C8.982 8.568 8.886 8.724 8.886 9.072C8.886 9.24431 8.74631 9.384 8.574 9.384H7.734C7.49541 9.384 7.302 9.19059 7.302 8.952C7.302 8.136 7.59 7.62 8.346 7.284L8.562 7.188C9.282 6.864 9.666 6.6 9.666 6C9.666 5.352 9.114 4.92 8.274 4.92C7.41 4.92 6.762 5.352 6.762 6.168C6.762 6.32706 6.63306 6.456 6.474 6.456H5.538C5.33918 6.456 5.178 6.29482 5.178 6.096ZM8.094 9.888C7.446 9.888 6.954 10.356 6.954 11.028C6.954 11.7 7.446 12.168 8.094 12.168C8.742 12.168 9.234 11.7 9.234 11.028C9.234 10.356 8.742 9.888 8.094 9.888Z" fill="#99A5C2"></path>
                 </svg>
               </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
+</div>
+
+<!-- Script para inicializar o gráfico e lidar com a mudança de intervalo -->
+<script>
+  document.getElementById('dashboard-chart-select').addEventListener('change', function() {
+      const selectedInterval = this.value;
+      fetchDataAndRenderChart(selectedInterval);
+  });
+
+  async function fetchDataAndRenderChart(interval) {
+    try {
+        const response = await fetch(`/api/getChartData?interval=${interval}`);
+        const data = await response.json();
+
+        console.log(data); // Log dos dados recebidos do servidor
+
+        renderChart(data);
+        updateUserInfo(data); // Atualiza as informações do usuário
+    } catch (error) {
+        console.error('Error fetching chart data:', error);
+    }
+  }
+
+  function renderChart(data) {
+    const chartElement = document.querySelector('.echart-line-payment');
+    const myChart = echarts.init(chartElement);
+
+    const option = {
+        tooltip: {
+            trigger: 'axis',
+            formatter: '{b0}: {c0} USD'
+        },
+        xAxis: {
+            type: 'category',
+            data: data.dates
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: data.earnings,
+            type: 'line'
+        }]
+    };
+
+    myChart.setOption(option);
+  }
+
+  function updateUserInfo(data) {
+    // Atualiza os campos de informações do usuário com os dados recebidos
+    document.getElementById('actionsDoneToday').textContent = data.actionsDoneToday;
+    document.getElementById('actionsDoneTotal').textContent = data.actionsDoneTotal;
+    document.getElementById('earnedToday').textContent = `$${(isNaN(data.earnedToday) ? 0 : data.earnedToday.toFixed(4))}`;
+    document.getElementById('earnedTotal').textContent = `$${(isNaN(data.earnedTotal) ? 0 : data.earnedTotal.toFixed(4))}`;
+  }
+
+  window.addEventListener('load', function() {
+      fetchDataAndRenderChart('7_days'); // Inicializa o gráfico com o intervalo de 7 dias ao carregar a página
+  });
+</script>
+
 <%- include("../partials/footer.html") %>

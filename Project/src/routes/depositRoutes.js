@@ -14,6 +14,7 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 
     try {
+        // Convertendo a quantidade para número
         const depositAmount = parseFloat(amount);
 
         if (isNaN(depositAmount) || depositAmount <= 0) {
@@ -26,9 +27,11 @@ router.post('/', authMiddleware, async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        // Adicionando ao saldo atual do usuário
         user.balance += depositAmount;
         await user.save();
 
+        // Registrando a transação
         const transaction = new Transaction({
             userId,
             amount: depositAmount,
