@@ -70,124 +70,104 @@
 </div>
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Delete Confirmation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete this campaign?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" id="confirmDeleteButton" disabled>Delete</button>
-        <small id="countdown-timer" class="text-muted ms-2"></small>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this campaign?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let selectedCampaignId = null;
-    
-        fetch('/api/announcements')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById('announcement-table-body');
-                tableBody.innerHTML = '';
-    
-                if (data.length > 0) {
-                    data.forEach(announcement => {
-                        const row = document.createElement('tr');
-                        
-                        row.innerHTML = `
-                            <td class="align-middle text-end">${announcement.platform}</td>
-                            <td class="align-middle text-end">${announcement.action}</td>
-                            <td class="align-middle text-end">${announcement.rewardPerAction}</td>
-                            <td class="align-middle text-end">${announcement.dailyLimit}</td>
-                            <td class="align-middle text-end">${announcement.overallLimit}</td>
-                            <td class="align-middle text-end">${announcement.totalSpent}</td>
-                            <td class="align-middle text-end">${announcement.totalActions}</td>
-                            <td class="align-middle text-end">
-                                <button class="btn btn-sm btn-danger delete-campaign-btn" data-id="${announcement.id}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</button>
-                            </td>
-                        `;
-                        
-                        tableBody.appendChild(row);
-                    });
-                } else {
-                    tableBody.innerHTML = `
-                        <tr>
-                            <td colspan="8" class="text-center">No announcements found.</td>
-                        </tr>
+document.addEventListener('DOMContentLoaded', function() {
+    let selectedCampaignId = null;
+
+    fetch('/api/announcements')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('announcement-table-body');
+            tableBody.innerHTML = '';
+
+            if (data.length > 0) {
+                data.forEach(announcement => {
+                    const row = document.createElement('tr');
+                    row.setAttribute('id', `campaign-${announcement.id}`);
+                    
+                    row.innerHTML = `
+                        <td class="align-middle text-end">${announcement.platform}</td>
+                        <td class="align-middle text-end">${announcement.action}</td>
+                        <td class="align-middle text-end">${announcement.rewardPerAction}</td>
+                        <td class="align-middle text-end">${announcement.dailyLimit}</td>
+                        <td class="align-middle text-end">${announcement.overallLimit}</td>
+                        <td class="align-middle text-end">${announcement.totalSpent}</td>
+                        <td class="align-middle text-end">${announcement.totalActions}</td>
+                        <td class="align-middle text-end">
+                            <button class="btn btn-sm btn-danger delete-campaign-btn" data-id="${announcement.id}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</button>
+                        </td>
                     `;
-                }
-    
-                document.querySelectorAll('.delete-campaign-btn').forEach(button => {
-                    button.addEventListener('click', function() {
-                        selectedCampaignId = this.getAttribute('data-id');
-                        startCountdown();
-                    });
+                    
+                    tableBody.appendChild(row);
                 });
-            })
-            .catch(error => console.error('Error fetching announcements:', error));
-    
-        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-            if (selectedCampaignId) {
-                deleteCampaign(selectedCampaignId);
-                const confirmDeleteModal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
-                confirmDeleteModal.hide();
+            } else {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center">No announcements found.</td>
+                    </tr>
+                `;
             }
-        });
-    
-        document.getElementById('add-campaign-btn').addEventListener('click', function() {
-            window.location.href = '/platform';
-        });
-    
-        function deleteCampaign(campaignId) {
-            fetch(`/api/announcements/${campaignId}`, {
-                method: 'DELETE'
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.querySelector(`button[data-id="${campaignId}"]`).closest('tr').remove();
-                } else {
-                    return response.json().then(data => {
-                        throw new Error(data.error || 'Error deleting campaign');
-                    });
-                }
-            })
-            .catch(error => console.error('Error deleting campaign:', error));
+
+            document.querySelectorAll('.delete-campaign-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    selectedCampaignId = this.getAttribute('data-id');
+                });
+            });
+        })
+        .catch(error => console.error('Error fetching announcements:', error));
+
+    document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+        if (selectedCampaignId) {
+            deleteCampaign(selectedCampaignId);
+            const confirmDeleteModal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
+            confirmDeleteModal.hide();
         }
-    
-        function startCountdown() {
-            const deleteButton = document.getElementById('confirmDeleteButton');
-            const countdownTimer = document.getElementById('countdown-timer');
-            deleteButton.disabled = true;
-            let countdown = 5;
-    
-            countdownTimer.textContent = `${countdown}s`;
-    
-            const countdownInterval = setInterval(() => {
-                countdown -= 1;
-                countdownTimer.textContent = `${countdown}s`;
-    
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    countdownTimer.textContent = '';
-                    deleteButton.disabled = false;
-                }
-            }, 1000);
-        }
-    
-        new List('allContactTable', {
-            valueNames: ['platform', 'action', 'rewardPerAction', 'dailyLimit', 'overallLimit', 'totalSpent', 'totalActions']
-        });
     });
+
+    document.getElementById('add-campaign-btn').addEventListener('click', function() {
+        window.location.href = '/platform';
+    });
+
+    function deleteCampaign(campaignId) {
+        fetch(`/api/announcements/${campaignId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById(`campaign-${campaignId}`).remove();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error || 'Error deleting campaign');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting campaign:', error);
+            alert('Failed to delete campaign: ' + error.message);
+        });
+    }
+
+    new List('allContactTable', {
+        valueNames: ['platform', 'action', 'rewardPerAction', 'dailyLimit', 'overallLimit', 'totalSpent', 'totalActions']
+    });
+});
 </script>
-    
 
 <%- include("../partials/footer.html") %>

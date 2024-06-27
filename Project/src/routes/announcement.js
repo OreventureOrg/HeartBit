@@ -159,4 +159,27 @@ router.post('/hide-announcement', authMiddleware, (req, res) => {
     res.sendStatus(200);
 });
 
+router.delete('/announcements/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const announcement = await Announcement.findById(id);
+
+        if (!announcement) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        if (announcement.postedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).send('You are not authorized to delete this announcement');
+        }
+
+        await announcement.remove();
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error deleting announcement:', error);
+        res.status(500).send('Error deleting announcement');
+    }
+});
+
+
 module.exports = router;
