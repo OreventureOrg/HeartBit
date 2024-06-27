@@ -145,13 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/platform';
     });
 
-    function deleteCampaign(campaignId) {
-        fetch(`/api/announcements/${campaignId}`, {
+    function deleteCampaign(taskId) {
+        fetch(`/api/announcements/${taskId}`, {
             method: 'DELETE'
         })
         .then(response => {
             if (response.ok) {
-                document.getElementById(`campaign-${campaignId}`).remove();
+                document.getElementById(`campaign-${taskId}`).remove();
             } else {
                 return response.json().then(data => {
                     throw new Error(data.error || 'Error deleting campaign');
