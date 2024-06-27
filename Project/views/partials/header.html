@@ -84,7 +84,7 @@
                 </ul>
               <% } else { %>
                 <ul class="navbar-nav d-flex justify-content-between" style="width: 100%">
-                  <li class="nav-item"><a class="nav-link" href="#">Balance: $<%= userBalance.toFixed(4) %></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Balance: $<span id="user-balance"><%= userBalance.toFixed(4) %></span></a></li>
                   <!--<li class="nav-item"><a class="btn btn-primary" href="/earn">Earn Money</a></li>-->
                   <li class="nav-item"><a class="nav-link" href="#"><%= username %></a></li>
                 </ul>

@@ -87,51 +87,63 @@
     
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-      <script>
-        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          const amount = document.getElementById('withdrawAmount').value;
-          const method = document.getElementById('withdrawMethod').value;
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userBalanceElement = document.getElementById('user-balance');
     
-          fetch('/api/withdraw', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ amount, method }),
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.message) {
-              alert(data.message);
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const amount = document.getElementById('withdrawAmount').value;
+            const method = document.getElementById('withdrawMethod').value;
+    
+            fetch('/api/withdraw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount, method }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    if (data.balance !== undefined) {
+                        userBalanceElement.textContent = data.balance.toFixed(4);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     
         document.getElementById('depositForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          const amount = document.getElementById('depositAmount').value;
-          const method = document.getElementById('paymentMethod').value;
+            event.preventDefault();
+            const amount = document.getElementById('depositAmount').value;
+            const method = document.getElementById('paymentMethod').value;
     
-          fetch('/api/deposit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ amount, method }),
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.message) {
-              alert(data.message);
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+            fetch('/api/deposit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount, method }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    if (data.balance !== undefined) {
+                        userBalanceElement.textContent = data.balance.toFixed(4);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
-      </script>
+    });
+    </script>
+    
+        
 <%- include("../partials/footer.html") %>

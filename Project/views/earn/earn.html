@@ -81,59 +81,69 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const completeTaskButtons = document.querySelectorAll('.complete-task-btn');
-        const hideButtons = document.querySelectorAll('.hide-button');
+document.addEventListener('DOMContentLoaded', () => {
+    const completeTaskButtons = document.querySelectorAll('.complete-task-btn');
+    const hideButtons = document.querySelectorAll('.hide-button');
 
-        completeTaskButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                const announcementId = button.getAttribute('data-id');
-                const platform = button.getAttribute('data-platform');
-                const action = button.getAttribute('data-action');
+    completeTaskButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const announcementId = button.getAttribute('data-id');
+            const platform = button.getAttribute('data-platform');
+            const action = button.getAttribute('data-action');
 
-                try {
-                    const response = await fetch(`/complete-task/${announcementId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-
-                    if (response.ok) {
-                        const updatedUrl = `/earn/${platform}/${action}`;
-                        window.location.href = updatedUrl; // Atualiza a página
-                    } else {
-                        console.error('Failed to complete task.');
+            try {
+                const response = await fetch(`/complete-task/${announcementId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
+                });
 
-        hideButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                const announcementId = button.getAttribute('data-id');
-                try {
-                    const response = await fetch('/hide-announcement', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ announcementId }),
-                    });
-
-                    if (response.ok) {
-                        document.getElementById(`announcement-${announcementId}`).style.display = 'none';
-                    } else {
-                        console.error('Failed to hide announcement.');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Atualiza o saldo do usuário
+                    const userBalanceElement = document.getElementById('user-balance');
+                    if (userBalanceElement) {
+                        userBalanceElement.textContent = data.newBalance.toFixed(4);
                     }
-                } catch (error) {
-                    console.error('Error:', error);
+
+                    // Remove a tarefa da lista
+                    document.getElementById(`announcement-${announcementId}`).style.display = 'none';
+                } else {
+                    console.error('Failed to complete task.');
                 }
-            });
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     });
+
+    hideButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const announcementId = button.getAttribute('data-id');
+            try {
+                const response = await fetch('/hide-announcement', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ announcementId }),
+                });
+
+                if (response.ok) {
+                    document.getElementById(`announcement-${announcementId}`).style.display = 'none';
+                } else {
+                    console.error('Failed to hide announcement.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+
+
 </script>
 
 <%- include("../partials/footer.html") %>
