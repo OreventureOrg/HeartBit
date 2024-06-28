@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Announcement = require('../models/announcement');
 const authMiddleware = require('../middleware/authMiddleware');
+const fetchUserDataMiddleware = require('../middleware/fetchUserDataMiddleware');
 const User = require('../models/User');
 
 router.get('/earn/:platform/:action', authMiddleware, async (req, res) => {
@@ -155,4 +156,69 @@ router.post('/hide-announcement', authMiddleware, (req, res) => {
 
     res.sendStatus(200);
 });
+<<<<<<< Updated upstream
+=======
+
+router.delete('/announcements/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const announcement = await Announcement.findById(id);
+
+        if (!announcement) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        if (announcement.postedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).send('You are not authorized to delete this announcement');
+        }
+
+        await announcement.remove();
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error deleting announcement:', error);
+        res.status(500).send('Error deleting announcement');
+    }
+});
+
+router.get('/api/announcements', authMiddleware, async (req, res) => {
+    try {
+        const userId = req.user._id; // Obtém o ID do usuário logado
+        const announcements = await Announcement.find({ postedBy: userId });
+
+        res.json(announcements);
+    } catch (error) {
+        console.error('Erro ao buscar campanhas:', error);
+        res.status(500).send('Erro ao buscar campanhas');
+    }
+});
+
+router.post('/api/announcements/pause/:taskId', authMiddleware,fetchUserDataMiddleware, async (req, res) => {
+    const { taskId } = req.params;
+
+    try {
+        const announcement = await Announcement.findById(taskId);
+
+        if (!announcement) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        // Verifica se o usuário logado é o criador da campanha
+        if (announcement.postedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).send('You are not authorized to pause this announcement');
+        }
+
+        // Define o status de pausa da campanha (exemplo: usando um campo "paused" no modelo Announcement)
+        announcement.paused = true;
+        await announcement.save();
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error pausing announcement:', error);
+        res.status(500).send('Error pausing announcement');
+    }
+});
+
+
+>>>>>>> Stashed changes
 module.exports = router;
