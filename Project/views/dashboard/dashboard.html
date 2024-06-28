@@ -1,74 +1,75 @@
 <%- include("../partials/header.html") %>
-
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<div class="row g-3">
-  <div class="col-8">
-    <div class="card rounded-3 overflow-hidden h-100">
-        <div class="card-body bg-line-chart-gradient d-flex flex-column justify-content-between">
-            <div class="row align-items-center g-0">
-                <div class="col" data-bs-theme="light">
-                    <h4 class="text-white mb-0">Today $764.39</h4>
-                    <p class="fs-10 fw-semi-bold text-white">Yesterday <span class="opacity-50">$684.87</span></p>
-                </div>
-                <div class="col-auto d-none d-sm-block">
-                    <select class="form-select form-select-sm mb-3" id="dashboard-chart-select">
-                        <option value="24_horas">24 Hours</option>
-                        <option value="7_days" selected="selected">7 Days</option>
-                        <option value="1_month">1 Month</option>
-                        <option value="all">All Time</option>
-                    </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div>
+      <div class="container">
+        <div class="row g-3 mb-3">
+            <div class="col-8">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">Dashboard</h5>
+                        <select id="dashboard-chart-select">
+                            <option value="24_horas">Últimas 24 horas</option>
+                            <option value="7_days" selected>Últimos 7 dias</option>
+                            <option value="1_month">Último mês</option>
+                            <option value="all">Tudo</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div id="chart" style="height: 400px;"></div>
+                    </div>
                 </div>
             </div>
-            <div class="echart-line-payment" style="height: 200px;"></div>
-        </div>
-    </div>
-  </div>
-
-  <!--info right-->
-  <div class="col-4">
-    <div class="card h-100 h-xxl-auto mt-xxl-3">
-      <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
-        <h6 class="mb-0">How To Start</h6>
+             <!--info right-->
+             <div class="col-4">
+              <div class="card h-100 h-xxl-auto mt-xxl-3">
+                  <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
+                      <h6 class="mb-0">How To Start</h6>
+                  </div>
+                  <div class="card-body pb-0">
+                      <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+                          <div class="file-thumbnail"><h2>1</h2></div>
+                          <div class="ms-3 flex-shrink-1 flex-grow-1">
+                              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Start By Completing Tasks</a></h6>
+                              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+                          </div>
+                      </div>
+                      <hr class="text-200">
+                      <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+                          <div class="file-thumbnail"><h2>2</h2></div>
+                          <div class="ms-3 flex-shrink-1 flex-grow-1">
+                              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Make money on social networks by completing simple tasks (likes, subscriptions, etc.)</a></h6>
+                              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+                          </div>
+                      </div>
+                      <hr class="text-200">
+                      <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+                          <div class="file-thumbnail"><h2>3</h2></div>
+                          <div class="ms-3 flex-shrink-1 flex-grow-1">
+                              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/affiliate">Invite friends and get a percentage of their earnings</a></h6>
+                              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+                          </div>
+                      </div>
+                      <hr class="text-200">
+                      <div class="d-flex mb-3 hover-actions-trigger align-items-center">
+                          <div class="file-thumbnail"><h2>4</h2></div>
+                          <div class="ms-3 flex-shrink-1 flex-grow-1">
+                              <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/withdraw">Withdraw the earned funds to the popular payment systems</a></h6>
+                              <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
+                          </div>
+                      </div>
+                      <hr class="text-200">
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="card-body pb-0">
-        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-          <div class="file-thumbnail"><h2>1</h2>
-          </div>
-          <div class="ms-3 flex-shrink-1 flex-grow-1">
-            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Start By Completing Tasks</a></h6>
-            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-          </div>
-        </div>
-        <hr class="text-200">
-        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-          <div class="file-thumbnail"><h2>2</h2>
-          </div>
-          <div class="ms-3 flex-shrink-1 flex-grow-1">
-            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/earn/instagram/followers">Make money on social networks by completing simple tasks (likes, subscriptions, etc.)</a></h6>
-            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-          </div>
-        </div>
-        <hr class="text-200">
-        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-          <div class="file-thumbnail"><h2>3</h2>
-          </div>
-          <div class="ms-3 flex-shrink-1 flex-grow-1">
-            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/affiliate">Invite friends and get a percentage of their earnings</a></h6>
-            <div class="fs-10"><span class="fas fa-arrow-down"></span></div>
-          </div>
-        </div>
-        <hr class="text-200">
-        <div class="d-flex mb-3 hover-actions-trigger align-items-center">
-          <div class="file-thumbnail"><h2>4</h2>
-          </div>
-          <div class="ms-3 flex-shrink-1 flex-grow-1">
-            <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="/withdraw">Withdraw the earned funds to the popular payment systems</a></h6>
-            <div class="fs-10"><span class="fas fa-arrow-down"></span></div> 
-          </div>
-        </div>
-        <hr class="text-200">
-      </div>
-    </div>
   </div>
 <div class="row g-3 mb-3">
   <div class="col-xxl-9">
@@ -144,61 +145,64 @@
 
 <!-- Script para inicializar o gráfico e lidar com a mudança de intervalo -->
 <script>
-  document.getElementById('dashboard-chart-select').addEventListener('change', function() {
-      const selectedInterval = this.value;
-      fetchDataAndRenderChart(selectedInterval);
-  });
+  document.addEventListener('DOMContentLoaded', () => {
+      const chart = echarts.init(document.getElementById('chart'));
+      const userId = '<%= userId %>'; // Ensure userId is passed from the server-side rendering
 
-  async function fetchDataAndRenderChart(interval) {
-    try {
-        const response = await fetch(`/api/getChartData?interval=${interval}`);
-        const data = await response.json();
+      function fetchData(interval) {
+          fetch(`/api/users/getChartData?interval=${interval}&userId=${userId}`)
+              .then(response => response.json())
+              .then(data => {
+                  const { dates, earnings, actions } = data;
+                  const option = {
+                      title: {
+                          text: 'User Actions and Earnings',
+                          subtext: 'Based on selected interval',
+                          left: 'center'
+                      },
+                      tooltip: {
+                          trigger: 'axis'
+                      },
+                      legend: {
+                          data: ['Earnings', 'Actions'],
+                          top: 'bottom'
+                      },
+                      xAxis: {
+                          type: 'category',
+                          data: dates
+                      },
+                      yAxis: [{
+                          type: 'value',
+                          name: 'Earnings',
+                          position: 'left'
+                      }, {
+                          type: 'value',
+                          name: 'Actions',
+                          position: 'right'
+                      }],
+                      series: [{
+                          name: 'Earnings',
+                          type: 'bar',
+                          data: earnings
+                      }, {
+                          name: 'Actions',
+                          type: 'line',
+                          yAxisIndex: 1,
+                          data: actions
+                      }]
+                  };
+                  chart.setOption(option);
+              })
+              .catch(error => console.error('Error fetching data:', error));
+      }
 
-        console.log(data); // Log dos dados recebidos do servidor
+      document.getElementById('dashboard-chart-select').addEventListener('change', (event) => {
+          fetchData(event.target.value);
+      });
 
-        renderChart(data);
-        updateUserInfo(data); // Atualiza as informações do usuário
-    } catch (error) {
-        console.error('Error fetching chart data:', error);
-    }
-  }
-
-  function renderChart(data) {
-    const chartElement = document.querySelector('.echart-line-payment');
-    const myChart = echarts.init(chartElement);
-
-    const option = {
-        tooltip: {
-            trigger: 'axis',
-            formatter: '{b0}: {c0} USD'
-        },
-        xAxis: {
-            type: 'category',
-            data: data.dates
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: data.earnings,
-            type: 'line'
-        }]
-    };
-
-    myChart.setOption(option);
-  }
-
-  function updateUserInfo(data) {
-    // Atualiza os campos de informações do usuário com os dados recebidos
-    document.getElementById('actionsDoneToday').textContent = data.actionsDoneToday;
-    document.getElementById('actionsDoneTotal').textContent = data.actionsDoneTotal;
-    document.getElementById('earnedToday').textContent = `$${(isNaN(data.earnedToday) ? 0 : data.earnedToday.toFixed(4))}`;
-    document.getElementById('earnedTotal').textContent = `$${(isNaN(data.earnedTotal) ? 0 : data.earnedTotal.toFixed(4))}`;
-  }
-
-  window.addEventListener('load', function() {
-      fetchDataAndRenderChart('7_days'); // Inicializa o gráfico com o intervalo de 7 dias ao carregar a página
+      fetchData('7_days'); // Initial load
   });
 </script>
-
+</body>
+</html>
 <%- include("../partials/footer.html") %>

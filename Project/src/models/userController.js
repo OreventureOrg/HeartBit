@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/User'); // Adjust the path as necessary
 
+// Route to get chart data
 router.get('/getChartData', async (req, res) => {
     const { interval, userId } = req.query;
 
-    // Calcular a data inicial baseada no intervalo selecionado
+    if (!userId) {
+        return res.status(400).json({ error: 'ID do usuário é necessário' });
+    }
+
     const endDate = new Date();
     let startDate;
     switch (interval) {
@@ -19,18 +23,21 @@ router.get('/getChartData', async (req, res) => {
             startDate = new Date(endDate.getTime() - (30 * 24 * 60 * 60 * 1000));
             break;
         case 'all':
-            startDate = new Date(0); // Desde o início dos tempos
+            startDate = new Date(0);
             break;
         default:
             startDate = new Date(endDate.getTime() - (7 * 24 * 60 * 60 * 1000));
     }
 
     try {
-        // Encontrar o usuário pelo ID e filtrar tarefas baseadas na data
         const user = await User.findById(userId);
-        const tasksInRange = user.tasks.filter(task => task.dateCompleted >= startDate && task.dateCompleted <= endDate);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
 
-        // Organizar os dados para o gráfico
+        const tasksInRange = user.tasks.filter(task => 
+            task.dateCompleted >= startDate && task.dateCompleted <= endDate);
+
         const dates = [];
         const earnings = [];
         const actions = [];
@@ -49,8 +56,8 @@ router.get('/getChartData', async (req, res) => {
 
         res.json({ dates, earnings, actions });
     } catch (error) {
-        console.error('Error fetching chart data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Erro ao buscar dados do gráfico:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });
 

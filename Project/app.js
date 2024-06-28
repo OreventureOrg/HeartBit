@@ -1,157 +1,162 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const path = require('path');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-require('dotenv').config();
-
-const app = express();
-const PORT = 5000;
-
-const authMiddleware = require('./src/middleware/authMiddleware');
-const addUserMiddleware = require('./src/middleware/addUserMiddleware');
-const fetchUserDataMiddleware = require('./src/middleware/fetchUserDataMiddleware');
-const User = require('./src/models/User'); // Certifique-se de que o modelo User está sendo importado
-const apiRoutes = require('./src/routes/api'); // ajuste o caminho conforme necessário
+    const express = require('express');
+    const mongoose = require('mongoose');
+    const bodyParser = require('body-parser');
+    const path = require('path');
+    const session = require('express-session');
+    const MongoStore = require('connect-mongo');
+    require('dotenv').config();
 
 
-// ============= BODY-PARSER SETUP ============= //
+    const app = express();
+    const PORT = 5000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
-app.use('/apie', apiRoutes);
+    const authMiddleware = require('./src/middleware/authMiddleware');
+    const addUserMiddleware = require('./src/middleware/addUserMiddleware');
+    const fetchUserDataMiddleware = require('./src/middleware/fetchUserDataMiddleware');
+    const User = require('./src/models/User'); // Certifique-se de que o modelo User está sendo importado
+    const apiRoutes = require('./src/routes/api'); // ajuste o caminho conforme necessário
+    const userController = require('./src/models/userController');
 
-// ============= MONGO SETUP ============= //
 
-mongoose.connect(process.env.MONGO_URI, {});
+    // ============= BODY-PARSER SETUP ============= //
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Erro de conexão com MongoDB:'));
-db.once('open', () => {
-    console.log('Conectado ao MongoDB');
-});
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use('/api/users', userController);
+    app.use('/apie', apiRoutes);
 
-// ============= SESSION SETUP ============= //
+    // ============= MONGO SETUP ============= //
 
-app.use(session({
-    secret: 'secreta',
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
-}));
+    mongoose.connect(process.env.MONGO_URI, {});
 
-// ============= ROUTES ============= //
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'Erro de conexão com MongoDB:'));
+    db.once('open', () => {
+        console.log('Conectado ao MongoDB');
+    });
 
-app.post('/hide-announcement', (req, res) => {
-    const { announcementId } = req.body;
+    // ============= SESSION SETUP ============= //
 
-    if (!req.session.hiddenAnnouncements) {
-        req.session.hiddenAnnouncements = [];
-    }
+    app.use(session({
+        secret: 'secreta',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
+    }));
 
-    if (!req.session.hiddenAnnouncements.includes(announcementId)) {
-        req.session.hiddenAnnouncements.push(announcementId);
-    }
+    // ============= ROUTES ============= //
 
-    res.sendStatus(200);
-});
+    app.post('/hide-announcement', (req, res) => {
+        const { announcementId } = req.body;
 
-const userRoutes = require('./src/routes/userRoutes');
-const withdrawRoutes = require('./src/routes/withdrawRoutes');
-const depositRoutes = require('./src/routes/depositRoutes');
-const announcementRoutes = require('./src/routes/announcement');
+        if (!req.session.hiddenAnnouncements) {
+            req.session.hiddenAnnouncements = [];
+        }
 
-app.use('/', userRoutes);
-app.use('/api/withdraw', withdrawRoutes);
-app.use('/api/deposit', depositRoutes);
-app.use('/', announcementRoutes);
+        if (!req.session.hiddenAnnouncements.includes(announcementId)) {
+            req.session.hiddenAnnouncements.push(announcementId);
+        }
 
-// ============= VIEW ENGINE SETUP ============= //
+        res.sendStatus(200);
+    });
 
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-app.set('views', path.join(__dirname, 'views'));
+    const userRoutes = require('./src/routes/userRoutes');
+    const withdrawRoutes = require('./src/routes/withdrawRoutes');
+    const depositRoutes = require('./src/routes/depositRoutes');
+    const announcementRoutes = require('./src/routes/announcement');
 
-app.use(express.static(path.join(__dirname, 'public')));
+    app.use('/', userRoutes);
+    app.use('/api/withdraw', withdrawRoutes);
+    app.use('/api/deposit', depositRoutes);
+    app.use('/', announcementRoutes);
 
-// ============= HOME ============= //
+    // ============= VIEW ENGINE SETUP ============= //
 
-app.get("/", addUserMiddleware, (req, res) => {
-    res.render("index.html", { Page: "Home", user: req.user });
-});
+    app.set('view engine', 'ejs');
+    app.engine('html', require('ejs').renderFile);
+    app.set('views', path.join(__dirname, 'views'));
 
-app.get("/how_about", addUserMiddleware, (req, res) => {
-    res.render("./how_about.html", { Page: "How About", user: req.user });
-});
+    app.use(express.static(path.join(__dirname, 'public')));
 
-// ============= AUTH ============= //
+    // ============= HOME ============= //
 
-app.get("/login", (req, res) => {
-    res.render("./auth/login.html", { Page: "Login" });
-});
+    app.get("/", addUserMiddleware, (req, res) => {
+        res.render("index.html", { Page: "Home", user: req.user });
+    });
 
-app.get("/register", (req, res) => {
-    const referenceCode = req.query.ref || '';
-    res.render("auth/register.html", { Page: "Register", referenceCode });
-});
+    app.get("/how_about", addUserMiddleware, (req, res) => {
+        res.render("./how_about.html", { Page: "How About", user: req.user });
+    });
 
-// ============= DASHBOARD ============= //
+    // ============= AUTH ============= //
 
-app.get("/dashboard", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    try {
-        console.log('Rendering dashboard with user data:', {
-            userBalance: req.userBalance,
-            username: req.username,
-            actionsDoneToday: req.actionsDoneToday,
-            actionsDoneTotal: req.actionsDoneTotal,
-            earnedToday: req.earnedToday,
-            earnedTotal: req.earnedTotal
-        });
+    app.get("/login", (req, res) => {
+        res.render("./auth/login.html", { Page: "Login" });
+    });
 
-        res.render("./dashboard/dashboard.html", {
-            Page: "Dashboard",
-            userBalance: req.userBalance,
-            username: req.username,
-            actionsDoneToday: req.actionsDoneToday,
-            actionsDoneTotal: req.actionsDoneTotal,
-            earnedToday: req.earnedToday,
-            earnedTotal: req.earnedTotal
-        });
-    } catch (error) {
-        console.error('Error rendering dashboard:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+    app.get("/register", (req, res) => {
+        const referenceCode = req.query.ref || '';
+        res.render("auth/register.html", { Page: "Register", referenceCode });
+    });
 
-app.get("/affiliate", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    const host = `${req.protocol}://${req.get('host')}`;
-    const affiliateLink = `${host}/register?ref=${req.session.userId}`;
-    res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance, username: req.username });
-});
+    // ============= DASHBOARD ============= //
 
-app.get("/announcement", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    const platform = req.query.platform || 'Platform';
-    const action = req.query.action || 'Action';
-    const successMessage = req.query.success === 'true' ? 'Campaign created successfully!' : '';
-    res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance, username: req.username });
-});
+    app.get("/dashboard", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        try {
+            console.log('Rendering dashboard with user data:', {
+                userId: req.session.userId,  // Ensure userId is added
+                userBalance: req.userBalance,
+                username: req.username,
+                actionsDoneToday: req.actionsDoneToday,
+                actionsDoneTotal: req.actionsDoneTotal,
+                earnedToday: req.earnedToday,
+                earnedTotal: req.earnedTotal
+            });
 
-app.get("/platform", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance, username: req.username });
-});
+            res.render("./dashboard/dashboard.html", {
+                Page: "Dashboard",
+                userId: req.session.userId,  // Ensure userId is passed to the template
+                userBalance: req.userBalance,
+                username: req.username,
+                actionsDoneToday: req.actionsDoneToday,
+                actionsDoneTotal: req.actionsDoneTotal,
+                earnedToday: req.earnedToday,
+                earnedTotal: req.earnedTotal
+            });
+        } catch (error) {
+            console.error('Error rendering dashboard:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    });
 
-app.get("/services", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    res.render("./services.html", { Page: "Services", user: req.user });
-});
+    app.get("/affiliate", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        const host = `${req.protocol}://${req.get('host')}`;
+        const affiliateLink = `${host}/register?ref=${req.session.userId}`;
+        res.render("./dashboard/affiliate.html", { Page: "Affiliate", affiliateLink, userBalance: req.userBalance, username: req.username });
+    });
 
-app.get("/withdraw", authMiddleware, fetchUserDataMiddleware, (req, res) => {
-    res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance, username: req.username });
-});
+    app.get("/announcement", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        const platform = req.query.platform || 'Platform';
+        const action = req.query.action || 'Action';
+        const successMessage = req.query.success === 'true' ? 'Campaign created successfully!' : '';
+        res.render("./earn/announcement.html", { Page: "Announcement", platform, action, successMessage, userBalance: req.userBalance, username: req.username });
+    });
 
-// ============= INIT SERVER ============= //
+    app.get("/platform", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        res.render("./earn/platform.html", { Page: "Platform", userBalance: req.userBalance, username: req.username });
+    });
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
+    app.get("/services", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        res.render("./services.html", { Page: "Services", user: req.user });
+    });
+
+    app.get("/withdraw", authMiddleware, fetchUserDataMiddleware, (req, res) => {
+        res.render("./dashboard/withdraw.html", { Page: "Withdraw", userBalance: req.userBalance, username: req.username });
+    });
+
+    // ============= INIT SERVER ============= //
+
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+    });
