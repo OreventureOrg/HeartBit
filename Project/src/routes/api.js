@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User'); // Ajuste o caminho conforme necessário
+const Announcement = require('../models/announcement'); // Certifique-se de ajustar o caminho conforme necessário
 
 // Middleware de autenticação
 const authMiddleware = (req, res, next) => {
@@ -26,5 +27,18 @@ router.get('/getChartData', async (req, res) => {
     }
 });
 
+<<<<<<< Updated upstream
+=======
+// Rota para obter anúncios
+router.get('/api/announcements', async (req, res) => {
+    try {
+        const announcements = await Announcement.find({ postedBy: req.user._id });
+        res.json(announcements);
+    } catch (error) {
+        console.error('Erro ao buscar anúncios:', error);
+        res.status(500).json({ error: 'Erro ao buscar anúncios' });
+    }
+});
+>>>>>>> Stashed changes
 
 module.exports = router;

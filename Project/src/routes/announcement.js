@@ -116,8 +116,6 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         }
 
         await user.save();
-
-        // Retorna o novo saldo do usuário
         res.json({ newBalance: user.balance });
     } catch (error) {
         console.error('Erro ao completar tarefa:', error);
@@ -144,7 +142,6 @@ router.get("/campaigns", authMiddleware, async (req, res) => {
 });
 
 
-// Adiciona a rota para esconder anúncios
 router.post('/hide-announcement', authMiddleware, (req, res) => {
     const { announcementId } = req.body;
 
@@ -158,28 +155,4 @@ router.post('/hide-announcement', authMiddleware, (req, res) => {
 
     res.sendStatus(200);
 });
-
-router.delete('/announcements/:id', authMiddleware, async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const announcement = await Announcement.findById(id);
-
-        if (!announcement) {
-            return res.status(404).send('Announcement not found');
-        }
-
-        if (announcement.postedBy.toString() !== req.user._id.toString()) {
-            return res.status(403).send('You are not authorized to delete this announcement');
-        }
-
-        await announcement.remove();
-        res.sendStatus(200);
-    } catch (error) {
-        console.error('Error deleting announcement:', error);
-        res.status(500).send('Error deleting announcement');
-    }
-});
-
-
 module.exports = router;
