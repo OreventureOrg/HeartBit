@@ -191,7 +191,32 @@ router.get('/api/announcements', authMiddleware, async (req, res) => {
     }
 });
 
-router.post('/api/announcements/pause/:taskId', authMiddleware,fetchUserDataMiddleware, async (req, res) => {
+router.post('/api/announcements/pause/:taskId', authMiddleware, fetchUserDataMiddleware, async (req, res) => {
+    const { taskId } = req.params;
+    console.log('Task ID received:', taskId); // Debugging line
+
+    try {
+        const announcement = await Announcement.findById(taskId);
+
+        if (!announcement) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        if (announcement.postedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).send('You are not authorized to pause this announcement');
+        }
+
+        announcement.paused = true;
+        await announcement.save();
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error pausing announcement:', error);
+        res.status(500).send('Error pausing announcement');
+    }
+});
+
+router.post('/api/announcements/unpause/:taskId', authMiddleware, async (req, res) => {
     const { taskId } = req.params;
 
     try {
@@ -203,17 +228,17 @@ router.post('/api/announcements/pause/:taskId', authMiddleware,fetchUserDataMidd
 
         // Verifica se o usuário logado é o criador da campanha
         if (announcement.postedBy.toString() !== req.user._id.toString()) {
-            return res.status(403).send('You are not authorized to pause this announcement');
+            return res.status(403).send('You are not authorized to unpause this announcement');
         }
 
-        // Define o status de pausa da campanha (exemplo: usando um campo "paused" no modelo Announcement)
-        announcement.paused = true;
+        // Remove o status de pausa da campanha
+        announcement.paused = false;
         await announcement.save();
 
         res.sendStatus(200);
     } catch (error) {
-        console.error('Error pausing announcement:', error);
-        res.status(500).send('Error pausing announcement');
+        console.error('Error unpausing announcement:', error);
+        res.status(500).send('Error unpausing announcement');
     }
 });
 

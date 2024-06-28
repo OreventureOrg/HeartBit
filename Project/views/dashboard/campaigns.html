@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.length > 0) {
                 data.forEach(announcement => {
                     const row = document.createElement('tr');
-                    row.setAttribute('id', `campaign-${announcement.id}`);
+                    row.setAttribute('id', `campaign-${announcement._id}`); // Use _id here
                     
                     row.innerHTML = `
                         <td class="align-middle text-end">${announcement.platform}</td>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="align-middle text-end">${announcement.totalSpent}</td>
                         <td class="align-middle text-end">${announcement.totalActions}</td>
                         <td class="align-middle text-end">
-                            <button class="btn btn-sm btn-warning pause-campaign-btn" data-id="${announcement.id}" data-bs-toggle="modal" data-bs-target="#confirmPauseModal">Pause</button>
+                            <button class="btn btn-sm btn-warning pause-campaign-btn" data-id="${announcement._id}" data-bs-toggle="modal" data-bs-target="#confirmPauseModal">Pause</button>
                         </td>
                     `;
                     
@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.pause-campaign-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     selectedCampaignId = this.getAttribute('data-id');
+                    console.log('Selected Campaign ID:', selectedCampaignId); // Debugging line
                 });
             });
         })
@@ -169,5 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+    
 
 <%- include("../partials/footer.html") %>
