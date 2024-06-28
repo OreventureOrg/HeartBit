@@ -27,8 +27,6 @@ router.get('/getChartData', async (req, res) => {
     }
 });
 
-<<<<<<< Updated upstream
-=======
 // Rota para obter anúncios
 router.get('/api/announcements', async (req, res) => {
     try {
@@ -39,6 +37,5 @@ router.get('/api/announcements', async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar anúncios' });
     }
 });
->>>>>>> Stashed changes
 
 module.exports = router;

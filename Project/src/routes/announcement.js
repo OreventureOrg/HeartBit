@@ -156,8 +156,6 @@ router.post('/hide-announcement', authMiddleware, (req, res) => {
 
     res.sendStatus(200);
 });
-<<<<<<< Updated upstream
-=======
 
 router.delete('/announcements/:id', authMiddleware, async (req, res) => {
     const { id } = req.params;
@@ -220,5 +218,4 @@ router.post('/api/announcements/pause/:taskId', authMiddleware,fetchUserDataMidd
 });
 
 
->>>>>>> Stashed changes
 module.exports = router;
