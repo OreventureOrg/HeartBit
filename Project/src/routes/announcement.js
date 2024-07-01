@@ -112,6 +112,10 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         user.tasks.push({ taskId: announcementId, dateCompleted: new Date(), earnings: reward });
         user.balance += reward;
 
+        announcementObj.totalActions += 1;
+        announcementObj.totalSpent += reward;
+        await announcementObj.save();
+
         const poster = await User.findById(announcementObj.postedBy);
         if (poster) {
             poster.balance -= penalty;
