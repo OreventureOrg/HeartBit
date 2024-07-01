@@ -19,6 +19,7 @@ router.get('/earn/:platform/:action', authMiddleware, async (req, res) => {
         let announcements = await Announcement.find({
             platform,
             action,
+            paused: false, // Ensure only active announcements are fetched
             _id: { $nin: user.tasks.map(task => task.taskId) }
         });
 
@@ -66,7 +67,8 @@ router.post('/announcement', authMiddleware, async (req, res) => {
             rewardPerAction: parseFloat(rewardPerAction) / 2,
             dailyLimit: parseInt(dailyLimit) || 0,
             overallLimit: parseInt(overallLimit) || 0,
-            postedBy: req.user._id
+            postedBy: req.user._id,
+            paused: false // Ensure new announcements are not paused by default
         });
 
         await newAnnouncement.save();
@@ -109,6 +111,11 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
 
         user.tasks.push({ taskId: announcementId, dateCompleted: new Date(), earnings: reward });
         user.balance += reward;
+
+        // Update totalActions and totalSpent
+        announcementObj.totalActions += 1;
+        announcementObj.totalSpent += reward;
+        await announcementObj.save();
 
         const poster = await User.findById(announcementObj.postedBy);
         if (poster) {
@@ -239,6 +246,32 @@ router.post('/api/announcements/unpause/:taskId', authMiddleware, async (req, re
     } catch (error) {
         console.error('Error unpausing announcement:', error);
         res.status(500).send('Error unpausing announcement');
+    }
+});
+
+// Toggle pause/unpause
+router.post('/api/announcements/toggle/:taskId', authMiddleware, async (req, res) => {
+    const { taskId } = req.params;
+    try {
+        const announcement = await Announcement.findById(taskId);
+
+        if (!announcement) {
+            return res.status(404).send('Announcement not found');
+        }
+
+        // Check if the user is authorized
+        if (announcement.postedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).send('You are not authorized to modify this announcement');
+        }
+
+        // Toggle the paused state
+        announcement.paused = !announcement.paused;
+        await announcement.save();
+
+        res.json({ paused: announcement.paused });
+    } catch (error) {
+        console.error('Error toggling announcement state:', error);
+        res.status(500).send('Error toggling announcement state');
     }
 });
 

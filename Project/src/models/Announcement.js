@@ -49,7 +49,16 @@ const announcementSchema = new mongoose.Schema({
     paused: {
         type: Boolean,
         default: false
-    }
+    },
+    totalSpent: {
+        type: Number,
+        default: 0 
+    },
+    totalActions: {
+        type: Number,
+        default: 0 
+    } 
+
 });
 
 module.exports = mongoose.model('Announcement', announcementSchema);

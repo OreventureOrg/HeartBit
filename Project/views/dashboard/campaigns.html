@@ -29,18 +29,19 @@
       <div class="card-body p-0">
           <div class="table-responsive scrollbar">
               <table class="table table-lg table-hover fs-12 mb-0 w-100">
-                  <thead class="bg-body-tertiary">
-                      <tr>
-                          <th class="text-800 sort align-middle text-end" data-sort="platform">Platform</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="totalSpent">Total Spent</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="totalActions">Total Actions</th>
-                          <th class="text-800 align-middle text-end">Actions</th>
-                      </tr>
-                  </thead>
+                <thead class="bg-body-tertiary">
+                        <tr>
+                            <th class="text-800 sort align-middle text-end" data-sort="platform">Platform</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="username">Username</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="totalSpent">Total Spent</th>
+                            <th class="text-800 sort align-middle text-end" data-sort="totalActions">Total Actions</th>
+                            <th class="text-800 align-middle text-end">Actions</th>
+                        </tr>
+                    </thead>
                   <tbody id="announcement-table-body">
                       <% if (announcements.length > 0) { %>
                           <% announcements.forEach(announcement => { %>
@@ -77,11 +78,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to pause this campaign?
+                Are you sure you want to <span id="pauseActionText"></span> this campaign?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-warning" id="confirmPauseButton">Pause</button>
+                <button type="button" class="btn btn-warning" id="confirmPauseButton">Confirm</button>
             </div>
         </div>
     </div>
@@ -90,6 +91,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     let selectedCampaignId = null;
+    let selectedCampaignPaused = false;
 
     fetch('/api/announcements')
         .then(response => response.json())
@@ -100,27 +102,34 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.length > 0) {
                 data.forEach(announcement => {
                     const row = document.createElement('tr');
-                    row.setAttribute('id', `campaign-${announcement._id}`); // Use _id here
-                    
+                    row.setAttribute('id', `campaign-${announcement._id}`);
+
                     row.innerHTML = `
                         <td class="align-middle text-end">${announcement.platform}</td>
                         <td class="align-middle text-end">${announcement.action}</td>
+                        <td class="align-middle text-end">${announcement.username}</td>
                         <td class="align-middle text-end">${announcement.rewardPerAction}</td>
                         <td class="align-middle text-end">${announcement.dailyLimit}</td>
                         <td class="align-middle text-end">${announcement.overallLimit}</td>
                         <td class="align-middle text-end">${announcement.totalSpent}</td>
                         <td class="align-middle text-end">${announcement.totalActions}</td>
                         <td class="align-middle text-end">
-                            <button class="btn btn-sm btn-warning pause-campaign-btn" data-id="${announcement._id}" data-bs-toggle="modal" data-bs-target="#confirmPauseModal">Pause</button>
+                            <button class="btn btn-sm ${announcement.paused ? 'btn-success' : 'btn-warning'} pause-campaign-btn" 
+                                    data-id="${announcement._id}" 
+                                    data-paused="${announcement.paused}" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmPauseModal">
+                                ${announcement.paused ? 'Reativar' : 'Pausar'}
+                            </button>
                         </td>
                     `;
-                    
+
                     tableBody.appendChild(row);
                 });
             } else {
                 tableBody.innerHTML = `
                     <tr>
-                        <td colspan="8" class="text-center">No announcements found.</td>
+                        <td colspan="9" class="text-center">No announcements found.</td> <!-- Updated colspan to 9 -->
                     </tr>
                 `;
             }
@@ -128,7 +137,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.pause-campaign-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     selectedCampaignId = this.getAttribute('data-id');
-                    console.log('Selected Campaign ID:', selectedCampaignId); // Debugging line
+                    selectedCampaignPaused = this.getAttribute('data-paused') === 'true';
+
+                    const pauseActionText = document.getElementById('pauseActionText');
+                    const confirmPauseButton = document.getElementById('confirmPauseButton');
+
+                    if (selectedCampaignPaused) {
+                        pauseActionText.textContent = 'reactivate';
+                        confirmPauseButton.classList.remove('btn-warning');
+                        confirmPauseButton.classList.add('btn-success');
+                    } else {
+                        pauseActionText.textContent = 'pause';
+                        confirmPauseButton.classList.remove('btn-success');
+                        confirmPauseButton.classList.add('btn-warning');
+                    }
                 });
             });
         })
@@ -136,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('confirmPauseButton').addEventListener('click', function() {
         if (selectedCampaignId) {
-            pauseCampaign(selectedCampaignId);
+            toggleCampaignPause(selectedCampaignId, selectedCampaignPaused);
             const confirmPauseModal = bootstrap.Modal.getInstance(document.getElementById('confirmPauseModal'));
             confirmPauseModal.hide();
         }
@@ -146,27 +168,31 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/platform';
     });
 
-    function pauseCampaign(campaignId) {
-        fetch(`/api/announcements/pause/${campaignId}`, {
+    function toggleCampaignPause(campaignId, isPaused) {
+        fetch(`/api/announcements/toggle/${campaignId}`, {
             method: 'POST'
         })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById(`campaign-${campaignId}`).remove();
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                const campaignRow = document.getElementById(`campaign-${campaignId}`);
+                const pauseButton = campaignRow.querySelector('.pause-campaign-btn');
+                pauseButton.innerHTML = data.paused ? 'Reativar' : 'Pausar';
+                pauseButton.classList.toggle('btn-warning', !data.paused);
+                pauseButton.classList.toggle('btn-success', data.paused);
+                pauseButton.setAttribute('data-paused', data.paused);
             } else {
-                return response.json().then(data => {
-                    throw new Error(data.error || 'Error pausing campaign');
-                });
+                throw new Error('Failed to toggle campaign state');
             }
         })
         .catch(error => {
-            console.error('Error pausing campaign:', error);
-            alert('Failed to pause campaign: ' + error.message);
+            console.error('Error toggling campaign state:', error);
+            alert('Failed to toggle campaign state: ' + error.message);
         });
     }
 
     new List('allContactTable', {
-        valueNames: ['platform', 'action', 'rewardPerAction', 'dailyLimit', 'overallLimit', 'totalSpent', 'totalActions']
+        valueNames: ['platform', 'action','username', 'rewardPerAction', 'dailyLimit', 'overallLimit', 'totalSpent', 'totalActions'] 
     });
 });
 </script>

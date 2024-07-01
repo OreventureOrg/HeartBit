@@ -54,7 +54,7 @@
                         <div class="col-12 mb-3 d-flex flex-wrap align-items-center">
                             <div class="d-flex flex-column flex-grow-1">
                                 <label for="manufacturer-name" class="form-label">Profile Name</label>
-                                <input class="form-control mb-2" id="manufacturer-name" type="text" name="username" value="" >
+                                <input class="form-control mb-2" id="manufacturer-name" type="text" name="username" maxlength="13" value="" >
                                 <label for="event-description" class="form-label">Profile Description</label>
                                 <textarea class="form-control" id="event-description" rows="3" name="description" ></textarea>
                             </div>
@@ -65,7 +65,7 @@
                         <% } else { %>
                         <div class="col-12 mb-3">
                             <label for="profile-name" class="form-label">Profile Name</label>
-                            <input class="form-control mb-2" id="profile-name" name="username" type="text" required value="">
+                            <input class="form-control mb-2" id="profile-name" name="username" type="text" maxlength="13" required value="">
                         </div>
                         <div class="col-12 mb-3">
                             <label for="profile-description" class="form-label">Profile Description</label>
