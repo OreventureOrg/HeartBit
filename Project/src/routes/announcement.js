@@ -112,15 +112,20 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         user.tasks.push({ taskId: announcementId, dateCompleted: new Date(), earnings: reward });
         user.balance += reward;
 
-        // Update totalActions and totalSpent
-        announcementObj.totalActions += 1;
-        announcementObj.totalSpent += reward;
-        await announcementObj.save();
-
         const poster = await User.findById(announcementObj.postedBy);
         if (poster) {
             poster.balance -= penalty;
             await poster.save();
+        }
+
+        // Verificação do referenceCode
+        if (user.referredBy) { // Verifica se o usuário foi referenciado
+            const referrer = await User.findById(user.referredBy); // Encontra o usuário que referenciou
+            if (referrer) {
+                const referralReward = reward * 0.15; // Calcula a recompensa de referência (15% do valor da tarefa)
+                referrer.balance += referralReward; // Adiciona a recompensa ao saldo do usuário referenciador
+                await referrer.save(); // Salva as mudanças no usuário referenciador
+            }
         }
 
         await user.save();
@@ -130,7 +135,6 @@ router.get("/complete-task/:announcementId", authMiddleware, async (req, res) =>
         res.status(500).send('Erro ao completar tarefa');
     }
 });
-
 
 router.get("/campaigns", authMiddleware, async (req, res) => {
     try {

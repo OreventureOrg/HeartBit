@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     balance: { type: Number, default: 0.0 },
     referenceCode: { type: String, default: null },
+    referredBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
     tasks: [TaskSchema]
 });
 
