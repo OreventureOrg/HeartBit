@@ -5,7 +5,7 @@
   // Brand colors
   // 
   @each $color, $value in $brand-colors {
-    --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}: #{$value}; 
   }
 
   //
