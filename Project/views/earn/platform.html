@@ -1,213 +1,220 @@
 <%- include("../partials/header.html") %>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Submenu Example</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .table thead th.text-start {
-            text-align: left;
+        .btn-outline-instagram,
+        .btn-outline-youtube,
+        .btn-outline-twitter,
+        .btn-outline-tiktok {
+            padding: 25px;
+            font-size: 1.2em;
+            transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+            min-width: 220px; /* Increase the minimum width for buttons */
         }
-        .platform-logo i {
-            margin-right: 8px;
+
+        .btn-outline-instagram {
+            border-color: #E63660;
+            color: #E63660;
         }
-    </style>
-</head>  
-<div class="container-fluid">
-  <div class="card" id="allContactTable" data-list='{"valueNames":["platform","action","username","rewardPerAction","dailyLimit","overallLimit","totalSpent","totalActions"],"page":11,"pagination":true,"fallback":"contact-table-fallback"}'>
-      <div class="card-header border-bottom border-200 px-0">
-          <div class="d-lg-flex justify-content-between">
-              <div class="row flex-between-center gy-2 px-x1">
-                  <div class="col-auto pe-0">
-                      <h6 class="mb-0">Campaigns</h6>
-                  </div>
-                  <div class="col-auto">
-                      <form>
-                          <div class="input-group input-search-width">
-                              <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search by name" aria-label="search">
-                              <button class="btn btn-sm btn-outline-secondary border-300 hover-border-secondary" type="button">
-                                  <i class="fas fa-search fs-10" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-              <div class="row flex-between-center gy-2 px-x1">
-                  <div class="col-auto">
-                      <button class="btn btn-sm btn-primary" id="add-campaign-btn">Add Campaign</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="card-body p-0">
-          <div class="table-responsive scrollbar">
-              <table class="table table-lg table-hover fs-12 mb-0 w-100">
-                  <thead class="bg-body-tertiary">
-                      <tr>
-                          <th class="text-800 sort align-middle text-start" data-sort="platform"></th>
-                          <th class="text-800 sort align-middle text-end" data-sort="action">Action</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="username">Username</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="rewardPerAction">Reward Per Action</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="dailyLimit">Daily Limit</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="overallLimit">Overall Limit</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="totalSpent">Total Spent</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="totalActions">Total Actions</th>
-                          <th class="text-800 align-middle text-end">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody id="announcement-table-body">
-                      <% if (announcements.length > 0) { %>
-                          <% announcements.forEach(announcement => { %>
-                              <tr>
-                                  <td class="align-middle text-start platform-logo"><i class="<%= platformIcons[announcement.platform] %>"></i> <%- announcement.platform %></td>
-                                  <td class="align-middle text-end"><%- announcement.action %></td>
-                                  <td class="align-middle text-end"><%- announcement.username %></td>
-                                  <td class="align-middle text-end"><%- announcement.rewardPerAction %></td>
-                                  <td class="align-middle text-end"><%- announcement.dailyLimit %></td>
-                                  <td class="align-middle text-end"><%- announcement.overallLimit %></td>
-                                  <td class="align-middle text-end"><%- announcement.totalSpent %></td>
-                                  <td class="align-middle text-end"><%- announcement.totalActions %></td>
-                                  <td class="align-middle text-end">
-                                      <button class="btn btn-sm btn-warning pause-campaign-btn" data-id="<%- announcement.id %>" data-bs-toggle="modal" data-bs-target="#confirmPauseModal">Pause</button>
-                                  </td>
-                              </tr>
-                          <% }); %>
-                      <% } else { %>
-                          <tr>
-                              <td colspan="9" class="text-center">No announcements found.</td>
-                          </tr>
-                      <% } %>
-                  </tbody>
-              </table>
-          </div>
-      </div>
-  </div>
-</div>
 
-<div class="modal fade" id="confirmPauseModal" tabindex="-1" aria-labelledby="confirmPauseModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmPauseModalLabel">Pause Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to <span id="pauseActionText"></span> this campaign?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-warning" id="confirmPauseButton">Confirm</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    let selectedCampaignId = null;
-    let selectedCampaignPaused = false;
-
-    fetch('/api/announcements')
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('announcement-table-body');
-            tableBody.innerHTML = '';
-
-            if (data.length > 0) {
-                data.forEach(announcement => {
-                    const row = document.createElement('tr');
-                    row.setAttribute('id', `campaign-${announcement._id}`);
-
-                    const platformIconClass = platformIcons[announcement.platform] || '';
-
-                    row.innerHTML = `
-                        <td class="align-middle text-start platform-logo"><i class="${platformIconClass}"></i> ${announcement.platform}</td>
-                        <td class="align-middle text-end">${announcement.action}</td>
-                        <td class="align-middle text-end">${announcement.username}</td>
-                        <td class="align-middle text-end">${announcement.rewardPerAction}</td>
-                        <td class="align-middle text-end">${announcement.dailyLimit}</td>
-                        <td class="align-middle text-end">${announcement.overallLimit}</td>
-                        <td class="align-middle text-end">${announcement.totalSpent}</td>
-                        <td class="align-middle text-end">${announcement.totalActions}</td>
-                        <td class="align-middle text-end">
-                            <button class="btn btn-sm ${announcement.paused ? 'btn-success' : 'btn-warning'} pause-campaign-btn" 
-                                    data-id="${announcement._id}" 
-                                    data-paused="${announcement.paused}" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#confirmPauseModal">
-                                ${announcement.paused ? 'Reativar' : 'Pausar'}
-                            </button>
-                        </td>
-                    `;
-
-                    tableBody.appendChild(row);
-                });
-            } else {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="9" class="text-center">No announcements found.</td>
-                    </tr>
-                `;
-            }
-
-            document.querySelectorAll('.pause-campaign-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    selectedCampaignId = this.getAttribute('data-id');
-                    selectedCampaignPaused = this.getAttribute('data-paused') === 'true';
-
-                    const pauseActionText = document.getElementById('pauseActionText');
-                    const confirmPauseButton = document.getElementById('confirmPauseButton');
-
-                    if (selectedCampaignPaused) {
-                        pauseActionText.textContent = 'reactivate';
-                        confirmPauseButton.classList.remove('btn-warning');
-                        confirmPauseButton.classList.add('btn-success');
-                    } else {
-                        pauseActionText.textContent = 'pause';
-                        confirmPauseButton.classList.remove('btn-success');
-                        confirmPauseButton.classList.add('btn-warning');
-                    }
-                });
-            });
-        })
-        .catch(error => console.error('Error fetching announcements:', error));
-
-    document.getElementById('confirmPauseButton').addEventListener('click', function() {
-        if (selectedCampaignId) {
-            toggleCampaignPause(selectedCampaignId, selectedCampaignPaused);
-            const confirmPauseModal = bootstrap.Modal.getInstance(document.getElementById('confirmPauseModal'));
-            confirmPauseModal.hide();
+        .btn-outline-instagram:hover {
+            background-color: #E63660;
+            color: white;
         }
-    });
 
-    document.getElementById('add-campaign-btn').addEventListener('click', function() {
-        window.location.href = '/platform';
-    });
+        .btn-outline-instagram:focus {
+            box-shadow: 0 0 10px #8a3ab9; 
+        }
 
-    function toggleCampaignPause(campaignId, isPaused) {
-        fetch(`/api/announcements/toggle/${campaignId}`, {
-            method: 'POST'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                const campaignRow = document.getElementById(`campaign-${campaignId}`);
-                const pauseButton = campaignRow.querySelector('.pause-campaign-btn');
-                pauseButton.innerHTML = data.paused ? 'Reativar' : 'Pausar';
-                pauseButton.classList.toggle('btn-warning', !data.paused);
-                pauseButton.classList.toggle('btn-success', data.paused);
-                pauseButton.setAttribute('data-paused', data.paused);
-            } else {
-                throw new Error('Failed to toggle campaign state');
-            }
-        })
-        .catch(error => {
-            console.error('Error toggling campaign state:', error);
-            alert('Failed to toggle campaign state: ' + error.message);
-        });
+        .btn-outline-youtube {
+            border-color: #FF0000;
+            color: #FF0000;
+        }
+
+        .btn-outline-youtube:hover {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        .btn-outline-youtube:focus {
+            box-shadow: 0 0 10px #FF0000; 
+        }
+
+        .btn-outline-twitter {
+            border-color: #1DA1F2;
+            color: #1DA1F2;
+        }
+
+        .btn-outline-twitter:hover {
+            background-color: #1DA1F2;
+            color: white;
+        }
+
+        .btn-outline-twitter:focus {
+            box-shadow: 0 0 10px #1DA1F2; 
+        }
+
+        .btn-outline-tiktok {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .btn-outline-tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .btn-outline-tiktok:focus {
+            box-shadow: 0 0 10px #000000; 
+        }
+
+        /* Basic styling for the menu */
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Center the menu horizontally */
+        }
+
+        .menu > li {
+            position: relative;
+            margin: 0 10px; /* Add spacing between buttons */
+        }
+
+        /* Submenu styling */
+        .submenu {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%; /* Ensure the submenu matches the width of the button */
+        }
+
+        .submenu > li {
+            border-bottom: 1px solid white; /* Add white border between submenu items */
+        }
+
+        .submenu > li > a {
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            display: block; /* Ensure the links take the full width */
+            text-align: center; /* Center the text */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        .submenu > li > a i {
+            margin-right: 10px; /* Add spacing between icon and text */
+        }
+
+        .btn-outline-instagram + .submenu > li > a {
+            background-color: #E63660;
+            border: 1px solid #E63660;
+        }
+
+        .btn-outline-instagram + .submenu > li > a:hover {
+            background-color: #c02950;
+        }
+
+        .btn-outline-youtube + .submenu > li > a {
+            background-color: #FF0000;
+            border: 1px solid #FF0000;
+        }
+
+        .btn-outline-youtube + .submenu > li > a:hover {
+            background-color: #cc0000;
+        }
+
+.btn-outline-twitter + .submenu > li > a {
+    background-color: #1DA1F2;
+    border: 1px solid #1DA1F2;
+}
+
+.btn-outline-twitter + .submenu > li > a:hover {
+    background-color: #1784c7;
+}
+
+/* Estilo para o submenu no modo claro */
+.btn-outline-tiktok + .submenu > li > a {
+    background-color: #000000;
+    border: 1px solid #000000;
+}
+
+/* Estilo para o modo escuro */
+@media (prefers-color-scheme: dark) {
+    .btn-outline-tiktok,
+    .btn-outline-tiktok + .submenu > li > a {
+        background-color: #ffffff; /* Branco */
+        border: 1px solid #ffffff;
+        color: #000000; /* Texto preto para contraste */
     }
+}
 
-    new List('allContactTable', {
-        valueNames: ['platform', 'action','username', 'rewardPerAction', 'dailyLimit', 'overallLimit', 'totalSpent', 'totalActions'] 
-    });
-});
-</script>
+.btn-outline-tiktok + .submenu > li > a:hover {
+    background-color: #333333;
+}
 
-<%- include("../partials/footer.html") %>
+.menu > li:hover .submenu {
+    display: block;
+}
+    </style>
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <ul class="menu">
+                <li>
+                    <button class="btn btn-outline-instagram dropdown-toggle" type="button">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="/announcement?platform=instagram&action=followers"><i class="fab fa-instagram"></i> Instagram Followers</a></li>
+                        <li><a href="/announcement?platform=instagram&action=likes"><i class="fab fa-instagram"></i> Instagram Likes</a></li>
+                        <li><a href="/announcement?platform=instagram&action=comments"><i class="fab fa-instagram"></i> Instagram Comments</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-youtube dropdown-toggle" type="button">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="/announcement?platform=youtube&action=subscribers"><i class="fab fa-youtube"></i> YouTube Subscribers</a></li>
+                        <li><a href="/announcement?platform=youtube&action=views"><i class="fab fa-youtube"></i> YouTube Views</a></li>
+                        <li><a href="/announcement?platform=youtube&action=likes"><i class="fab fa-youtube"></i> YouTube Likes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-twitter dropdown-toggle" type="button">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="/announcement?platform=twitter&action=followers"><i class="fab fa-twitter"></i> Twitter Followers</a></li>
+                        <li><a href="/announcement?platform=twitter&action=likes"><i class="fab fa-twitter"></i> Twitter Likes</a></li>
+                        <li><a href="/announcement?platform=twitter&action=retweets"><i class="fab fa-twitter"></i> Twitter Retweets</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn-outline-tiktok dropdown-toggle" type="button">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </button>
+                    <ul class="submenu">
+                        <li><a href="/announcement?platform=tiktok&action=followers"><i class="fab fa-tiktok"></i> TikTok Followers</a></li>
+                        <li><a href="/announcement?platform=tiktok&action=likes"><i class="fab fa-tiktok"></i> TikTok Likes</a></li>
+                        <li><a href="/announcement?platform=tiktok&action=views"><i class="fab fa-tiktok"></i> TikTok Views</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div> <!-- Close container -->
+    </section>
+
+    <%- include("../partials/footer.html") %>
